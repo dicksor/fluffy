@@ -1,5 +1,25 @@
 package fluffy.userinterface;
 
-public class MainGUI {
+import javax.swing.JFrame;
+
+public class MainGUI extends JFrame {
+
+	public MainGUI() {
+		geometry();
+		control();
+		appearance();
+	}
+
+	private void appearance() {
+		
+	}
+
+	private void control() {
+		
+	}
+
+	private void geometry() {
+		
+	}
 
 }
