@@ -26,7 +26,7 @@ public class ConnectionGUI extends JFrame {
 	}
 
 	private void control() {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}
 
 	private void appearance() {

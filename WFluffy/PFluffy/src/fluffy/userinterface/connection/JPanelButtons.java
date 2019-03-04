@@ -1,11 +1,15 @@
 package fluffy.userinterface.connection;
 
 import java.awt.FlowLayout;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.Component;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class JPanelButtons extends JPanel {
 
@@ -14,6 +18,7 @@ public class JPanelButtons extends JPanel {
 		control();
 		appearance();
 	}
+	
 
 	private void geometry() {
 		this.btnCancel = new JButton("Cancel");
@@ -31,7 +36,8 @@ public class JPanelButtons extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				Component root = SwingUtilities.getRoot((JButton)e.getSource());
+				root.dispatchEvent(new WindowEvent((Window) root, WindowEvent.WINDOW_CLOSING));
 			}
 		});
 	}

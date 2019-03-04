@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JSpinner;
 
 public class CameraGUI extends JFrame{
+	
 	public CameraGUI() {
 		geometry();
 		control();

@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import fluffy.userinterface.connection.ConnectionGUI;
+
 public class JPannelButtons extends JPanel {
 
 	public JPannelButtons() {
@@ -26,6 +28,14 @@ public class JPannelButtons extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
+			}
+		});
+		
+		this.btnAdd.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new ConnectionGUI();
 			}
 		});
 	}
