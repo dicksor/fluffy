@@ -123,3 +123,4 @@ camera bluetooth to raspberry to ip
 * [exemple openCV java](http://rapidprogrammer.com/how-to-access-camera-with-opencv-and-java)
 * [RSTP](https://reolink.com/rtsp-ip-camera-and-best-rtsp-camera-buying-guide/)
 * [JMF]()
+* [Install openCV for java](https://opencv-java-tutorials.readthedocs.io/en/stable/01%20-%20Installing%20OpenCV%20for%20Java.html)
