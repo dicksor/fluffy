@@ -1,14 +1,12 @@
 package fluffy.userinterface.camera_gui;
 
-import java.awt.FlowLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 
 public class JPanelWest extends JPanel {
+
 	public JPanelWest() {
 		geometry();
 		control();
@@ -21,11 +19,10 @@ public class JPanelWest extends JPanel {
 		this.btnRotateLeft = new JButton("Rotate left");
 		this.btnRotateRight = new JButton("Rotate right");
 		this.panelZoom = new JPanelZoom();
-		
-		
+
 		this.boxMainLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setLayout(boxMainLayout);
-		
+
 		this.add(lblCameraName);
 		this.add(btnSnapshot);
 		this.add(btnSnapshot);
@@ -47,6 +44,6 @@ public class JPanelWest extends JPanel {
 	private JButton btnRotateLeft;
 	private JButton btnRotateRight;
 	private JPanelZoom panelZoom;
-	
+
 	private BoxLayout boxMainLayout;
 }

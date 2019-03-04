@@ -7,7 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 
-public class CameraGUI extends JFrame{
+public class CameraGUI extends JFrame {
+
 	public CameraGUI() {
 		geometry();
 		control();
@@ -26,7 +27,6 @@ public class CameraGUI extends JFrame{
 		panelCamera = new JPanelCameraGUI();
 		this.add(panelCamera);
 	}
-	
-	
+
 	private JPanelCameraGUI panelCamera;
 }

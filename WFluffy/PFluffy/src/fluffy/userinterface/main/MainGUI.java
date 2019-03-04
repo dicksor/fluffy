@@ -29,14 +29,14 @@ public class MainGUI extends JFrame {
 		this.jPannelButtons = new JPannelButtons();
 		this.jPannelLabel = new JPannelLabel();
 		this.jPannelCameraPreview = new JPannelCameraPreview();
-		
+
 		this.setLayout(new BorderLayout());
-		
+
 		this.add(this.jPannelLabel, BorderLayout.NORTH);
 		this.add(this.jPannelCameraPreview, BorderLayout.CENTER);
 		this.add(this.jPannelButtons, BorderLayout.SOUTH);
 	}
-	
+
 	private JPannelButtons jPannelButtons;
 	private JPannelLabel jPannelLabel;
 	private JPannelCameraPreview jPannelCameraPreview;
