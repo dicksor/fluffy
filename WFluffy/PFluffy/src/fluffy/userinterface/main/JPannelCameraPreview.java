@@ -1,9 +1,13 @@
 package fluffy.userinterface.main;
 
 import java.awt.FlowLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import fluffy.userinterface.camera_gui.CameraGUI;
 
 public class JPannelCameraPreview extends JPanel {
 
@@ -14,13 +18,33 @@ public class JPannelCameraPreview extends JPanel {
 	}
 
 	private void appearance() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	private void control() {
-		// TODO Auto-generated method stub
-		
+		this.lbCameraPreview.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new CameraGUI();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {	
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+		});
 	}
 
 	private void geometry() {
