@@ -30,9 +30,9 @@ public class ConnectionGUI extends JFrame {
 	}
 
 	private void appearance() {
-		this.setTitle("Fluffy");
+		this.setTitle("Fluffy: Connection");
 		this.setSize(300, 180);
-		//this.setResizable(false);
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 

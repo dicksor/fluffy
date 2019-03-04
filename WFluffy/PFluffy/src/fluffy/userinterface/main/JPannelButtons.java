@@ -1,13 +1,18 @@
 package fluffy.userinterface.main;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import fluffy.userinterface.connection.ConnectionGUI;
+import fluffy.userinterface.help.HelpGUI;
 
 public class JPannelButtons extends JPanel {
 
@@ -27,7 +32,8 @@ public class JPannelButtons extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				Component root = SwingUtilities.getRoot((JButton)e.getSource());
+				root.dispatchEvent(new WindowEvent((Window) root, WindowEvent.WINDOW_CLOSING));
 			}
 		});
 		
@@ -36,6 +42,14 @@ public class JPannelButtons extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new ConnectionGUI();
+			}
+		});
+		
+		this.btnHelp.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new HelpGUI();
 			}
 		});
 	}

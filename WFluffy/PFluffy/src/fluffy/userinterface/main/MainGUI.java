@@ -16,13 +16,13 @@ public class MainGUI extends JFrame {
 	}
 
 	private void appearance() {
-		this.setTitle("Fluffy");
+		this.setTitle("Fluffy : Main");
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 	}
 
 	private void control() {
-		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	private void geometry() {
