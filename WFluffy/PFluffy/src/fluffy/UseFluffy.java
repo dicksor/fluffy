@@ -1,6 +1,6 @@
 package fluffy;
 
-import fluffy.userinterface.MainGUI;
+import fluffy.userinterface.main.MainGUI;
 
 public class UseFluffy {
 
