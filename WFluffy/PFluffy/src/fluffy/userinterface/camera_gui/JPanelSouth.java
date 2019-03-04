@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import fluffy.userinterface.MainGUI;
 
 public class JPanelSouth extends JPanel{
 	public JPanelSouth()
@@ -39,7 +38,6 @@ public class JPanelSouth extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new MainGUI();
 				Component root = SwingUtilities.getRoot((JButton)e.getSource());
 				root.dispatchEvent(new WindowEvent((Window) root, WindowEvent.WINDOW_CLOSING));
 			}});

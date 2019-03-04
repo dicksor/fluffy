@@ -8,14 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 
-<<<<<<< HEAD:WFluffy/PFluffy/src/fluffy/userinterface/camera_gui/JPanelWest.java
 public class JPanelWest extends JPanel {
 	public JPanelWest() {
-=======
-public class CameraGUI extends JFrame{
-	
-	public CameraGUI() {
->>>>>>> 02205d66bf849f3ce94739745809cc10efb81934:WFluffy/PFluffy/src/fluffy/userinterface/CameraGUI.java
 		geometry();
 		control();
 		appearance();
