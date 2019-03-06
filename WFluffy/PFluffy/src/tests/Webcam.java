@@ -10,7 +10,14 @@ import javax.swing.JLabel;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
 import org.opencv.highgui.HighGui;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
 
 public class Webcam {
@@ -46,6 +53,7 @@ public class Webcam {
 		System.out.println("Captured Frame Width " + frame.width());
 
 		// HighGui.imshow("camera.jpg", frame);
+		faceDetection(frame);
 		
 		BufferedImage img = Mat2BufferedImage(frame);
 		displayImage(img);
@@ -81,4 +89,28 @@ public class Webcam {
 	    System.arraycopy(b, 0, targetPixels, 0, b.length);  
 	    return image;
 	}
+	
+	public static void faceDetection(Mat m) {
+		String xmlFile = "C:\\opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml";
+		CascadeClassifier classifier = new CascadeClassifier(xmlFile);
+		
+		MatOfRect faceDetections = new MatOfRect();
+		classifier.detectMultiScale(m, faceDetections);
+		System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
+		
+		for (Rect rect : faceDetections.toArray()) {
+	         Imgproc.rectangle(
+	            m,                                               // where to draw the box
+	            new Point(rect.x, rect.y),                            // bottom left
+	            new Point(rect.x + rect.width, rect.y + rect.height), // top right
+	            new Scalar(0, 0, 255),
+	            3                                                     // RGB colour
+	         );
+	      }
+
+	      Imgcodecs.imwrite("C:\\Users\\jonas.freiburg\\Documents\\faceDetec.jpg", m);
+
+	      System.out.println("Image Processed");
+
+	}	
 }
