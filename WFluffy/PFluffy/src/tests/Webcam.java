@@ -13,8 +13,9 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
+import org.opencv.core.RotatedRect;
 import org.opencv.core.Scalar;
-import org.opencv.highgui.HighGui;
+import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
@@ -57,6 +58,7 @@ public class Webcam {
 		
 		BufferedImage img = Mat2BufferedImage(frame);
 		displayImage(img);
+		rotateImage(frame, 90);
 	}
 	
 	public static void displayImage(Image img2) {
@@ -111,6 +113,17 @@ public class Webcam {
 	      Imgcodecs.imwrite("C:\\Users\\jonas.freiburg\\Documents\\faceDetec.jpg", m);
 
 	      System.out.println("Image Processed");
-
 	}	
+	
+	public static void rotateImage(Mat m, double angle) {
+		// get rotation matrix for rotating the image around its center in pixel coordinates
+		System.out.println("Starting rotation");
+	    Point center = new Point(m.cols() / 2.0, m.cols() / 2.0);
+	    double scale = 1.0;
+	    Mat mRotation = Imgproc.getRotationMatrix2D(center, angle, scale);
+	    Mat mRotatedImage = new Mat();
+	    Imgproc.warpAffine(m, mRotatedImage, mRotation, new Size(m.rows(), m.cols()));
+	    System.out.println("Rotation done");
+	    Imgcodecs.imwrite("C:\\Users\\jonas.freiburg\\Documents\\rotatedImg.jpg", mRotatedImage);
+	}
 }
