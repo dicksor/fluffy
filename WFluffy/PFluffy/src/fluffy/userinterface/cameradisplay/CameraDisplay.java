@@ -31,10 +31,6 @@ public abstract class CameraDisplay implements Runnable {
 	public void setIsRunning(boolean isRunning) {
 		this.isRunning = isRunning;
 	}
-	
-	public void setCameraDisplay(JLabel lbCameraDisplay) {
-		this.lbCameraDisplay = lbCameraDisplay;
-	}
 
 	protected boolean isRunning;
 	protected JLabel lbCameraDisplay;

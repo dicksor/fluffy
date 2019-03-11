@@ -1,13 +1,8 @@
 package fluffy.userinterface.camera_gui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
-
 import fluffy.network.Camera;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
 import fluffy.userinterface.cameradisplay.CameraDisplayVideoDetection;

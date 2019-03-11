@@ -1,11 +1,7 @@
 package fluffy.userinterface.main;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 public class MainGUI extends JFrame {
 

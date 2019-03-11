@@ -1,12 +1,9 @@
 package fluffy.userinterface.connection;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class JPanelForm extends JPanel {

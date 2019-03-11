@@ -1,16 +1,7 @@
 package fluffy.userinterface.camera_gui;
 
-import java.awt.Dimension;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JSpinner;
-
 import fluffy.network.Camera;
-import fluffy.userinterface.cameradisplay.CameraDisplay;
 
 public class CameraGUI extends JFrame {
 

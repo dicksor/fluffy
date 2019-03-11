@@ -3,20 +3,12 @@ package fluffy.userinterface.main;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import org.opencv.core.Mat;
-
-import fluffy.imageprocessing.OpenCvFaceDetection;
-import fluffy.imageprocessing.OpenCvUtil;
 import fluffy.network.Camera;
 import fluffy.userinterface.camera_gui.CameraGUI;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
 import fluffy.userinterface.cameradisplay.CameraDisplayVideo;
-import fluffy.userinterface.cameradisplay.CameraDisplayVideoDetection;
 
 public class JPannelCameraPreview extends JPanel {
 
