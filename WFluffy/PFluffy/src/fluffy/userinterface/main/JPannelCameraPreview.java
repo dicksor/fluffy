@@ -26,32 +26,6 @@ public class JPannelCameraPreview extends JPanel {
 		this.faceDetection = new OpenCvFaceDetection("C:\\opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml");
 	}
 
-	/*private void showLive() {
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		System.loadLibrary("opencv_ffmpeg401_64");
-
-		Camera camera = new Camera("http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1");
-
-		
-		 * Thread displayLive = new Thread(new Runnable() {
-		 * 
-		 * @Override public void run() { ImageIcon image = new
-		 * ImageIcon(OpenCvUtil.matToBufferedImage(camera.getImage()));
-		 * lbCameraPreview.setIcon(image); lbCameraPreview.repaint(); } });
-		 
-
-		if (camera.open()) {
-			while (true) {
-
-				if (!camera.getImage().empty()) {
-					break;
-				} else {
-					break;
-				}
-			}
-		}
-	}*/
-
 	private void appearance() {
 		this.flowLayout.setHgap(50);
 	}
@@ -95,6 +69,8 @@ public class JPannelCameraPreview extends JPanel {
 	}
 
 	public void streamCamera() {
+		// Pour streamer la vidéo surveillance remplacer "" par ->
+		// http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1
 		this.camera = new Camera("");
 		this.camera.open();
 
@@ -119,7 +95,7 @@ public class JPannelCameraPreview extends JPanel {
 	private JLabel lbCameraData;
 	private JLabel lbCameraPreview;
 	private Camera camera;
-	
+	// TODO : Organiser différement, pas tout faire dans le même code
 	private OpenCvFaceDetection faceDetection;
 
 }
