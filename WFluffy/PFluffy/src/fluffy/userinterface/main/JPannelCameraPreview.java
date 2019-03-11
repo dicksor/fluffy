@@ -9,6 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.opencv.core.Mat;
+
+import fluffy.imageprocessing.OpenCvFaceDetection;
 import fluffy.imageprocessing.OpenCvUtil;
 import fluffy.network.Camera;
 import fluffy.userinterface.camera_gui.CameraGUI;
@@ -21,6 +23,7 @@ public class JPannelCameraPreview extends JPanel {
 		// showLive();
 		control();
 		appearance();
+		this.faceDetection = new OpenCvFaceDetection("C:\\opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml");
 	}
 
 	/*private void showLive() {
@@ -101,7 +104,8 @@ public class JPannelCameraPreview extends JPanel {
 			public void run() {
 				while (true) {
 					Mat matCam = camera.getImage();
-					BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCam);
+					Mat matCamFace = faceDetection.detecte(matCam);
+					BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCamFace);
 					ImageIcon imgIcn = new ImageIcon(imgCam);
 					lbCameraPreview.setIcon(imgIcn);
 				}
@@ -115,5 +119,7 @@ public class JPannelCameraPreview extends JPanel {
 	private JLabel lbCameraData;
 	private JLabel lbCameraPreview;
 	private Camera camera;
+	
+	private OpenCvFaceDetection faceDetection;
 
 }
