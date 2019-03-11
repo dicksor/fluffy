@@ -13,7 +13,9 @@ import fluffy.userinterface.cameradisplay.CameraDisplayVideo;
 public class JPannelCameraPreview extends JPanel {
 
 	public JPannelCameraPreview() {
-		this.camera = null;
+		// Pour streamer la vidéo surveillance remplacer "" par ->
+		// http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1
+		this.camera = new Camera("");
 		this.geometry();
 		this.control();
 		this.appearance();
@@ -62,9 +64,6 @@ public class JPannelCameraPreview extends JPanel {
 	}
 
 	public void streamCamera() {
-		// Pour streamer la vidéo surveillance remplacer "" par ->
-		// http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1
-		this.camera = new Camera("");
 		this.camera.open();
 		
 		// Normalement par la suite on pourra faire cameraDisplay = new CameraDisplayVideo(...), pour désactiver l'option détection
