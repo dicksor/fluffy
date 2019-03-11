@@ -36,6 +36,10 @@ public class MainGUI extends JFrame {
 		this.add(this.jPannelCameraPreview, BorderLayout.CENTER);
 		this.add(this.jPannelButtons, BorderLayout.SOUTH);
 	}
+	
+	public void streamCamera() {
+		this.jPannelCameraPreview.streamCamera();
+	}
 
 	private JPannelButtons jPannelButtons;
 	private JPannelLabel jPannelLabel;

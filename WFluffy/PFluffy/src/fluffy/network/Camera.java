@@ -7,10 +7,19 @@ public class Camera {
 
 	public Camera(String link) {
 		this.link = link;
+		this.camera = new VideoCapture();
 	}
 
 	public void open() {
-		this.camera.open(this.link);
+		// TODO : remove when not in dev
+		if(this.link != "") {
+			this.camera.open(this.link);
+		}
+		else {
+			// Open Webcam
+			this.camera.open(0);
+		}
+		
 
 		if (!this.camera.isOpened())
 			// TODO : Customize error

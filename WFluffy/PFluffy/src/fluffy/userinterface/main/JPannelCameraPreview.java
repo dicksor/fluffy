@@ -3,10 +3,16 @@ package fluffy.userinterface.main;
 import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.opencv.core.Mat;
+
+import fluffy.imageprocessing.OpenCvUtil;
+import fluffy.network.Camera;
 import fluffy.userinterface.camera_gui.CameraGUI;
 
 public class JPannelCameraPreview extends JPanel {
@@ -23,7 +29,7 @@ public class JPannelCameraPreview extends JPanel {
 
 	private void control() {
 		this.lbCameraPreview.addMouseListener(new MouseListener() {
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new CameraGUI();
@@ -34,7 +40,7 @@ public class JPannelCameraPreview extends JPanel {
 			}
 
 			@Override
-			public void mouseReleased(MouseEvent e) {	
+			public void mouseReleased(MouseEvent e) {
 			}
 
 			@Override
@@ -51,17 +57,37 @@ public class JPannelCameraPreview extends JPanel {
 		// TODO Auto-generated method stub
 		this.lbCameraData = new JLabel("Entrer les informations de la caméra ici");
 		this.lbCameraPreview = new JLabel("Prévisualisation de la caméra");
-		
+
 		this.flowLayout = new FlowLayout(FlowLayout.CENTER);
 		this.setLayout(this.flowLayout);
-		
+
 		this.add(lbCameraData);
 		this.add(this.lbCameraPreview);
 	}
 
+	public void streamCamera() {
+		this.camera = new Camera("");
+		this.camera.open();
+
+		Thread threadDisplayImage = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				while (true) {
+					Mat matCam = camera.getImage();
+					BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCam);
+					ImageIcon imgIcn = new ImageIcon(imgCam);
+					lbCameraPreview.setIcon(imgIcn);
+				}
+			}
+		});
+
+		threadDisplayImage.start();
+	}
+
 	private FlowLayout flowLayout;
 	private JLabel lbCameraData;
-	// TODO : change to media player
 	private JLabel lbCameraPreview;
+	private Camera camera;
 
 }

@@ -4,10 +4,18 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.objdetect.CascadeClassifier;
 
 public class OpenCvUtil {
 	
-	public BufferedImage matToBufferedImage(Mat m) {
+	public static BufferedImage matToBufferedImage(Mat m) {
 		int type = BufferedImage.TYPE_BYTE_GRAY;
 		if (m.channels() > 1) {
 			type = BufferedImage.TYPE_3BYTE_BGR;
@@ -19,6 +27,15 @@ public class OpenCvUtil {
 		final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
 		System.arraycopy(b, 0, targetPixels, 0, b.length);
 		return image;
+	}
+	
+	public static Mat rotateImage(Mat m, double angle) {
+		Point center = new Point(m.cols() / 2.0, m.cols() / 2.0);
+		double scale = 1.0;
+		Mat mRotation = Imgproc.getRotationMatrix2D(center, angle, scale);
+		Mat mRotatedImage = new Mat();
+		Imgproc.warpAffine(m, mRotatedImage, mRotation, new Size(m.rows(), m.cols()));
+		return mRotatedImage;
 	}
 
 }

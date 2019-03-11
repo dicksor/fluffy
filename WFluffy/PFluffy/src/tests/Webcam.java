@@ -56,7 +56,7 @@ public class Webcam {
 
 		// HighGui.imshow("camera.jpg", frame);
 		faceDetection(frame);
-
+		
 		BufferedImage img = Mat2BufferedImage(frame);
 		displayImage(img);
 		rotateImage(frame, 90);
