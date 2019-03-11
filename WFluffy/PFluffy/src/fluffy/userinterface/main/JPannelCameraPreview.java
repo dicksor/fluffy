@@ -21,10 +21,10 @@ import fluffy.userinterface.cameradisplay.CameraDisplayVideoDetection;
 public class JPannelCameraPreview extends JPanel {
 
 	public JPannelCameraPreview() {
-
-		geometry();
-		control();
-		appearance();
+		this.camera = null;
+		this.geometry();
+		this.control();
+		this.appearance();
 	}
 
 	private void appearance() {
@@ -36,7 +36,7 @@ public class JPannelCameraPreview extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new CameraGUI();
+				new CameraGUI(camera);
 			}
 
 			@Override
@@ -76,7 +76,7 @@ public class JPannelCameraPreview extends JPanel {
 		this.camera.open();
 		
 		// Normalement par la suite on pourra faire cameraDisplay = new CameraDisplayVideo(...), pour désactiver l'option détection
-		CameraDisplay cameraDisplay = new CameraDisplayVideoDetection(this.lbCameraPreview, this.camera);
+		CameraDisplay cameraDisplay = new CameraDisplayVideo(this.lbCameraPreview, this.camera);
 		
 		Thread threadDisplayImage = new Thread(cameraDisplay);
 		threadDisplayImage.start();

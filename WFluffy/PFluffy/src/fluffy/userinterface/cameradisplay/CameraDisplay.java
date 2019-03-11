@@ -14,7 +14,7 @@ public abstract class CameraDisplay implements Runnable {
 
 	public CameraDisplay(JLabel cameraDisplay, Camera camera) {
 		this.isRunning = true;
-		this.cameraDisplay = cameraDisplay;
+		this.lbCameraDisplay = cameraDisplay;
 		this.camera = camera;
 	}
 	
@@ -24,12 +24,20 @@ public abstract class CameraDisplay implements Runnable {
 			Mat matCam = camera.getImage();
 			BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCam);
 			ImageIcon imgIcn = new ImageIcon(imgCam);
-			this.cameraDisplay.setIcon(imgIcn);
+			this.lbCameraDisplay.setIcon(imgIcn);
 		}
+	}
+	
+	public void setIsRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
+	
+	public void setCameraDisplay(JLabel lbCameraDisplay) {
+		this.lbCameraDisplay = lbCameraDisplay;
 	}
 
 	protected boolean isRunning;
-	protected JLabel cameraDisplay;
+	protected JLabel lbCameraDisplay;
 	protected Camera camera;
 
 }

@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 public class JPannelLabel extends JPanel {
 
 	public JPannelLabel() {
-		geometry();
-		control();
-		appearance();
+		this.geometry();
+		this.control();
+		this.appearance();
 	}
 
 	private void appearance() {

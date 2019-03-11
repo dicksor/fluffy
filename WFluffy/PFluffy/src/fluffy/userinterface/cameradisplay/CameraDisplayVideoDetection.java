@@ -13,8 +13,8 @@ import fluffy.network.Camera;
 
 public class CameraDisplayVideoDetection extends CameraDisplay {
 
-	public CameraDisplayVideoDetection(JLabel cameraDisplay, Camera camera) {
-		super(cameraDisplay, camera);
+	public CameraDisplayVideoDetection(JLabel lbCameraDisplay, Camera camera) {
+		super(lbCameraDisplay, camera);
 		this.faceDetection = new OpenCvFaceDetection("C:\\opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml");
 	}
 
@@ -25,7 +25,7 @@ public class CameraDisplayVideoDetection extends CameraDisplay {
 			Mat matCamFaceDetected = faceDetection.detecte(matCam);
 			BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCamFaceDetected);
 			ImageIcon imgIcn = new ImageIcon(imgCam);
-			this.cameraDisplay.setIcon(imgIcn);
+			this.lbCameraDisplay.setIcon(imgIcn);
 		}
 	}
 

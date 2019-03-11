@@ -11,9 +11,9 @@ public class JPannelCameraList extends JPanel {
 	public JPannelCameraList() {
 		this.setJPannelCamPrev = new TreeSet<JPannelCameraPreview>();
 		
-		geometry();
-		control();
-		appearance();
+		this.geometry();
+		this.control();
+		this.appearance();
 	}
 	
 	private void appearance() {

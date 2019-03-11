@@ -10,9 +10,9 @@ import javax.swing.JLabel;
 public class MainGUI extends JFrame {
 
 	public MainGUI() {
-		geometry();
-		control();
-		appearance();
+		this.geometry();
+		this.control();
+		this.appearance();
 	}
 
 	private void appearance() {
@@ -22,7 +22,7 @@ public class MainGUI extends JFrame {
 	}
 
 	private void control() {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	private void geometry() {

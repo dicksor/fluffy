@@ -1,11 +1,16 @@
 package fluffy.userinterface.camera_gui;
 
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
+
+import fluffy.network.Camera;
+import fluffy.userinterface.cameradisplay.CameraDisplay;
 
 public class CameraGUI extends JFrame {
 
@@ -13,6 +18,12 @@ public class CameraGUI extends JFrame {
 		geometry();
 		control();
 		appearance();
+	}
+	
+	public CameraGUI(Camera camera) {
+		this();
+		this.panelCamera.setCamera(camera);
+		this.panelCamera.streamCamera();
 	}
 
 	private void appearance() {
@@ -22,11 +33,12 @@ public class CameraGUI extends JFrame {
 	}
 
 	private void control() {
+		// TODO
 	}
 
 	private void geometry() {
-		panelCamera = new JPanelCameraGUI();
-		this.add(panelCamera);
+		this.panelCamera = new JPanelCameraGUI();
+		this.add(this.panelCamera);
 	}
 
 	private JPanelCameraGUI panelCamera;

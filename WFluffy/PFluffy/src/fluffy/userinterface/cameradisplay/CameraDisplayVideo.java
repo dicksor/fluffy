@@ -6,8 +6,7 @@ import fluffy.network.Camera;
 
 public class CameraDisplayVideo extends CameraDisplay {
 
-	public CameraDisplayVideo(JLabel cameraDisplay, Camera camera) {
-		super(cameraDisplay, camera);
+	public CameraDisplayVideo(JLabel lbCameraDisplay, Camera camera) {
+		super(lbCameraDisplay, camera);
 	}
-
 }

@@ -17,9 +17,9 @@ import fluffy.userinterface.help.HelpGUI;
 public class JPannelButtons extends JPanel {
 
 	public JPannelButtons() {
-		geometry();
-		control();
-		appearance();
+		this.geometry();
+		this.control();
+		this.appearance();
 	}
 	
 	private void appearance() {
