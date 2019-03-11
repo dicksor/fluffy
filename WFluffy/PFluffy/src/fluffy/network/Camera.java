@@ -7,21 +7,20 @@ public class Camera {
 
 	public Camera(String link) {
 		this.link = link;
+		this.camera = new VideoCapture();
 	}
 
-	public void open() {
+	public boolean open() {
 		this.camera.open(this.link);
 
-		if (!this.camera.isOpened())
-			// TODO : Customize error
-			throw new Error("Unable to open camera");
+		return this.camera.isOpened();
 	}
 
 	public void release() {
 		// TODO : check for error
 		this.camera.release();
 	}
-	
+
 	public Mat getImage() {
 		// TODO : test error
 		Mat frame = new Mat();
@@ -29,7 +28,7 @@ public class Camera {
 		camera.grab();
 		camera.retrieve(frame);
 		camera.read(frame);
-		
+
 		return frame;
 	}
 

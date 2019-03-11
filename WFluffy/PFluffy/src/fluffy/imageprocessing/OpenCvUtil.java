@@ -6,8 +6,8 @@ import java.awt.image.DataBufferByte;
 import org.opencv.core.Mat;
 
 public class OpenCvUtil {
-	
-	public BufferedImage matToBufferedImage(Mat m) {
+
+	public static BufferedImage matToBufferedImage(Mat m) {
 		int type = BufferedImage.TYPE_BYTE_GRAY;
 		if (m.channels() > 1) {
 			type = BufferedImage.TYPE_3BYTE_BGR;
