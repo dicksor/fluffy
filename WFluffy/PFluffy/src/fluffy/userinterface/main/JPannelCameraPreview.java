@@ -18,7 +18,7 @@ public class JPannelCameraPreview extends JPanel {
 	}
 
 	private void appearance() {
-		
+		this.flowLayout.setHgap(50);
 	}
 
 	private void control() {
@@ -53,7 +53,6 @@ public class JPannelCameraPreview extends JPanel {
 		this.lbCameraPreview = new JLabel("Prévisualisation de la caméra");
 		
 		this.flowLayout = new FlowLayout(FlowLayout.CENTER);
-		this.flowLayout.setHgap(50);
 		this.setLayout(this.flowLayout);
 		
 		this.add(lbCameraData);
