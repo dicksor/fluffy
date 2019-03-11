@@ -14,16 +14,17 @@ import fluffy.imageprocessing.OpenCvFaceDetection;
 import fluffy.imageprocessing.OpenCvUtil;
 import fluffy.network.Camera;
 import fluffy.userinterface.camera_gui.CameraGUI;
+import fluffy.userinterface.cameradisplay.CameraDisplay;
+import fluffy.userinterface.cameradisplay.CameraDisplayVideo;
+import fluffy.userinterface.cameradisplay.CameraDisplayVideoDetection;
 
 public class JPannelCameraPreview extends JPanel {
 
 	public JPannelCameraPreview() {
 
 		geometry();
-		// showLive();
 		control();
 		appearance();
-		this.faceDetection = new OpenCvFaceDetection("C:\\opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml");
 	}
 
 	private void appearance() {
@@ -73,21 +74,11 @@ public class JPannelCameraPreview extends JPanel {
 		// http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1
 		this.camera = new Camera("");
 		this.camera.open();
-
-		Thread threadDisplayImage = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				while (true) {
-					Mat matCam = camera.getImage();
-					Mat matCamFace = faceDetection.detecte(matCam);
-					BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCamFace);
-					ImageIcon imgIcn = new ImageIcon(imgCam);
-					lbCameraPreview.setIcon(imgIcn);
-				}
-			}
-		});
-
+		
+		// Normalement par la suite on pourra faire cameraDisplay = new CameraDisplayVideo(...), pour désactiver l'option détection
+		CameraDisplay cameraDisplay = new CameraDisplayVideoDetection(this.lbCameraPreview, this.camera);
+		
+		Thread threadDisplayImage = new Thread(cameraDisplay);
 		threadDisplayImage.start();
 	}
 
@@ -95,7 +86,5 @@ public class JPannelCameraPreview extends JPanel {
 	private JLabel lbCameraData;
 	private JLabel lbCameraPreview;
 	private Camera camera;
-	// TODO : Organiser différement, pas tout faire dans le même code
-	private OpenCvFaceDetection faceDetection;
 
 }

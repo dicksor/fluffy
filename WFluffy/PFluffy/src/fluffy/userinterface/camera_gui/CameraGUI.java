@@ -16,8 +16,9 @@ public class CameraGUI extends JFrame {
 	}
 
 	private void appearance() {
+		this.setTitle("Fluffy : Camera");
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
-		this.setSize(new Dimension(600, 600));
 	}
 
 	private void control() {
