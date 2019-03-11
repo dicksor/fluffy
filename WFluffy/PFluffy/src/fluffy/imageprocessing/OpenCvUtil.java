@@ -14,7 +14,7 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
 public class OpenCvUtil {
-	
+
 	public static BufferedImage matToBufferedImage(Mat m) {
 		int type = BufferedImage.TYPE_BYTE_GRAY;
 		if (m.channels() > 1) {

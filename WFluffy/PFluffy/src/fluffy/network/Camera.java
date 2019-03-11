@@ -10,27 +10,23 @@ public class Camera {
 		this.camera = new VideoCapture();
 	}
 
-	public void open() {
+	public boolean open() {
 		// TODO : remove when not in dev
-		if(this.link != "") {
+		if (this.link != "") {
 			this.camera.open(this.link);
-		}
-		else {
+		} else {
 			// Open Webcam
 			this.camera.open(0);
 		}
-		
 
-		if (!this.camera.isOpened())
-			// TODO : Customize error
-			throw new Error("Unable to open camera");
+		return this.camera.isOpened();
 	}
 
 	public void release() {
 		// TODO : check for error
 		this.camera.release();
 	}
-	
+
 	public Mat getImage() {
 		// TODO : test error
 		Mat frame = new Mat();
@@ -38,7 +34,7 @@ public class Camera {
 		camera.grab();
 		camera.retrieve(frame);
 		camera.read(frame);
-		
+
 		return frame;
 	}
 

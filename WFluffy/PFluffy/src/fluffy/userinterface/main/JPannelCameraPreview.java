@@ -8,9 +8,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import org.opencv.core.Mat;
-
 import fluffy.imageprocessing.OpenCvUtil;
 import fluffy.network.Camera;
 import fluffy.userinterface.camera_gui.CameraGUI;
@@ -18,10 +16,38 @@ import fluffy.userinterface.camera_gui.CameraGUI;
 public class JPannelCameraPreview extends JPanel {
 
 	public JPannelCameraPreview() {
+
 		geometry();
+		// showLive();
 		control();
 		appearance();
 	}
+
+	/*private void showLive() {
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		System.loadLibrary("opencv_ffmpeg401_64");
+
+		Camera camera = new Camera("http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1");
+
+		
+		 * Thread displayLive = new Thread(new Runnable() {
+		 * 
+		 * @Override public void run() { ImageIcon image = new
+		 * ImageIcon(OpenCvUtil.matToBufferedImage(camera.getImage()));
+		 * lbCameraPreview.setIcon(image); lbCameraPreview.repaint(); } });
+		 
+
+		if (camera.open()) {
+			while (true) {
+
+				if (!camera.getImage().empty()) {
+					break;
+				} else {
+					break;
+				}
+			}
+		}
+	}*/
 
 	private void appearance() {
 		this.flowLayout.setHgap(50);
