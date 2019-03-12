@@ -21,7 +21,6 @@ public class JPanelCameraGUI extends JPanel {
 	}
 
 	private void control() {
-		// TODO Auto-generated method stub
 
 	}
 
