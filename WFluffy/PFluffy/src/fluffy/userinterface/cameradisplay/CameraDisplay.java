@@ -8,11 +8,11 @@ import javax.swing.JLabel;
 import org.opencv.core.Mat;
 
 import fluffy.imageprocessing.OpenCvUtil;
-import fluffy.network.Camera;
+import fluffy.network.camera.ICamera;
 
-public abstract class CameraDisplay implements Runnable {
+public class CameraDisplay implements Runnable {
 
-	public CameraDisplay(JLabel cameraDisplay, Camera camera) {
+	public CameraDisplay(JLabel cameraDisplay, ICamera camera) {
 		this.isRunning = true;
 		this.lbCameraDisplay = cameraDisplay;
 		this.camera = camera;
@@ -32,8 +32,8 @@ public abstract class CameraDisplay implements Runnable {
 		this.isRunning = isRunning;
 	}
 
-	protected boolean isRunning;
-	protected JLabel lbCameraDisplay;
-	protected Camera camera;
+	private boolean isRunning;
+	private JLabel lbCameraDisplay;
+	private ICamera camera;
 
 }

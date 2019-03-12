@@ -1,18 +1,22 @@
 package fluffy.userinterface.camera_gui;
 
 import javax.swing.JFrame;
-import fluffy.network.Camera;
+
+import fluffy.network.camera.CameraFaceDetection;
+import fluffy.network.camera.CameraRotation;
+import fluffy.network.camera.ICamera;
 
 public class CameraGUI extends JFrame {
 
 	public CameraGUI() {
-		geometry();
-		control();
-		appearance();
+		this.geometry();
+		this.control();
+		this.appearance();
 	}
 	
-	public CameraGUI(Camera camera) {
+	public CameraGUI(ICamera camera) {
 		this();
+		camera = new CameraRotation(new CameraFaceDetection(camera), 90);
 		this.panelCamera.setCamera(camera);
 		this.panelCamera.streamCamera();
 	}

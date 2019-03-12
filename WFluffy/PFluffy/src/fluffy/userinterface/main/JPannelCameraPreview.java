@@ -5,10 +5,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import fluffy.network.Camera;
+
+import fluffy.network.camera.Camera;
+import fluffy.network.camera.ICamera;
 import fluffy.userinterface.camera_gui.CameraGUI;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
-import fluffy.userinterface.cameradisplay.CameraDisplayVideo;
 
 public class JPannelCameraPreview extends JPanel {
 
@@ -67,7 +68,7 @@ public class JPannelCameraPreview extends JPanel {
 		this.camera.open();
 		
 		// Normalement par la suite on pourra faire cameraDisplay = new CameraDisplayVideo(...), pour désactiver l'option détection
-		CameraDisplay cameraDisplay = new CameraDisplayVideo(this.lbCameraPreview, this.camera);
+		CameraDisplay cameraDisplay = new CameraDisplay(this.lbCameraPreview, this.camera);
 		
 		Thread threadDisplayImage = new Thread(cameraDisplay);
 		threadDisplayImage.start();
@@ -76,6 +77,6 @@ public class JPannelCameraPreview extends JPanel {
 	private FlowLayout flowLayout;
 	private JLabel lbCameraData;
 	private JLabel lbCameraPreview;
-	private Camera camera;
+	private ICamera camera;
 
 }

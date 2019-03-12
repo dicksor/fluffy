@@ -3,9 +3,9 @@ package fluffy.userinterface.camera_gui;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import fluffy.network.Camera;
+
+import fluffy.network.camera.ICamera;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
-import fluffy.userinterface.cameradisplay.CameraDisplayVideoDetection;
 
 public class JPanelCameraGUI extends JPanel {
 
@@ -39,14 +39,14 @@ public class JPanelCameraGUI extends JPanel {
 		this.add(this.lbCameraDisplay, BorderLayout.CENTER);
 	}
 	
-	public void setCamera(Camera camera) {
+	public void setCamera(ICamera camera) {
 		this.camera = camera;
 	}
 	
 	// FIXME : Almost duplicate code from JPannelCameraPreview
 	public void streamCamera() {
 		if(this.camera != null) {
-			CameraDisplay cameraDisplay = new CameraDisplayVideoDetection(this.lbCameraDisplay, this.camera);
+			CameraDisplay cameraDisplay = new CameraDisplay(this.lbCameraDisplay, this.camera);
 			
 			Thread threadDisplayImage = new Thread(cameraDisplay);
 			threadDisplayImage.start();
@@ -58,6 +58,6 @@ public class JPanelCameraGUI extends JPanel {
 	private JPanelWest panelWest;
 	private JPanelSouth panelSouth;
 	private BorderLayout borderMainLayout;
-	private Camera camera;
+	private ICamera camera;
 
 }

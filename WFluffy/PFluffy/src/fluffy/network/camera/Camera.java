@@ -1,15 +1,16 @@
-package fluffy.network;
+package fluffy.network.camera;
 
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 
-public class Camera {
+public class Camera implements ICamera {
 
 	public Camera(String link) {
 		this.link = link;
 		this.camera = new VideoCapture();
 	}
 
+	@Override
 	public boolean open() {
 		// TODO : remove when not in dev
 		if (this.link != "") {
@@ -21,12 +22,14 @@ public class Camera {
 
 		return this.camera.isOpened();
 	}
-
+	
+	@Override
 	public void release() {
 		// TODO : check for error
 		this.camera.release();
 	}
 
+	@Override
 	public Mat getImage() {
 		// TODO : test error
 		Mat frame = new Mat();
