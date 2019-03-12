@@ -1,6 +1,8 @@
 package fluffy.userinterface.camera_gui;
 
 import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -9,7 +11,8 @@ import fluffy.userinterface.cameradisplay.CameraDisplay;
 
 public class JPanelCameraGUI extends JPanel {
 
-	public JPanelCameraGUI() {
+	public JPanelCameraGUI(JFrame jFrame) {
+		this.jFrame = jFrame;
 		this.camera = null;
 		geometry();
 		control();
@@ -27,7 +30,7 @@ public class JPanelCameraGUI extends JPanel {
 
 	private void geometry() {
 
-		this.panelWest = new JPanelWest();
+		this.panelWest = new JPanelWest(this.jFrame);
 		this.panelSouth = new JPanelSouth();
 		this.lbCameraDisplay = new JLabel();
 
@@ -59,5 +62,6 @@ public class JPanelCameraGUI extends JPanel {
 	private JPanelSouth panelSouth;
 	private BorderLayout borderMainLayout;
 	private ICamera camera;
+	private JFrame jFrame;
 
 }
