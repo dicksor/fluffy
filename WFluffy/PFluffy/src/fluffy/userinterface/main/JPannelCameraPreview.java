@@ -1,6 +1,7 @@
 package fluffy.userinterface.main;
 
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JLabel;
@@ -26,29 +27,14 @@ public class JPannelCameraPreview extends JPanel {
 		this.flowLayout.setHgap(50);
 	}
 
-	private void control() {
-		this.lbCameraPreview.addMouseListener(new MouseListener() {
-
+	private void control() {		
+		this.lbCameraPreview.addMouseListener(new MouseAdapter() {
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new CameraGUI(camera);
 			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
+			
 		});
 	}
 

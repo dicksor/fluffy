@@ -28,6 +28,8 @@ public class CameraDisplay implements Runnable {
 		}
 	}
 	
+	// TODO : Faut il fermer le thread si on ferme la fenêtre ?
+	
 	public void setIsRunning(boolean isRunning) {
 		this.isRunning = isRunning;
 	}
