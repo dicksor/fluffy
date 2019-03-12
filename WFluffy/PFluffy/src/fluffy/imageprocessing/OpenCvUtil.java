@@ -32,5 +32,11 @@ public class OpenCvUtil {
 		Imgproc.warpAffine(m, mRotatedImage, mRotation, new Size(m.rows(), m.cols()));
 		return mRotatedImage;
 	}
+	
+	public static Mat zoomImage(Mat m, double scale) {
+		Mat mScaledImage = new Mat();
+		Imgproc.resize(m, mScaledImage, new Size(m.rows(), m.cols()), scale, scale);
+		return mScaledImage;
+	}
 
 }

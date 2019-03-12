@@ -23,8 +23,7 @@ public class JPannelButtons extends JPanel {
 	}
 	
 	private void appearance() {
-		// TODO Auto-generated method stub
-		
+		this.flowLayout.setVgap(20);
 	}
 
 	private void control() {
@@ -61,8 +60,6 @@ public class JPannelButtons extends JPanel {
 		
 		this.flowLayout = new FlowLayout(FlowLayout.CENTER);
 		this.setLayout(this.flowLayout);
-		this.flowLayout.setVgap(20);
-		
 		
 		this.add(this.btnAdd);
 		this.add(this.btnQuit);
