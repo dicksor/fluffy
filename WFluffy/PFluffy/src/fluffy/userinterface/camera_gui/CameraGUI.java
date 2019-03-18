@@ -16,7 +16,7 @@ public class CameraGUI extends JFrame {
 	
 	public CameraGUI(ICamera camera) {
 		this();
-		camera = new CameraRotation(new CameraFaceDetection(camera), 90);
+		camera = new CameraFaceDetection(camera);
 		this.panelCamera.setCamera(camera);
 		this.panelCamera.streamCamera();
 	}
@@ -32,7 +32,7 @@ public class CameraGUI extends JFrame {
 	}
 
 	private void geometry() {
-		this.panelCamera = new JPanelCameraGUI();
+		this.panelCamera = new JPanelCameraGUI(this);
 		this.add(this.panelCamera);
 	}
 

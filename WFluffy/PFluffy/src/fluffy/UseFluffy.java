@@ -12,5 +12,4 @@ public class UseFluffy {
 		MainGUI mainGui = new MainGUI();
 		mainGui.streamCamera();
 	}
-
 }

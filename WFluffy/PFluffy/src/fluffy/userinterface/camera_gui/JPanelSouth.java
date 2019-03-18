@@ -7,13 +7,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 
 public class JPanelSouth extends JPanel {
 
-	public JPanelSouth() {
+	public JPanelSouth(JFrame cameraGUI) {
+		this.cameraGUI = cameraGUI;
 		geometry();
 		control();
 		appearance();
@@ -29,9 +31,7 @@ public class JPanelSouth extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Component root = SwingUtilities.getRoot((JButton)e.getSource());
-
-				root.dispatchEvent(new WindowEvent((Window) root, WindowEvent.WINDOW_CLOSING));
+				JPanelSouth.this.cameraGUI.dispose();
 			}
 		});
 	}
@@ -43,5 +43,6 @@ public class JPanelSouth extends JPanel {
 	}
 
 	private JButton btnReturn;
+	private JFrame cameraGUI;
 
 }

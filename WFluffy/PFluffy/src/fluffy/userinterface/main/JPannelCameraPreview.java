@@ -1,5 +1,6 @@
 package fluffy.userinterface.main;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -39,14 +40,14 @@ public class JPannelCameraPreview extends JPanel {
 	}
 
 	private void geometry() {
-		// TODO Auto-generated method stub
+		
 		this.lbCameraData = new JLabel("Entrer les informations de la caméra ici");
-		this.lbCameraPreview = new JLabel("Prévisualisation de la caméra");
+		this.lbCameraPreview = new JLabel();
 
 		this.flowLayout = new FlowLayout(FlowLayout.CENTER);
 		this.setLayout(this.flowLayout);
 
-		this.add(lbCameraData);
+		this.add(this.lbCameraData);
 		this.add(this.lbCameraPreview);
 	}
 
