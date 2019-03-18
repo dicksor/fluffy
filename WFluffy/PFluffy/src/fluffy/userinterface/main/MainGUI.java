@@ -24,7 +24,7 @@ public class MainGUI extends JFrame {
 	private void geometry() {
 		this.jPannelButtons = new JPannelButtons();
 		this.jPannelLabel = new JPannelLabel();
-		this.jPannelCameraPreview = new JPannelCameraPreview();
+		this.jPannelCameraPreview = new JPannelCameraPreview("", "test", "test");
 
 		this.setLayout(new BorderLayout());
 
@@ -32,7 +32,7 @@ public class MainGUI extends JFrame {
 		this.add(this.jPannelCameraPreview, BorderLayout.CENTER);
 		this.add(this.jPannelButtons, BorderLayout.SOUTH);
 	}
-	
+
 	public void streamCamera() {
 		this.jPannelCameraPreview.streamCamera();
 	}
@@ -40,5 +40,4 @@ public class MainGUI extends JFrame {
 	private JPannelButtons jPannelButtons;
 	private JPannelLabel jPannelLabel;
 	private JPannelCameraPreview jPannelCameraPreview;
-
 }

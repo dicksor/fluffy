@@ -13,7 +13,7 @@ public class CameraGUI extends JFrame {
 		this.control();
 		this.appearance();
 	}
-	
+
 	public CameraGUI(ICamera camera) {
 		this();
 		camera = new CameraRotation(new CameraFaceDetection(camera), 90);
