@@ -1,9 +1,12 @@
 package fluffy.userinterface.main;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -48,7 +51,7 @@ public class JPannelCameraPreview extends JPanel {
 		this.flowLayout = new FlowLayout(FlowLayout.CENTER);
 		this.setLayout(this.flowLayout);
 
-		this.add(lbCameraData);
+		this.add(this.lbCameraData);
 		this.add(this.lbCameraPreview);
 	}
 
@@ -57,8 +60,7 @@ public class JPannelCameraPreview extends JPanel {
 
 		// Normalement par la suite on pourra faire cameraDisplay = new
 		// CameraDisplayVideo(...), pour désactiver l'option détection
-		CameraDisplay cameraDisplay = new CameraDisplay(this.lbCameraPreview, this.camera);
-
+		CameraDisplay cameraDisplay = new CameraDisplay(this.lbCameraPreview, this.camera, true);
 		Thread threadDisplayImage = new Thread(cameraDisplay);
 		threadDisplayImage.start();
 	}
@@ -67,6 +69,8 @@ public class JPannelCameraPreview extends JPanel {
 	private JLabel lbCameraData;
 	private JLabel lbCameraPreview;
 	private ICamera camera;
+
+	private JFrame mainView;
 
 	private String link;
 	private String cameraName;

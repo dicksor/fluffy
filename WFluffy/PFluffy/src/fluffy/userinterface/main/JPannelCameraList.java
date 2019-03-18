@@ -28,8 +28,7 @@ public class JPannelCameraList extends JPanel {
 
 	private void geometry() {
 		this.flowLayout = new FlowLayout(FlowLayout.CENTER);
-
-		//this.setJPannelCamPrev.add(new JPannelCameraPreview("", "test", "test"));
+		// this.setJPannelCamPrev.add(new JPannelCameraPreview("", "test", "test"));
 
 		this.setLayout(this.flowLayout);
 
