@@ -1,6 +1,8 @@
 package fluffy.userinterface.main;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 public class MainGUI extends JFrame {
@@ -19,12 +21,13 @@ public class MainGUI extends JFrame {
 
 	private void control() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setMinimumSize(new Dimension(700, 400));
 	}
 
 	private void geometry() {
 		this.jPannelButtons = new JPannelButtons();
 		this.jPannelLabel = new JPannelLabel();
-		this.jPannelCameraPreview = new JPannelCameraPreview();
+		this.jPannelCameraPreview = new JPannelCameraPreview(this);
 
 		this.setLayout(new BorderLayout());
 

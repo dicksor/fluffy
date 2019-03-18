@@ -1,9 +1,12 @@
 package fluffy.userinterface.main;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -14,10 +17,11 @@ import fluffy.userinterface.cameradisplay.CameraDisplay;
 
 public class JPannelCameraPreview extends JPanel {
 
-	public JPannelCameraPreview() {
+	public JPannelCameraPreview(JFrame mainView) {
 		// Pour streamer la vidéo surveillance remplacer "" par ->
 		// http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1
 		this.camera = new Camera("");
+		this.mainView = mainView;
 		this.geometry();
 		this.control();
 		this.appearance();
@@ -39,14 +43,14 @@ public class JPannelCameraPreview extends JPanel {
 	}
 
 	private void geometry() {
-		// TODO Auto-generated method stub
+		
 		this.lbCameraData = new JLabel("Entrer les informations de la caméra ici");
-		this.lbCameraPreview = new JLabel("Prévisualisation de la caméra");
+		this.lbCameraPreview = new JLabel();
 
 		this.flowLayout = new FlowLayout(FlowLayout.CENTER);
 		this.setLayout(this.flowLayout);
 
-		this.add(lbCameraData);
+		this.add(this.lbCameraData);
 		this.add(this.lbCameraPreview);
 	}
 
@@ -54,7 +58,7 @@ public class JPannelCameraPreview extends JPanel {
 		this.camera.open();
 		
 		// Normalement par la suite on pourra faire cameraDisplay = new CameraDisplayVideo(...), pour désactiver l'option détection
-		CameraDisplay cameraDisplay = new CameraDisplay(this.lbCameraPreview, this.camera);
+		CameraDisplay cameraDisplay = new CameraDisplay(this.lbCameraPreview, this.camera, true);
 		
 		Thread threadDisplayImage = new Thread(cameraDisplay);
 		threadDisplayImage.start();
@@ -64,5 +68,7 @@ public class JPannelCameraPreview extends JPanel {
 	private JLabel lbCameraData;
 	private JLabel lbCameraPreview;
 	private ICamera camera;
+	
+	private JFrame mainView;
 
 }

@@ -1,5 +1,8 @@
 package fluffy.userinterface.camera_gui;
 
+import java.awt.BorderLayout;
+
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,16 +22,23 @@ public class JPanelWest extends JPanel {
 		this.btnRotateLeft = new JButton("Rotate left");
 		this.btnRotateRight = new JButton("Rotate right");
 		this.panelZoom = new JPanelZoom();
-
-		this.boxMainLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
-		setLayout(boxMainLayout);
-
-		this.add(lblCameraName);
-		this.add(btnSnapshot);
-		this.add(btnSnapshot);
-		this.add(btnRotateLeft);
-		this.add(btnRotateRight);
-		this.add(panelZoom);
+		
+		Box boxV = Box.createVerticalBox();
+		
+		boxV.add(Box.createVerticalStrut(60));
+		boxV.add(lblCameraName);
+		boxV.add(Box.createVerticalStrut(30));
+		boxV.add(btnSnapshot);
+		boxV.add(Box.createVerticalStrut(30));
+		boxV.add(btnRotateLeft);
+		boxV.add(Box.createVerticalStrut(30));
+		boxV.add(btnRotateRight);
+		boxV.add(Box.createVerticalStrut(30));
+		boxV.add(panelZoom);
+		boxV.add(Box.createVerticalStrut(30));
+		
+		setLayout(new BorderLayout());
+		this.add(boxV, BorderLayout.CENTER);
 	}
 
 	private void control() {
@@ -50,5 +60,4 @@ public class JPanelWest extends JPanel {
 	private JButton btnRotateRight;
 	private JPanelZoom panelZoom;
 
-	private BoxLayout boxMainLayout;
 }
