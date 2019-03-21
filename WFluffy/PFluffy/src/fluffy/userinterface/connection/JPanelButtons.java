@@ -18,6 +18,7 @@ public class JPanelButtons extends JPanel {
 		control();
 		appearance();
 	}
+	
 
 	private void geometry() {
 		this.btnCancel = new JButton("Cancel");
@@ -35,17 +36,7 @@ public class JPanelButtons extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Component root = SwingUtilities.getRoot((JButton) e.getSource());
-				root.dispatchEvent(new WindowEvent((Window) root, WindowEvent.WINDOW_CLOSING));
-			}
-		});
-
-		this.btnConnectionCamera.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("ok");
-				Component root = SwingUtilities.getRoot((JButton) e.getSource());
+				Component root = SwingUtilities.getRoot((JButton)e.getSource());
 				root.dispatchEvent(new WindowEvent((Window) root, WindowEvent.WINDOW_CLOSING));
 			}
 		});

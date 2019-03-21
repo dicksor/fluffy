@@ -48,10 +48,11 @@ public class JPanelWest extends JPanel {
 	private void appearance() {
 		// rien
 	}
-
+	
 	public JButton getBtnRotateLeft() {
 		return btnRotateLeft;
 	}
+	
 
 	private JLabel lblCameraName;
 	private JButton btnSnapshot;

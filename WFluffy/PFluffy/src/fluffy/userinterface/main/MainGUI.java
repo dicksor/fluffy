@@ -25,22 +25,25 @@ public class MainGUI extends JFrame {
 	}
 
 	private void geometry() {
-		this.jPannelButtons = new JPannelButtons();
-		this.jPannelLabel = new JPannelLabel();
-		this.jPannelCameraPreview = new JPannelCameraPreview("", "test", "test");
+		this.jPanelButtons = new JPanelButtons();
+		this.jPanelLabel = new JPanelLabel();
+		this.jPanelCameraList = new JPanelCameraList();
+		this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview(this));
+		// this.jPannelCameraList.addCameraPreview(new JPannelCameraPreview(this));
 
 		this.setLayout(new BorderLayout());
 
-		this.add(this.jPannelLabel, BorderLayout.NORTH);
-		this.add(this.jPannelCameraPreview, BorderLayout.CENTER);
-		this.add(this.jPannelButtons, BorderLayout.SOUTH);
+		this.add(this.jPanelLabel, BorderLayout.NORTH);
+		this.add(this.jPanelCameraList, BorderLayout.CENTER);
+		this.add(this.jPanelButtons, BorderLayout.SOUTH);
 	}
-
+	
 	public void streamCamera() {
-		this.jPannelCameraPreview.streamCamera();
+		this.jPanelCameraList.streamCameras();
 	}
 
-	private JPannelButtons jPannelButtons;
-	private JPannelLabel jPannelLabel;
-	private JPannelCameraPreview jPannelCameraPreview;
+	private JPanelButtons jPanelButtons;
+	private JPanelLabel jPanelLabel;
+	private JPanelCameraList jPanelCameraList;
+
 }

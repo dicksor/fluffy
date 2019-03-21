@@ -16,11 +16,11 @@ public class JPanelForm extends JPanel {
 
 	private void geometry() {
 		this.lbCameraName = new JLabel("Camera name : ");
-		this.lbLinkPreview = new JLabel("Link of web preview : ");
+		this.lbAdressIP = new JLabel("IP adresse : ");
 		this.lbCameraDescription = new JLabel("Camera description : ");
 
 		this.fldCameraName = new JTextField();
-		this.fldLinkPreview = new JTextField();
+		this.fldAdressIP = new JTextField();
 		this.fldCameraDescription = new JTextField();
 
 		this.gridlayout = new GridLayout(3, 2);
@@ -29,8 +29,8 @@ public class JPanelForm extends JPanel {
 		this.add(lbCameraName);
 		this.add(fldCameraName);
 
-		this.add(lbLinkPreview);
-		this.add(fldLinkPreview);
+		this.add(lbAdressIP);
+		this.add(fldAdressIP);
 
 		this.add(lbCameraDescription);
 		this.add(fldCameraDescription);
@@ -45,29 +45,17 @@ public class JPanelForm extends JPanel {
 		gridlayout.setHgap(5);
 	}
 
-	public String getCameraName() {
-		return this.fldCameraName.getText();
-	}
-
-	public String getCameraDescription() {
-		return this.fldCameraDescription.getText();
-	}
-
-	public String getLinkPreview() {
-		return this.fldLinkPreview.getText();
-	}
-
 	// tools
 
 	private GridLayout gridlayout;
 
 	// Labels
 	private JLabel lbCameraName;
-	private JLabel lbLinkPreview;
+	private JLabel lbAdressIP;
 	private JLabel lbCameraDescription;
 
 	// TextFields
 	private JTextField fldCameraName;
-	private JTextField fldLinkPreview;
+	private JTextField fldAdressIP;
 	private JTextField fldCameraDescription;
 }
