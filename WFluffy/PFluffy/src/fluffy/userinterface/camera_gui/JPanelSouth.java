@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -17,6 +18,11 @@ public class JPanelSouth extends JPanel {
 		geometry();
 		control();
 		appearance();
+	}
+	
+	public JPanelSouth(JFrame frameRoot) {
+		this();
+		this.frameRoot = frameRoot;
 	}
 
 	private void appearance() {
@@ -29,9 +35,8 @@ public class JPanelSouth extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Component root = SwingUtilities.getRoot((JButton)e.getSource());
-
-				root.dispatchEvent(new WindowEvent((Window) root, WindowEvent.WINDOW_CLOSING));
+				JFrame frameRoot = JPanelSouth.this.frameRoot;
+				frameRoot.dispatchEvent(new WindowEvent(frameRoot, WindowEvent.WINDOW_CLOSING));
 			}
 		});
 	}
@@ -43,5 +48,6 @@ public class JPanelSouth extends JPanel {
 	}
 
 	private JButton btnReturn;
+	private JFrame frameRoot;
 
 }

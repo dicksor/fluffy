@@ -1,6 +1,8 @@
 package fluffy.userinterface.camera_gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -41,7 +43,32 @@ public class JPanelWest extends JPanel {
 	}
 
 	private void control() {
-		// rien
+		this.btnRotateLeft.addActionListener(new ActionListener() {	
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Should rotate left");
+				// TODO : rotate left
+			}
+		});
+		
+		this.btnRotateRight.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Should rotate right");
+				// TODO : rotate right
+			}
+		});
+		
+		this.btnSnapshot.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Should take snapshot");
+				// TODO : take snapshot
+			}
+		});
 	}
 
 	private void appearance() {

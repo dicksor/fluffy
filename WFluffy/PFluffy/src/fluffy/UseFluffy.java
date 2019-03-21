@@ -10,6 +10,5 @@ public class UseFluffy {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		System.loadLibrary("opencv_ffmpeg401_64");
 		MainGUI mainGui = new MainGUI();
-		mainGui.streamCamera();
 	}
 }

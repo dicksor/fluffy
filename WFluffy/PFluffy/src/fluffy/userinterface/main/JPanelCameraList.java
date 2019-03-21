@@ -17,6 +17,7 @@ public class JPanelCameraList extends JPanel {
 	public void addCameraPreview(JPanelCameraPreview panelCameraPreview) {
 		this.setJPanelCamPrev.add(panelCameraPreview);
 		this.add(panelCameraPreview);
+		panelCameraPreview.streamCamera();
 	}
 	
 	public void streamCameras() {
@@ -39,8 +40,6 @@ public class JPanelCameraList extends JPanel {
 		this.flowLayout = new FlowLayout(FlowLayout.CENTER);
 		
 		this.setLayout(this.flowLayout);
-		
-		this.streamCameras();
 	}
 
 	private List<JPanelCameraPreview> setJPanelCamPrev;
