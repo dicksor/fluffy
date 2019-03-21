@@ -1,11 +1,8 @@
 package fluffy.userinterface.main;
 
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,11 +14,10 @@ import fluffy.userinterface.cameradisplay.CameraDisplay;
 
 public class JPanelCameraPreview extends JPanel {
 
-	public JPanelCameraPreview(JFrame mainView) {
+	public JPanelCameraPreview(JFrame mainView, Camera camera) {
 		// Pour streamer la vidéo surveillance remplacer "" par ->
 		// http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1
-		this.camera = new Camera("");
-		this.mainView = mainView;
+		this.camera = camera;
 		this.geometry();
 		this.control();
 		this.appearance();
@@ -68,6 +64,5 @@ public class JPanelCameraPreview extends JPanel {
 	private JLabel lbCameraData;
 	private JLabel lbCameraPreview;
 	private ICamera camera;
-	private JFrame mainView;
 
 }

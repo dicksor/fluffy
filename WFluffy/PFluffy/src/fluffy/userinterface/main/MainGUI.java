@@ -5,6 +5,8 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import fluffy.network.camera.Camera;
+
 public class MainGUI extends JFrame {
 
 	public MainGUI() {
@@ -28,7 +30,7 @@ public class MainGUI extends JFrame {
 		this.jPanelButtons = new JPanelButtons();
 		this.jPanelLabel = new JPanelLabel();
 		this.jPanelCameraList = new JPanelCameraList();
-		this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview(this));
+		this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview(this, new Camera("")));
 		// this.jPannelCameraList.addCameraPreview(new JPannelCameraPreview(this));
 
 		this.setLayout(new BorderLayout());

@@ -3,16 +3,12 @@ package fluffy.userinterface.main;
 import java.awt.FlowLayout;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
 import javax.swing.JPanel;
 
 public class JPanelCameraList extends JPanel {
 
 	public JPanelCameraList() {
-		this.setJPanelCamPrev = new LinkedList<JPanelCameraPreview>();
-		
+		this.setJPanelCamPrev = new LinkedList<JPanelCameraPreview>();	
 		this.geometry();
 		this.control();
 		this.appearance();

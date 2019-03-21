@@ -3,7 +3,6 @@ package fluffy.userinterface.camera_gui;
 import java.awt.BorderLayout;
 
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
