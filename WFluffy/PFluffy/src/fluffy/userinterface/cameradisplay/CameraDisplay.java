@@ -21,10 +21,6 @@ public class CameraDisplay implements Runnable {
 		this.isPreview = isPreview;
 	}
 	
-	/*public void setIsPreview(Boolean isPreview) {
-		this.isPreview = isPreview;
-	}*/
-	
 	@Override
 	public void run() {
 		while (this.isRunning) {
@@ -40,12 +36,11 @@ public class CameraDisplay implements Runnable {
 	}
 	
 	// TODO : Faut il fermer le thread si on ferme la fenêtre ?
-	
 	public void setIsRunning(boolean isRunning) {
 		this.isRunning = isRunning;
 	}
 
-	private boolean isRunning;
+	private volatile boolean isRunning;
 	private JLabel lbCameraDisplay;
 	private ICamera camera;
 	

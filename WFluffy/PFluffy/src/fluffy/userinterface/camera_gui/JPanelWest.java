@@ -12,9 +12,15 @@ import javax.swing.JPanel;
 public class JPanelWest extends JPanel {
 
 	public JPanelWest() {
+		this.cameraRotationAngle = 0;
 		geometry();
 		control();
 		appearance();
+	}
+	
+	public JPanelWest(JPanel panelCamera) {
+		this();
+		this.panelCamera = panelCamera;
 	}
 
 	private void geometry() {
@@ -47,8 +53,8 @@ public class JPanelWest extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Should rotate left");
-				// TODO : rotate left
+				cameraRotationAngle += 90;
+				((JPanelCameraGUI) panelCamera).rotateCamera(cameraRotationAngle);
 			}
 		});
 		
@@ -56,8 +62,8 @@ public class JPanelWest extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Should rotate right");
-				// TODO : rotate right
+				cameraRotationAngle -= 90;
+				((JPanelCameraGUI) panelCamera).rotateCamera(cameraRotationAngle);
 			}
 		});
 		
@@ -85,5 +91,7 @@ public class JPanelWest extends JPanel {
 	private JButton btnRotateLeft;
 	private JButton btnRotateRight;
 	private JPanelZoom panelZoom;
+	private JPanel panelCamera;
+	private double cameraRotationAngle;
 
 }

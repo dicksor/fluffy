@@ -35,9 +35,8 @@ public class CameraGUI extends JFrame {
 			
 			@Override
 		    public void windowClosing(WindowEvent e) {
-		        // TODO : End threads
+				panelCamera.stopStream();
 		    }
-			
 		});
 	}
 

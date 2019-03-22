@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fluffy.network.camera.CameraRotation;
 import fluffy.network.camera.ICamera;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
 
@@ -35,7 +36,7 @@ public class JPanelCameraGUI extends JPanel {
 
 	private void geometry() {
 
-		this.panelWest = new JPanelWest();
+		this.panelWest = new JPanelWest(this);
 		this.panelSouth = new JPanelSouth(this.frameRoot);
 		this.lbCameraDisplay = new JLabel();
 
@@ -51,15 +52,28 @@ public class JPanelCameraGUI extends JPanel {
 		this.camera = camera;
 	}
 	
+	public void rotateCamera(double angle) {
+		// FIXME : Mais pas très DRY
+		this.camera = new CameraRotation(this.camera, angle);
+		this.cameraDisplay.setIsRunning(false);
+		this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, this.camera, false);
+		this.threadDisplayImage = new Thread(this.cameraDisplay);
+		this.threadDisplayImage.start();
+	}
+	
 	// FIXME : Almost duplicate code from JPannelCameraPreview
 	public void streamCamera() {
 		if(this.camera != null) {
-			CameraDisplay cameraDisplay = new CameraDisplay(this.lbCameraDisplay, this.camera, false);
+			this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, this.camera, false);
 			
-			Thread threadDisplayImage = new Thread(cameraDisplay);
-			threadDisplayImage.start();
+			this.threadDisplayImage = new Thread(this.cameraDisplay);
+			this.threadDisplayImage.start();
 		}
 		// TODO : Faire qqch si null
+	}
+	
+	public void stopStream() {
+		this.cameraDisplay.setIsRunning(false);
 	}
 
 	private JLabel lbCameraDisplay;
@@ -68,5 +82,7 @@ public class JPanelCameraGUI extends JPanel {
 	private BorderLayout borderMainLayout;
 	private ICamera camera;
 	private JFrame frameRoot;
+	private CameraDisplay cameraDisplay;
+	private Thread threadDisplayImage;
 
 }
