@@ -23,15 +23,14 @@ public class CameraDisplay implements Runnable {
 		this.isPreview = isPreview;
 		this.lock = new ReentrantLock();
 	}
-	
+
 	@Override
 	public void run() {
 		while (this.isRunning) {
 			lock.lock();
 			Mat matCam = camera.getImage();
 			lock.unlock();
-			if(isPreview)
-			{
+			if (isPreview) {
 				Imgproc.resize(matCam, matCam, new Size(150, 150));
 			}
 			BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCam);
@@ -39,7 +38,7 @@ public class CameraDisplay implements Runnable {
 			this.lbCameraDisplay.setIcon(imgIcn);
 		}
 	}
-	
+
 	// TODO : Faut il fermer le thread si on ferme la fenêtre ?
 	public void setIsRunning(boolean isRunning) {
 		this.isRunning = isRunning;
@@ -50,5 +49,5 @@ public class CameraDisplay implements Runnable {
 	private ICamera camera;
 	private Boolean isPreview;
 	private Lock lock;
-	
+
 }

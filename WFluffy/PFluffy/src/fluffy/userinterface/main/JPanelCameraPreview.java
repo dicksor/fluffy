@@ -14,10 +14,13 @@ import fluffy.userinterface.cameradisplay.CameraDisplay;
 
 public class JPanelCameraPreview extends JPanel {
 
-	public JPanelCameraPreview(JFrame mainView, Camera camera) {
+	public JPanelCameraPreview(String link, String cameraName, String cameraDescription) {
 		// Pour streamer la vidéo surveillance remplacer "" par ->
 		// http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1
-		this.camera = camera;
+		this.camera = new Camera(link);
+		this.link = link;
+		this.cameraName = cameraName;
+		this.cameraDescription = cameraDescription;
 		this.geometry();
 		this.control();
 		this.appearance();
@@ -27,20 +30,20 @@ public class JPanelCameraPreview extends JPanel {
 		this.flowLayout.setHgap(50);
 	}
 
-	private void control() {		
+	private void control() {
 		this.lbCameraPreview.addMouseListener(new MouseAdapter() {
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new CameraGUI(camera);
 			}
-			
+
 		});
 	}
 
 	private void geometry() {
-		
-		this.lbCameraData = new JLabel("Entrer les informations de la caméra ici");
+
+		this.lbCameraData = new JLabel(this.cameraName);
 		this.lbCameraPreview = new JLabel();
 
 		this.flowLayout = new FlowLayout(FlowLayout.CENTER);
@@ -52,10 +55,11 @@ public class JPanelCameraPreview extends JPanel {
 
 	public void streamCamera() {
 		this.camera.open();
-		
-		// Normalement par la suite on pourra faire cameraDisplay = new CameraDisplayVideo(...), pour désactiver l'option détection
+
+		// Normalement par la suite on pourra faire cameraDisplay = new
+		// CameraDisplayVideo(...), pour désactiver l'option détection
 		CameraDisplay cameraDisplay = new CameraDisplay(this.lbCameraPreview, this.camera, true);
-		
+
 		Thread threadDisplayImage = new Thread(cameraDisplay);
 		threadDisplayImage.start();
 	}
@@ -64,5 +68,9 @@ public class JPanelCameraPreview extends JPanel {
 	private JLabel lbCameraData;
 	private JLabel lbCameraPreview;
 	private ICamera camera;
+
+	private String link;
+	private String cameraName;
+	private String cameraDescription;
 
 }
