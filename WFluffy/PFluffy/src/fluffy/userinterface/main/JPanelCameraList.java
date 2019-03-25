@@ -21,9 +21,9 @@ public class JPanelCameraList extends JPanel {
 	}
 	
 	public void streamCameras() {
-		for(JPanelCameraPreview jPannelCameraPreview : this.setJPanelCamPrev) {
+		/*for(JPanelCameraPreview jPannelCameraPreview : this.setJPanelCamPrev) {
 			jPannelCameraPreview.streamCamera();
-		}
+		}*/
 	}
 	
 	private void appearance() {
