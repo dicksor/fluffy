@@ -3,6 +3,7 @@ package fluffy.userinterface.camera_gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -70,7 +71,8 @@ public class JPanelWest extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				((JPanelCameraGUI) panelCamera).takeSnapShot();
+				System.out.println("Should take snapshot");
+				// TODO : take snapshot
 			}
 		});
 	}

@@ -1,8 +1,6 @@
 package fluffy.userinterface.cameradisplay;
 
 import java.awt.image.BufferedImage;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -21,15 +19,12 @@ public class CameraDisplay implements Runnable {
 		this.lbCameraDisplay = cameraDisplay;
 		this.camera = camera;
 		this.isPreview = isPreview;
-		this.lock = new ReentrantLock();
 	}
 	
 	@Override
 	public void run() {
 		while (this.isRunning) {
-			lock.lock();
 			Mat matCam = camera.getImage();
-			lock.unlock();
 			if(isPreview)
 			{
 				Imgproc.resize(matCam, matCam, new Size(150, 150));
@@ -48,7 +43,7 @@ public class CameraDisplay implements Runnable {
 	private volatile boolean isRunning;
 	private JLabel lbCameraDisplay;
 	private ICamera camera;
+	
 	private Boolean isPreview;
-	private Lock lock;
 	
 }

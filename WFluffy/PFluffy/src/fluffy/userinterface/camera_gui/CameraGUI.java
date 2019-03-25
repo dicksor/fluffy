@@ -6,6 +6,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 import fluffy.network.camera.CameraFaceDetection;
+import fluffy.network.camera.CameraRotation;
 import fluffy.network.camera.ICamera;
 
 public class CameraGUI extends JFrame {

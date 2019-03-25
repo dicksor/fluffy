@@ -11,10 +11,6 @@ public class CameraRotation extends CameraDecorator {
 		this.angle = angle;
 	}
 	
-	public void setAngle(double angle) {
-		this.angle = angle;
-	}
-	
 	@Override
 	public Mat getImage() {
 		return this.getImageWithRotation(super.getImage());
