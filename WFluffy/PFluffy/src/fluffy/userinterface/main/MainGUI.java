@@ -2,6 +2,7 @@ package fluffy.userinterface.main;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 
@@ -17,7 +18,7 @@ public class MainGUI extends JFrame {
 
 	private void appearance() {
 		this.setTitle("Fluffy : Main");
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 	}
 
@@ -31,6 +32,7 @@ public class MainGUI extends JFrame {
 		this.jPanelLabel = new JPanelLabel();
 		this.jPanelCameraList = new JPanelCameraList();
 		this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview(this, new Camera("")));
+		//this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview(this, new Camera("http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=640x480")));
 
 		this.setLayout(new BorderLayout());
 

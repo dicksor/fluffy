@@ -3,6 +3,7 @@ package fluffy.userinterface.main;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,19 +28,18 @@ public class JPanelCameraPreview extends JPanel {
 		this.flowLayout.setHgap(50);
 	}
 
-	private void control() {		
+	private void control() {
 		this.lbCameraPreview.addMouseListener(new MouseAdapter() {
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new CameraGUI(camera);
 			}
-			
 		});
 	}
 
 	private void geometry() {
-		
+
 		this.lbCameraData = new JLabel("Entrer les informations de la caméra ici");
 		this.lbCameraPreview = new JLabel();
 
@@ -52,10 +52,10 @@ public class JPanelCameraPreview extends JPanel {
 
 	public void streamCamera() {
 		this.camera.open();
-		
+
 		// Normalement par la suite on pourra faire cameraDisplay = new CameraDisplayVideo(...), pour désactiver l'option détection
 		CameraDisplay cameraDisplay = new CameraDisplay(this.lbCameraPreview, this.camera, true);
-		
+
 		Thread threadDisplayImage = new Thread(cameraDisplay);
 		threadDisplayImage.start();
 	}

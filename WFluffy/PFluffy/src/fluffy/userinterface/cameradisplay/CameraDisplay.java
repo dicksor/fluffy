@@ -23,7 +23,7 @@ public class CameraDisplay implements Runnable {
 		this.isPreview = isPreview;
 		this.lock = new ReentrantLock();
 	}
-	
+
 	@Override
 	public void run() {
 		while (this.isRunning) {
@@ -39,7 +39,7 @@ public class CameraDisplay implements Runnable {
 			this.lbCameraDisplay.setIcon(imgIcn);
 		}
 	}
-	
+
 	// TODO : Faut il fermer le thread si on ferme la fenêtre ?
 	public void setIsRunning(boolean isRunning) {
 		this.isRunning = isRunning;
@@ -50,5 +50,5 @@ public class CameraDisplay implements Runnable {
 	private ICamera camera;
 	private Boolean isPreview;
 	private Lock lock;
-	
+
 }
