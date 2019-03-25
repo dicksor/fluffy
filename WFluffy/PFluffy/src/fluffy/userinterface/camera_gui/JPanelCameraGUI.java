@@ -1,11 +1,11 @@
 package fluffy.userinterface.camera_gui;
 
 import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fluffy.imageprocessing.snapshot.SnapshotTaker;
 import fluffy.network.camera.CameraRotation;
 import fluffy.network.camera.ICamera;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
@@ -49,16 +49,21 @@ public class JPanelCameraGUI extends JPanel {
 	}
 	
 	public void setCamera(ICamera camera) {
-		this.camera = camera;
+		this.camera = new CameraRotation(camera, 0);
 	}
 	
 	public void rotateCamera(double angle) {
-		// FIXME : Mais pas très DRY
-		this.camera = new CameraRotation(this.camera, angle);
+		// FIXME : Pas très DRY
+		((CameraRotation) this.camera).setAngle(angle);
 		this.cameraDisplay.setIsRunning(false);
 		this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, this.camera, false);
 		this.threadDisplayImage = new Thread(this.cameraDisplay);
 		this.threadDisplayImage.start();
+	}
+	
+	public void takeSnapShot() {
+		Thread snapThread = new Thread(new SnapshotTaker(this.camera));
+		snapThread.start();
 	}
 	
 	// FIXME : Almost duplicate code from JPannelCameraPreview
