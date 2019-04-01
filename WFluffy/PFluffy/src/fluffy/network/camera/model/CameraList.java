@@ -16,15 +16,7 @@ public class CameraList {
 	private CameraList() {
 		this.listCamera = new ArrayList<CameraModel>();
 		this.FILENAME = "config.xml";
-
-		try {
-			this.xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILENAME)));
-			// this.xmlDecoder = new XMLDecoder(new BufferedInputStream(new
-			// FileInputStream(FILENAME)));
-			// load();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		this.load();
 	}
 
 	@Override
@@ -41,22 +33,31 @@ public class CameraList {
 
 	public void add(CameraModel cam) {
 		this.listCamera.add(cam);
-		System.out.println(cam);
 		save();
 	}
 
 	private void save() {
-		System.out.println(this.listCamera);
-		this.xmlEncoder.writeObject(this.listCamera);
+		try {
+			this.xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILENAME)));
+			this.xmlEncoder.writeObject(this.listCamera);
+			this.xmlEncoder.flush();
+			this.xmlEncoder.close();
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}	
 	}
 
 	private void load() {
 		try {
-			this.listCamera = (List<CameraModel>) this.xmlDecoder.readObject();
-		} catch (ClassCastException e) {
+			this.xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FILENAME)));
+			this.listCamera = (ArrayList<CameraModel>) this.xmlDecoder.readObject();
+		} 
+		catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
+		catch (ClassCastException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// Attributes
