@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fluffy.imageprocessing.snapshot.SnapshotTaker;
+import fluffy.imageprocessing.snapshot.DialogSnapshotTaker;
 import fluffy.network.camera.CameraRotation;
 import fluffy.network.camera.ICamera;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
@@ -62,7 +62,7 @@ public class JPanelCameraGUI extends JPanel {
 	}
 	
 	public void takeSnapShot() {
-		Thread snapThread = new Thread(new SnapshotTaker(this.camera));
+		Thread snapThread = new Thread(new DialogSnapshotTaker(this.camera));
 		snapThread.start();
 	}
 	
