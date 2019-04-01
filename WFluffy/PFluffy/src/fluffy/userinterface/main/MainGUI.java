@@ -6,7 +6,8 @@ import java.awt.Frame;
 
 import javax.swing.JFrame;
 
-import fluffy.userinterface.connection.CameraList;
+import fluffy.network.camera.model.CameraList;
+import fluffy.network.camera.model.CameraModel;
 
 public class MainGUI extends JFrame {
 
@@ -33,7 +34,9 @@ public class MainGUI extends JFrame {
 		this.jPanelCameraList = new JPanelCameraList();
 		this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview("", "test", "test"));
 
-		CameraList.addCam("test", "link_test", "description...");
+		CameraList cameraList = CameraList.getInstance();
+		CameraModel cam = new CameraModel("test", "link_test", "description...");
+		cameraList.add(cam);
 
 		this.setLayout(new BorderLayout());
 
