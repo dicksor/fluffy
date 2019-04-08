@@ -27,9 +27,16 @@ public class CameraDisplay implements Runnable {
 	@Override
 	public void run() {
 		while (this.isRunning) {
-			lock.lock();
-			Mat matCam = camera.getImage();
-			lock.unlock();
+			Mat matCam = null;
+			//lock.lock();
+			try {
+				matCam = camera.getImage();
+				System.out.println(matCam.get(0,0));
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+			//lock.unlock();
 			if (isPreview) {
 				Imgproc.resize(matCam, matCam, new Size(150, 150));
 			}

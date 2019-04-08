@@ -32,6 +32,7 @@ public class MainGUI extends JFrame {
 		this.jPanelButtons = new JPanelButtons();
 		this.jPanelLabel = new JPanelLabel();
 		this.jPanelCameraList = new JPanelCameraList();
+		// http://192.168.1.200/axis-cgi/mjpg/video.cgi
 		this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview("", "test", "test"));
 
 		CameraList cameraList = CameraList.getInstance();

@@ -4,14 +4,16 @@ import java.io.Serializable;
 
 public class CameraModel implements Serializable {
 
+	public CameraModel() {
+		this.name = "";
+		this.link = "";
+		this.description = "";
+	}
+
 	public CameraModel(String name, String link, String description) {
 		this.name = name;
 		this.link = link;
 		this.description = description;
-	}
-
-	public CameraModel() {
-
 	}
 
 	public String getName() {

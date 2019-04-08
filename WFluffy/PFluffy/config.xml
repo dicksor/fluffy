@@ -14,4 +14,22 @@
     </void>
    </object>
   </void>
+<<<<<<< HEAD
  </object>
+=======
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
+>>>>>>> d29861ce5d321a2569696cd634d9719393a80634
