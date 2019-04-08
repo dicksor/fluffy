@@ -37,7 +37,7 @@ public class Camera implements ICamera {
 		camera.grab();
 		camera.retrieve(frame);
 		camera.read(frame);
-
+		System.out.println(frame.size());
 		return frame;
 	}
 

@@ -36,6 +36,7 @@ public class JPanelCameraPreview extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new CameraGUI(camera);
+				JPanelCameraPreview.this.stopStream();
 			}
 
 		});
@@ -56,10 +57,14 @@ public class JPanelCameraPreview extends JPanel {
 	public void streamCamera() {
 		this.camera.open();
 
-		CameraDisplay cameraDisplay = new CameraDisplay(this.lbCameraPreview, this.camera, true);
+		this.cameraDisplay = new CameraDisplay(this.lbCameraPreview, this.camera, true);
 
 		Thread threadDisplayImage = new Thread(cameraDisplay);
 		threadDisplayImage.start();
+	}
+	
+	private void stopStream() {
+		this.cameraDisplay.setIsRunning(false);
 	}
 
 	private FlowLayout flowLayout;
@@ -70,5 +75,7 @@ public class JPanelCameraPreview extends JPanel {
 	private String link;
 	private String cameraName;
 	private String cameraDescription;
+	
+	private CameraDisplay cameraDisplay;
 
 }

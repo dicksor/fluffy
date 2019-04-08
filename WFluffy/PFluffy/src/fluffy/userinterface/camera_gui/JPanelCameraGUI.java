@@ -69,6 +69,12 @@ public class JPanelCameraGUI extends JPanel {
 	// FIXME : Almost duplicate code from JPannelCameraPreview
 	public void streamCamera() {
 		if(this.camera != null) {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, this.camera, false);
 			
 			this.threadDisplayImage = new Thread(this.cameraDisplay);

@@ -50,6 +50,7 @@ public class CameraList {
 	private void load() {
 		try {
 			this.xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FILENAME)));
+			// FIXME Cast exception
 			this.listCamera = (ArrayList<CameraModel>) this.xmlDecoder.readObject();
 		} 
 		catch(FileNotFoundException e) {
