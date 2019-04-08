@@ -16,7 +16,15 @@ public class CameraList {
 	private CameraList() {
 		this.listCamera = new ArrayList<CameraModel>();
 		this.FILENAME = "config.xml";
-		this.load();
+
+		try {
+			this.xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILENAME)));
+			// this.xmlDecoder = new XMLDecoder(new BufferedInputStream(new
+			// FileInputStream(FILENAME)));
+			// load();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -33,10 +41,12 @@ public class CameraList {
 
 	public void add(CameraModel cam) {
 		this.listCamera.add(cam);
+		System.out.println(cam);
 		save();
 	}
 
 	private void save() {
+<<<<<<< HEAD
 		try {
 			this.xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILENAME)));
 			this.xmlEncoder.writeObject(this.listCamera);
@@ -45,19 +55,19 @@ public class CameraList {
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
+=======
+		System.out.println(this.listCamera);
+		this.xmlEncoder.writeObject(this.listCamera);
+>>>>>>> parent of d29861c... fixed xmldecoder error
 	}
 
 	private void load() {
 		try {
-			this.xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FILENAME)));
-			this.listCamera = (ArrayList<CameraModel>) this.xmlDecoder.readObject();
-		} 
-		catch(FileNotFoundException e) {
+			this.listCamera = (List<CameraModel>) this.xmlDecoder.readObject();
+		} catch (ClassCastException e) {
 			e.printStackTrace();
 		}
-		catch (ClassCastException e) {
-			e.printStackTrace();
-		}
+
 	}
 
 	// Attributes
