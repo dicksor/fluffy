@@ -1,46 +1,80 @@
 
 package fluffy.network.mail;
 
+import java.util.Date;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
 import javax.mail.Message;
-import javax.mail.MessagingException;
+import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
+//https://www.journaldev.com/2532/javamail-example-send-mail-in-java-smtp
 public class Mail
 	{
 
-	public static void main(String[] args)
+	public Mail()
 		{
-		String to = "vincent.moulin@he-arc.ch";//change accordingly
-		String from = "romain.capocasale@he-arc.ch";//change accordingly
-		String host = "";//or IP address
+		userEmail = new String("romain.capocasale@he-arc.ch");//FIXME: change email adress
 
-		//Get the session object
-		Properties properties = System.getProperties();
-		properties.setProperty("smtprel.he-arc.ch", host);
-		Session session = Session.getDefaultInstance(properties);
+		Properties props = System.getProperties();
+		props.put("mail.smtp.host", SMTP_SERVER);
+		session = Session.getInstance(props, null);
+		}
 
-		//compose the message
+	public void sendEmail()
+		{
 		try
 			{
-			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(from));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			message.setSubject("Ping");
-			message.setText("Hello, this is example of sending email  ");
+			//set header
+			MimeMessage msg = new MimeMessage(session);
+			msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
+			msg.addHeader("format", "flowed");
+			msg.addHeader("Content-Transfer-Encoding", "8bit");
 
-			// Send message
-			Transport.send(message);
-			System.out.println("message sent successfully....");
+			//set message header
+			msg.setFrom(new InternetAddress("fluffy.corporation@fluffy.com", "Fluffy"));
+			msg.setReplyTo(InternetAddress.parse("fluffy.corporation@fluffy.com", false));
+			msg.setSubject(SUBJECT, "UTF-8");
+			msg.setSentDate(new Date());
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userEmail, false));
 
+			//set message
+			BodyPart messageBodyPart = new MimeBodyPart();
+			messageBodyPart.setText(MESSAGE);
+			Multipart multipart = new MimeMultipart();
+			multipart.addBodyPart(messageBodyPart);
+
+			//set attachment
+			messageBodyPart = new MimeBodyPart();
+			DataSource dataSource = new FileDataSource("01-04-2019.zip");
+			messageBodyPart.setDataHandler(new DataHandler(dataSource));
+			messageBodyPart.setFileName("01-04-2019.zip");
+			multipart.addBodyPart(messageBodyPart);
+			msg.setContent(multipart);
+
+			//send mail
+			Transport.send(msg);
+
+			System.out.println("EMail Sent Successfully!!");
 			}
-		catch (MessagingException mex)
+		catch (Exception e)
 			{
-			mex.printStackTrace();
+			e.printStackTrace();
 			}
 		}
+
+	private Session session;
+	private String userEmail;
+	private static final String SUBJECT = "Daily Snapshot Review";
+	private static final String MESSAGE = "Daily Snapshot Review";
+	private static final String SMTP_SERVER = "smtprel.he-arc.ch";
 	}

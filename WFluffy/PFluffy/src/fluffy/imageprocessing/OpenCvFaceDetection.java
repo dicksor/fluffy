@@ -29,7 +29,6 @@ public class OpenCvFaceDetection extends OpenCvDetection
 		super(xmlModelFile);
 
 		this.camera = camera;
-
 		try
 			{
 			format = new SimpleDateFormat("HH.mm.ss");
@@ -41,17 +40,14 @@ public class OpenCvFaceDetection extends OpenCvDetection
 			}
 		}
 
-	public Mat detecte(Mat m)
+	private void takeSnapshot()
 		{
-		MatOfRect faceDetections = new MatOfRect();
-		this.classifier.detectMultiScale(m, faceDetections);
-
 		try
 			{
 			dateActuelle = format.parse(format.format(new Date()));
 			long difference = dateActuelle.getTime() - dateCapture.getTime();
 
-			if(difference >= DELAY_BETWEEN_CAPTURE)
+			if (difference >= DELAY_BETWEEN_CAPTURE)
 				{
 				String strDateCapture = format.format(new Date());
 				dateCapture = format.parse(strDateCapture);
@@ -62,11 +58,26 @@ public class OpenCvFaceDetection extends OpenCvDetection
 		catch (ParseException e)
 			{
 			e.printStackTrace();
+			System.err.println("Error with the snapshot");
 			}
+		}
+
+	public Mat detecte(Mat m)
+		{
+		MatOfRect faceDetections = new MatOfRect();
+		this.classifier.detectMultiScale(m, faceDetections);
 
 		for(Rect rect:faceDetections.toArray())
 			{
+			System.out.println("detection");
 			Imgproc.rectangle(m, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(0, 0, 255), 3);
+			}
+
+		//test if array > 1, because we would take only on snapshot
+		if(faceDetections.toArray().length >=1)
+			{
+			takeSnapshot();
+			System.out.println("detection");
 			}
 
 		// TODO : return object with matrix, and face detected count
@@ -74,5 +85,5 @@ public class OpenCvFaceDetection extends OpenCvDetection
 		}
 
 	ICamera camera;
-	private static final long DELAY_BETWEEN_CAPTURE = 5000;//temps en milliseconde
+	private static final long DELAY_BETWEEN_CAPTURE = 10000;//temps en milliseconde
 	}

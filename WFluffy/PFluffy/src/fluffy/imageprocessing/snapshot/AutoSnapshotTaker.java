@@ -22,7 +22,6 @@ public class AutoSnapshotTaker extends SnapshotTaker
 	@Override
 	public void run()
 		{
-
 		String filePath = createFolderFromDate() + "\\" + this.filename + ".jpg";
 		System.out.println(filePath);
 		File file = new File(filePath);
