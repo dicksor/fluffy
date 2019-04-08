@@ -46,19 +46,17 @@ public class CameraList {
 	}
 
 	private void save() {
-<<<<<<< HEAD
 		try {
 			this.xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILENAME)));
 			this.xmlEncoder.writeObject(this.listCamera);
 			this.xmlEncoder.flush();
 			this.xmlEncoder.close();
-		} catch(FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-=======
+
 		System.out.println(this.listCamera);
 		this.xmlEncoder.writeObject(this.listCamera);
->>>>>>> parent of d29861c... fixed xmldecoder error
 	}
 
 	private void load() {

@@ -15,8 +15,6 @@ public class CameraModel implements Serializable {
 		this.link = "";
 		this.description = "";
 	}
-	
-	
 
 	/*
 	 * public String getName() { return name; }
@@ -32,6 +30,11 @@ public class CameraModel implements Serializable {
 	 * public void setDescription(String description) { this.description =
 	 * description; }
 	 */
+
+	@Override
+	public String toString() {
+		return "CameraModel [name=" + name + ", link=" + link + ", description=" + description + "]";
+	}
 
 	private static final long serialVersionUID = 1L;
 
