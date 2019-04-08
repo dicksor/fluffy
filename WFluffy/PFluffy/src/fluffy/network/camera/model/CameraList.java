@@ -48,6 +48,7 @@ public class CameraList {
 	private void save() {
 		System.out.println(this.listCamera);
 		this.xmlEncoder.writeObject(this.listCamera);
+		this.xmlEncoder.flush();
 	}
 
 	private void load() {
@@ -57,6 +58,7 @@ public class CameraList {
 			e.printStackTrace();
 		}
 
+		// System.out.println(this.listCamera);
 	}
 
 	// Attributes
