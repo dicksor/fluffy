@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -17,7 +18,7 @@ public class JPanelWest extends JPanel {
 		appearance();
 	}
 	
-	public JPanelWest(JPanel panelCamera) {
+	public JPanelWest(JPanelCameraGUI panelCamera) {
 		this();
 		this.panelCamera = panelCamera;
 	}
@@ -27,6 +28,7 @@ public class JPanelWest extends JPanel {
 		this.btnSnapshot = new JButton("Take Snapshot");
 		this.btnRotateLeft = new JButton("Rotate left");
 		this.btnRotateRight = new JButton("Rotate right");
+		this.ckbFaceDetection = new JCheckBox("With face detection");
 		this.panelZoom = new JPanelZoom();
 		
 		Box boxV = Box.createVerticalBox();
@@ -39,6 +41,8 @@ public class JPanelWest extends JPanel {
 		boxV.add(btnRotateLeft);
 		boxV.add(Box.createVerticalStrut(30));
 		boxV.add(btnRotateRight);
+		boxV.add(Box.createVerticalStrut(30));
+		boxV.add(ckbFaceDetection);
 		boxV.add(Box.createVerticalStrut(30));
 		boxV.add(panelZoom);
 		boxV.add(Box.createVerticalStrut(30));
@@ -53,7 +57,7 @@ public class JPanelWest extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cameraRotationAngle += 90;
-				((JPanelCameraGUI) panelCamera).rotateCamera(cameraRotationAngle);
+				panelCamera.rotateCamera(cameraRotationAngle);
 			}
 		});
 		
@@ -62,7 +66,7 @@ public class JPanelWest extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cameraRotationAngle -= 90;
-				((JPanelCameraGUI) panelCamera).rotateCamera(cameraRotationAngle);
+				panelCamera.rotateCamera(cameraRotationAngle);
 			}
 		});
 		
@@ -70,7 +74,22 @@ public class JPanelWest extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				((JPanelCameraGUI) panelCamera).takeSnapShot();
+				panelCamera.stopStream();
+				panelCamera.takeSnapShot();
+				panelCamera.streamCamera();
+			}
+		});
+		
+		this.ckbFaceDetection.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(JPanelWest.this.ckbFaceDetection.isSelected()) {
+					panelCamera.setFaceDetection(true);
+				}	
+				else {
+					panelCamera.setFaceDetection(false);
+				}
 			}
 		});
 	}
@@ -88,8 +107,9 @@ public class JPanelWest extends JPanel {
 	private JButton btnSnapshot;
 	private JButton btnRotateLeft;
 	private JButton btnRotateRight;
+	private JCheckBox ckbFaceDetection;
 	private JPanelZoom panelZoom;
-	private JPanel panelCamera;
+	private JPanelCameraGUI panelCamera;
 	private double cameraRotationAngle;
 
 }

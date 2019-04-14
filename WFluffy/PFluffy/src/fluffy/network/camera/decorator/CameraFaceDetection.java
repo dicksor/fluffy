@@ -1,8 +1,9 @@
-package fluffy.network.camera;
+package fluffy.network.camera.decorator;
 
 import org.opencv.core.Mat;
 
 import fluffy.imageprocessing.OpenCvFaceDetection;
+import fluffy.network.camera.exception.EmptyImageException;
 
 public class CameraFaceDetection extends CameraDecorator {
 
@@ -12,7 +13,7 @@ public class CameraFaceDetection extends CameraDecorator {
 	}
 	
 	@Override
-	public Mat getImage() {
+	public Mat getImage() throws EmptyImageException {
 		return this.getImageWithFaceDetection(super.getImage());
 	}
 	

@@ -1,7 +1,9 @@
-package fluffy.network.camera;
+package fluffy.network.camera.decorator;
 
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
+
+import fluffy.network.camera.exception.EmptyImageException;
 
 public class Camera implements ICamera {
 
@@ -12,11 +14,9 @@ public class Camera implements ICamera {
 
 	@Override
 	public boolean open() {
-		// TODO : remove when not in dev
 		if (this.link != "") {
 			this.camera.open(this.link);
 		} else {
-			// Open Webcam
 			this.camera.open(0);
 		}
 
@@ -25,19 +25,23 @@ public class Camera implements ICamera {
 	
 	@Override
 	public void release() {
-		// TODO : check for error
 		this.camera.release();
 	}
 
 	@Override
-	public Mat getImage() {
-		// TODO : test error
+	public Mat getImage() throws EmptyImageException {
 		Mat frame = new Mat();
+		if(!camera.grab())
+			throw new EmptyImageException("Grab errror");
+		
+		if(camera.retrieve(frame)) {
+			if(!camera.read(frame)) 
+				throw new EmptyImageException("Read error");
+		}
+		else {
+			throw new EmptyImageException("Retrieve error");
+		}
 
-		camera.grab();
-		camera.retrieve(frame);
-		camera.read(frame);
-		System.out.println(frame.size());
 		return frame;
 	}
 
@@ -49,5 +53,4 @@ public class Camera implements ICamera {
 
 	private VideoCapture camera;
 	private String link;
-
 }

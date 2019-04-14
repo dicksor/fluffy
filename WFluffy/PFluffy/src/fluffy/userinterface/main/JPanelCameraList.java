@@ -7,23 +7,15 @@ import javax.swing.JPanel;
 
 public class JPanelCameraList extends JPanel {
 
-	public JPanelCameraList() {
-		this.setJPanelCamPrev = new LinkedList<JPanelCameraPreview>();	
+	public JPanelCameraList() {	
 		this.geometry();
 		this.control();
 		this.appearance();
 	}
 	
 	public void addCameraPreview(JPanelCameraPreview panelCameraPreview) {
-		this.setJPanelCamPrev.add(panelCameraPreview);
 		this.add(panelCameraPreview);
 		panelCameraPreview.streamCamera();
-	}
-	
-	public void streamCameras() {
-		/*for(JPanelCameraPreview jPannelCameraPreview : this.setJPanelCamPrev) {
-			jPannelCameraPreview.streamCamera();
-		}*/
 	}
 	
 	private void appearance() {
@@ -42,7 +34,6 @@ public class JPanelCameraList extends JPanel {
 		this.setLayout(this.flowLayout);
 	}
 
-	private List<JPanelCameraPreview> setJPanelCamPrev;
 	private FlowLayout flowLayout;
 
 }

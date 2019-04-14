@@ -7,8 +7,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fluffy.network.camera.Camera;
-import fluffy.network.camera.ICamera;
+import fluffy.network.camera.decorator.Camera;
+import fluffy.network.camera.decorator.ICamera;
 import fluffy.userinterface.camera_gui.CameraGUI;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
 
@@ -18,6 +18,7 @@ public class JPanelCameraPreview extends JPanel {
 		// Pour streamer la vidéo surveillance remplacer "" par ->
 		// http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1
 		this.camera = new Camera(link);
+		this.camera.open();
 		this.link = link;
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
@@ -35,8 +36,14 @@ public class JPanelCameraPreview extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new CameraGUI(camera);
 				JPanelCameraPreview.this.stopStream();
+				// FIXME : Find dynamic delay
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				new CameraGUI(JPanelCameraPreview.this, camera);
 			}
 
 		});
@@ -55,8 +62,6 @@ public class JPanelCameraPreview extends JPanel {
 	}
 
 	public void streamCamera() {
-		this.camera.open();
-
 		this.cameraDisplay = new CameraDisplay(this.lbCameraPreview, this.camera, true);
 
 		Thread threadDisplayImage = new Thread(cameraDisplay);

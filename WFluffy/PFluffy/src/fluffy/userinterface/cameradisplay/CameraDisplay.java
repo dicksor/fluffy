@@ -12,7 +12,8 @@ import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 import fluffy.imageprocessing.OpenCvUtil;
-import fluffy.network.camera.ICamera;
+import fluffy.network.camera.decorator.ICamera;
+import fluffy.network.camera.exception.EmptyImageException;
 
 public class CameraDisplay implements Runnable {
 
@@ -30,21 +31,23 @@ public class CameraDisplay implements Runnable {
 			Mat matCam = null;
 			try {
 				matCam = camera.getImage();
-				System.out.println(matCam.get(0,0));
+				if (isPreview) {
+					Imgproc.resize(matCam, matCam, new Size(150, 150));
+				}
+				BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCam);
+				ImageIcon imgIcn = new ImageIcon(imgCam);
+				this.lbCameraDisplay.setIcon(imgIcn);
+			}
+			catch(EmptyImageException e) {
+				System.out.println("Empty image");
+				e.printStackTrace();
 			}
 			catch(Exception e) {
 				e.printStackTrace();
-			}
-			if (isPreview) {
-				Imgproc.resize(matCam, matCam, new Size(150, 150));
-			}
-			BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCam);
-			ImageIcon imgIcn = new ImageIcon(imgCam);
-			this.lbCameraDisplay.setIcon(imgIcn);
+			}	
 		}
 	}
 
-	// TODO : Faut il fermer le thread si on ferme la fenêtre ?
 	public void setIsRunning(boolean isRunning) {
 		this.isRunning = isRunning;
 	}

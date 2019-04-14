@@ -1,8 +1,9 @@
-package fluffy.network.camera;
+package fluffy.network.camera.decorator;
 
 import org.opencv.core.Mat;
 
 import fluffy.imageprocessing.OpenCvUtil;
+import fluffy.network.camera.exception.EmptyImageException;
 
 public class CameraZoom extends CameraDecorator {
 
@@ -12,7 +13,7 @@ public class CameraZoom extends CameraDecorator {
 	}
 	
 	@Override
-	public Mat getImage() {
+	public Mat getImage() throws EmptyImageException {
 		return this.getImageWithZoom(super.getImage());
 	}
 	

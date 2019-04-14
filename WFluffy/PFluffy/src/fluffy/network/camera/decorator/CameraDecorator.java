@@ -1,6 +1,8 @@
-package fluffy.network.camera;
+package fluffy.network.camera.decorator;
 
 import org.opencv.core.Mat;
+
+import fluffy.network.camera.exception.EmptyImageException;
 
 public abstract class CameraDecorator implements ICamera {
 
@@ -9,7 +11,7 @@ public abstract class CameraDecorator implements ICamera {
 	}
 
 	@Override
-	public Mat getImage() {
+	public Mat getImage() throws EmptyImageException {
 		return this.camera.getImage();
 	}
 	
