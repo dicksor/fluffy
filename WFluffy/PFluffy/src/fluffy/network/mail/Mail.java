@@ -28,9 +28,11 @@ import javax.mail.internet.MimeMultipart;
 public class Mail
 	{
 
-	public Mail()
+	public Mail(String userEmail, String zipFilePath)
 		{
-		userEmail = new String("romain.capocasale@he-arc.ch");//FIXME: change email adress
+		//userEmail = new String("romain.capocasale@he-arc.ch");//FIXME: change email adress
+		this.userEmail = userEmail;
+		this.zipFilePath = zipFilePath;
 
 		Properties props = System.getProperties();
 		props.put("mail.smtp.host", SMTP_SERVER);
@@ -62,9 +64,9 @@ public class Mail
 
 			//set attachment
 			messageBodyPart = new MimeBodyPart();
-			DataSource dataSource = new FileDataSource("01-04-2019.zip");
+			DataSource dataSource = new FileDataSource(zipFilePath);
 			messageBodyPart.setDataHandler(new DataHandler(dataSource));
-			messageBodyPart.setFileName("01-04-2019.zip");
+			messageBodyPart.setFileName(zipFilePath);
 			multipart.addBodyPart(messageBodyPart);
 			msg.setContent(multipart);
 
@@ -81,6 +83,7 @@ public class Mail
 
 	private Session session;
 	private String userEmail;
+	private String zipFilePath;
 	private static final String SUBJECT = "Daily Snapshot Review";
 	private static final String MESSAGE = "Daily Snapshot Review";
 	private static final String SMTP_SERVER = "smtprel.he-arc.ch";

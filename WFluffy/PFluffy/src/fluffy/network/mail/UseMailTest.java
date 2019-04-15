@@ -22,8 +22,9 @@ public class UseMailTest
 
 	public static void main()
 		{
-		Mail mail = new Mail();
-		mail.sendEmail();
+		//Mail mail = new Mail("romain.capocasale@he-arc.ch");
+		//mail.sendEmail();
+
 		}
 
 	/*------------------------------------------------------------------*\

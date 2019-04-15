@@ -14,6 +14,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import org.opencv.core.Core;
 
+import fluffy.network.mail.EmailSender;
 import fluffy.userinterface.main.MainGUI;
 import mdlaf.MaterialLookAndFeel;
 
@@ -32,6 +33,7 @@ public class UseFluffy
 			{
 			e.printStackTrace();
 			}
+		EmailSender emailSender = new EmailSender();
 		new MainGUI();
 		}
 	}
