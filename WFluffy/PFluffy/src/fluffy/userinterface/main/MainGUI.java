@@ -36,6 +36,7 @@ public class MainGUI extends JFrame {
 	private void geometry() {
 		this.jPanelButtons = new JPanelButtons();
 		this.jPanelLabel = new JPanelLabel();
+		this.jPanelLabel.repaint();
 		this.jPanelCameraList = new JPanelCameraList();
 		this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview("", "test1", "test"));
 
