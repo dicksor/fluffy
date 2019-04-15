@@ -10,6 +10,7 @@ package fluffy.userinterface.help;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Frame;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,20 +28,20 @@ public class HelpGUI extends JFrame {
 		control();
 		appearance();
 	}
-	
+
 	private void appearance() {
 		// TODO Auto-generated method stub
 		this.setTitle("Fluffy : Aide");
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.fldHelp.setEditable(false);
 		this.setVisible(true);
 	}
 
 	private void control() {
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 		this.btnQuit.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Component root = SwingUtilities.getRoot((JButton)e.getSource());
@@ -52,7 +53,7 @@ public class HelpGUI extends JFrame {
 	private void geometry() {
 		this.fldHelp = new JTextField("Ici s'affichera l'aide et à propos");
 		this.btnQuit = new JButton("Quitter");
-		
+
 		this.setLayout(new BorderLayout());
 
 		this.add(this.fldHelp, BorderLayout.CENTER);
@@ -61,5 +62,5 @@ public class HelpGUI extends JFrame {
 
 	private JTextField fldHelp;
 	private JButton btnQuit;
-	
+
 }
