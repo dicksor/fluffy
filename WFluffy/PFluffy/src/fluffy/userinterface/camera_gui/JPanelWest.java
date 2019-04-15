@@ -25,23 +25,21 @@ import mdlaf.utils.MaterialColors;
 public class JPanelWest extends JPanel
 	{
 
-	public JPanelWest()
+	public JPanelWest(JPanel panelCamera, String cameraName, String cameraDescription)
 		{
 		this.cameraRotationAngle = 0;
+		this.cameraName = cameraName;
+		this.cameraDescription = cameraDescription;
 		geometry();
 		control();
 		appearance();
-		}
-
-	public JPanelWest(JPanel panelCamera)
-		{
-		this();
 		this.panelCamera = panelCamera;
 		}
 
 	private void geometry()
 		{
-		this.lblCameraName = new JLabel("Camera Name");
+		this.lblCameraName = new JLabel("<html><strong>Camera name : </strong>"+ cameraName +"</html>");
+		this.lblCameraDescription = new JLabel("<html><strong>Description : </strong>"+ cameraDescription +"</html>");
 		this.btnSnapshot = new JButton("Take Snapshot");
 		this.btnRotateLeft = new JButton("Rotate left");
 		this.btnRotateRight = new JButton("Rotate right");
@@ -51,6 +49,8 @@ public class JPanelWest extends JPanel
 
 		boxV.add(Box.createVerticalGlue());
 		boxV.add(lblCameraName);
+		boxV.add(Box.createVerticalStrut(30));
+		boxV.add(lblCameraDescription);
 		boxV.add(Box.createVerticalStrut(30));
 		boxV.add(btnSnapshot);
 		boxV.add(Box.createVerticalStrut(30));
@@ -121,6 +121,7 @@ public class JPanelWest extends JPanel
 		}
 
 	private JLabel lblCameraName;
+	private JLabel lblCameraDescription;
 	private JButton btnSnapshot;
 	private JButton btnRotateLeft;
 	private JButton btnRotateRight;
@@ -128,4 +129,6 @@ public class JPanelWest extends JPanel
 	private JPanel panelCamera;
 	private double cameraRotationAngle;
 
+	private String cameraName;
+	private String cameraDescription;
 	}

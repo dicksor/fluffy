@@ -6,6 +6,7 @@
  * Printemps 2019
  * He-arc
  */
+
 package fluffy.userinterface.camera_gui;
 
 import java.awt.Frame;
@@ -17,41 +18,48 @@ import javax.swing.JFrame;
 import fluffy.network.camera.CameraFaceDetection;
 import fluffy.network.camera.ICamera;
 
-public class CameraGUI extends JFrame {
+public class CameraGUI extends JFrame
+	{
 
-	public CameraGUI() {
+	public CameraGUI(ICamera camera, String cameraName, String cameraDescription)
+		{
+		this.cameraName = cameraName;
+		this.cameraDescription = cameraDescription;
 		this.geometry();
 		this.control();
 		this.appearance();
-	}
-
-	public CameraGUI(ICamera camera) {
-		this();
 		camera = new CameraFaceDetection(camera);
 		this.panelCamera.setCamera(camera);
 		this.panelCamera.streamCamera();
-	}
+		}
 
-	private void appearance() {
+	private void appearance()
+		{
 		this.setTitle("Fluffy : Camera");
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setVisible(true);
-	}
+		}
 
-	private void control() {
-		this.addWindowListener(new WindowAdapter() {
+	private void control()
+		{
+		this.addWindowListener(new WindowAdapter()
+			{
 
 			@Override
-		    public void windowClosing(WindowEvent e) {
+			public void windowClosing(WindowEvent e)
+				{
 				panelCamera.stopStream();
-		    }
-		});
-	}
+				}
+			});
+		}
 
-	private void geometry() {
-		this.panelCamera = new JPanelCameraGUI(this);
+	private void geometry()
+		{
+		this.panelCamera = new JPanelCameraGUI(this, cameraName, cameraDescription);
 		this.add(this.panelCamera);
-	}
+		}
 
 	private JPanelCameraGUI panelCamera;
-}
+	private String cameraName;
+	private String cameraDescription;
+	}

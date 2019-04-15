@@ -25,15 +25,13 @@ import fluffy.userinterface.cameradisplay.CameraDisplay;
 public class JPanelCameraGUI extends JPanel
 	{
 
-	public JPanelCameraGUI()
+	public JPanelCameraGUI(JFrame frameRoot, String cameraName, String cameraDescription)
 		{
+		this.cameraName = cameraName;
+		this.cameraDescription = cameraDescription;
 		this.geometry();
 		this.control();
 		this.appearance();
-		}
-
-	public JPanelCameraGUI(JFrame frameRoot)
-		{
 		this.camera = null;
 		this.frameRoot = frameRoot;
 		this.geometry();
@@ -69,7 +67,7 @@ public class JPanelCameraGUI extends JPanel
 	private void geometry()
 		{
 
-		this.panelWest = new JPanelWest(this);
+		this.panelWest = new JPanelWest(this, cameraName, cameraDescription);
 		this.panelEast = new JPanel();
 		this.panelEast.setPreferredSize(new Dimension(panelWest.getPreferredSize().width, panelWest.getPreferredSize().height));
 		this.panelSouth = new JPanelSouth(this.frameRoot);
@@ -135,4 +133,6 @@ public class JPanelCameraGUI extends JPanel
 	private CameraDisplay cameraDisplay;
 	private Thread threadDisplayImage;
 
+	private String cameraName;
+	private String cameraDescription;
 	}

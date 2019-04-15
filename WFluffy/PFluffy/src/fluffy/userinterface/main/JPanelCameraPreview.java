@@ -43,7 +43,7 @@ public class JPanelCameraPreview extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new CameraGUI(camera);
+				new CameraGUI(camera, cameraName, cameraDescription);
 			}
 
 		});
