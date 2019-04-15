@@ -6,11 +6,16 @@
  * Printemps 2019
  * He-arc
  */
+
 package fluffy;
+
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import org.opencv.core.Core;
 
 import fluffy.userinterface.main.MainGUI;
+import mdlaf.MaterialLookAndFeel;
 
 public class UseFluffy
 	{
@@ -19,6 +24,14 @@ public class UseFluffy
 		{
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		System.loadLibrary("opencv_ffmpeg401_64");
+		try
+			{
+			UIManager.setLookAndFeel(new MaterialLookAndFeel());
+			}
+		catch (UnsupportedLookAndFeelException e)
+			{
+			e.printStackTrace();
+			}
 		new MainGUI();
 		}
 	}
