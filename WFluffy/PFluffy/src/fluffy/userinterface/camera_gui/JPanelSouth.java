@@ -8,13 +8,16 @@
  */
 package fluffy.userinterface.camera_gui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import mdlaf.animation.MaterialUIMovement;
+import mdlaf.utils.MaterialColors;
 
 
 public class JPanelSouth extends JPanel {
@@ -24,15 +27,16 @@ public class JPanelSouth extends JPanel {
 		control();
 		appearance();
 	}
-	
+
 	public JPanelSouth(JFrame frameRoot) {
 		this();
 		this.frameRoot = frameRoot;
 	}
 
 	private void appearance() {
-		// TODO Auto-generated method stub
-
+		this.btnReturn.setBackground(MaterialColors.RED_400);
+		this.btnReturn.setForeground(Color.WHITE);
+		MaterialUIMovement.add(this.btnReturn, MaterialColors.GRAY_200);
 	}
 
 	private void control() {
@@ -40,8 +44,8 @@ public class JPanelSouth extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame frameRoot = JPanelSouth.this.frameRoot;
-				frameRoot.dispatchEvent(new WindowEvent(frameRoot, WindowEvent.WINDOW_CLOSING));
+				JPanelSouth.this.frameRoot.setVisible(false);
+				JPanelSouth.this.frameRoot.dispose();
 			}
 		});
 	}

@@ -9,16 +9,13 @@
 package fluffy.userinterface.main;
 
 import java.awt.Color;
-import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import fluffy.userinterface.connection.ConnectionGUI;
 import fluffy.userinterface.help.HelpGUI;
@@ -36,14 +33,17 @@ public class JPanelButtons extends JPanel {
 	private void appearance() {
 		this.btnAdd.setBackground(MaterialColors.LIGHT_BLUE_400);
 		this.btnAdd.setForeground(Color.WHITE);
+		this.btnAdd.setPreferredSize(BTN_DIMENSION);
 		MaterialUIMovement.add(this.btnAdd, MaterialColors.GRAY_200);
 
 		this.btnHelp.setBackground(MaterialColors.LIGHT_BLUE_400);
 		this.btnHelp.setForeground(Color.WHITE);
+		this.btnHelp.setPreferredSize(BTN_DIMENSION);
 		MaterialUIMovement.add(this.btnHelp, MaterialColors.GRAY_200);
 
 		this.btnQuit.setBackground(MaterialColors.RED_400);
 		this.btnQuit.setForeground(Color.WHITE);
+		this.btnQuit.setPreferredSize(BTN_DIMENSION);
 		MaterialUIMovement.add(this.btnQuit, MaterialColors.GRAY_200);
 
 		this.flowLayout.setVgap(20);
@@ -54,8 +54,7 @@ public class JPanelButtons extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Component root = SwingUtilities.getRoot((JButton)e.getSource());
-				root.dispatchEvent(new WindowEvent((Window) root, WindowEvent.WINDOW_CLOSING));
+				System.exit(0);
 			}
 		});
 
@@ -95,5 +94,5 @@ public class JPanelButtons extends JPanel {
 	private JButton btnHelp;
 	private JButton btnQuit;
 	private JButton btnAdd;
-
+	private static final Dimension BTN_DIMENSION = new Dimension(150, 50);
 }

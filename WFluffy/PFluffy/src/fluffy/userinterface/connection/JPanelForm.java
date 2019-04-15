@@ -50,7 +50,7 @@ public class JPanelForm extends JPanel {
 
 	private void appearance() {
 		gridlayout.setVgap(10);
-		gridlayout.setHgap(5);
+		gridlayout.setHgap(10);
 	}
 
 	// tools

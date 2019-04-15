@@ -50,8 +50,7 @@ public class JPanelCameraPreview extends JPanel {
 	}
 
 	private void geometry() {
-
-		this.lbCameraData = new JLabel(this.cameraName);
+		this.lbCameraData = new JLabel("<html><strong>Camera name : </strong>" + this.cameraName + "<br/><strong>Description : </strong>" + this.cameraDescription + "</html>");
 		this.lbCameraPreview = new JLabel();
 
 		this.flowLayout = new FlowLayout(FlowLayout.CENTER);

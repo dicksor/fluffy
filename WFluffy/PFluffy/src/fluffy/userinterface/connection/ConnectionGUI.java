@@ -9,6 +9,7 @@
 package fluffy.userinterface.connection;
 
 import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
@@ -22,7 +23,7 @@ public class ConnectionGUI extends JFrame {
 
 	private void geometry() {
 		this.jPanelForm = new JPanelForm();
-		this.jPanelButtons = new JPanelButtons();
+		this.jPanelButtons = new JPanelButtons(this);
 
 		this.borderlayout = new BorderLayout();
 		setLayout(borderlayout);
@@ -32,12 +33,12 @@ public class ConnectionGUI extends JFrame {
 	}
 
 	private void control() {
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	private void appearance() {
 		this.setTitle("Fluffy: Connection");
-		this.setSize(300, 180);
+		this.setSize(360, 180);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);

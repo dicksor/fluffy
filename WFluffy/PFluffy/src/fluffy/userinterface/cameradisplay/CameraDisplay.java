@@ -6,6 +6,7 @@
  * Printemps 2019
  * He-arc
  */
+
 package fluffy.userinterface.cameradisplay;
 
 import java.awt.image.BufferedImage;
@@ -22,35 +23,41 @@ import org.opencv.imgproc.Imgproc;
 import fluffy.imageprocessing.OpenCvUtil;
 import fluffy.network.camera.ICamera;
 
-public class CameraDisplay implements Runnable {
+public class CameraDisplay implements Runnable
+	{
 
-	public CameraDisplay(JLabel cameraDisplay, ICamera camera, Boolean isPreview) {
+	public CameraDisplay(JLabel cameraDisplay, ICamera camera, Boolean isPreview)
+		{
 		this.isRunning = true;
 		this.lbCameraDisplay = cameraDisplay;
 		this.camera = camera;
 		this.isPreview = isPreview;
 		this.lock = new ReentrantLock();
-	}
+		}
 
 	@Override
-	public void run() {
-		while (this.isRunning) {
+	public void run()
+		{
+		while(this.isRunning)
+			{
 			lock.lock();
 			Mat matCam = camera.getImage();
 			lock.unlock();
-			if (isPreview) {
+			if (isPreview)
+				{
 				Imgproc.resize(matCam, matCam, new Size(150, 150));
-			}
+				}
 			BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCam);
 			ImageIcon imgIcn = new ImageIcon(imgCam);
 			this.lbCameraDisplay.setIcon(imgIcn);
+			}
 		}
-	}
 
 	// TODO : Faut il fermer le thread si on ferme la fenêtre ?
-	public void setIsRunning(boolean isRunning) {
+	public void setIsRunning(boolean isRunning)
+		{
 		this.isRunning = isRunning;
-	}
+		}
 
 	private volatile boolean isRunning;
 	private JLabel lbCameraDisplay;
@@ -58,4 +65,4 @@ public class CameraDisplay implements Runnable {
 	private Boolean isPreview;
 	private Lock lock;
 
-}
+	}

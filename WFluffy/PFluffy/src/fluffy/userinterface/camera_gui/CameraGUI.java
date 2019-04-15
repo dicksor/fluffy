@@ -8,6 +8,7 @@
  */
 package fluffy.userinterface.camera_gui;
 
+import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -23,7 +24,7 @@ public class CameraGUI extends JFrame {
 		this.control();
 		this.appearance();
 	}
-	
+
 	public CameraGUI(ICamera camera) {
 		this();
 		camera = new CameraFaceDetection(camera);
@@ -33,13 +34,13 @@ public class CameraGUI extends JFrame {
 
 	private void appearance() {
 		this.setTitle("Fluffy : Camera");
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 	}
 
 	private void control() {
 		this.addWindowListener(new WindowAdapter() {
-			
+
 			@Override
 		    public void windowClosing(WindowEvent e) {
 				panelCamera.stopStream();

@@ -10,7 +10,6 @@ package fluffy.userinterface.main;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Frame;
 
 import javax.swing.JFrame;
 
@@ -26,20 +25,19 @@ public class MainGUI extends JFrame {
 
 	private void appearance() {
 		this.setTitle("Fluffy : Main");
-		this.setExtendedState(Frame.MAXIMIZED_BOTH);
+		this.setMinimumSize(new Dimension(700, 400));
 		this.setVisible(true);
 	}
 
 	private void control() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setMinimumSize(new Dimension(700, 400));
 	}
 
 	private void geometry() {
 		this.jPanelButtons = new JPanelButtons();
 		this.jPanelLabel = new JPanelLabel();
 		this.jPanelCameraList = new JPanelCameraList();
-		this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview("", "test", "test"));
+		this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview("", "test1", "test"));
 
 		CameraList.addCam("test", "link_test", "description...");
 
