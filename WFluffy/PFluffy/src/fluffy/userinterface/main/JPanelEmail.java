@@ -1,3 +1,11 @@
+/**
+ * @author romain.capocasa
+ * @author jonas.freiburghaus
+ * @author vincent.moulin1
+ * Projet P2
+ * Printemps 2019
+ * He-arc
+ */
 package fluffy.userinterface.main;
 
 import java.awt.Color;
@@ -10,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import fluffy.network.tools.EmailValidator;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 
@@ -58,11 +67,17 @@ public class JPanelEmail extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 				{
-				//mettre ces valeurs dans un fichier texte
-				String email = JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText();
-				int hour = JPanelEmail.this.jPanelEmailInfo.getCbxHours().getSelectedIndex();
-				JOptionPane.showMessageDialog(null, "Settings correctly applied", "InfoBox: fluffy", JOptionPane.INFORMATION_MESSAGE);
-
+				if((new EmailValidator()).validate(JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText().trim()))
+					{
+					//mettre ces valeurs dans un fichier texte
+					String email = JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText();
+					int hour = JPanelEmail.this.jPanelEmailInfo.getCbxHours().getSelectedIndex();
+					JOptionPane.showMessageDialog(null, "Settings correctly applied", "InfoBox: fluffy", JOptionPane.INFORMATION_MESSAGE);
+					}
+				else
+					{
+					JOptionPane.showMessageDialog(null, "Error please enter a correct email", "ErrBox: fluffy", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			});
 		}
