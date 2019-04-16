@@ -19,7 +19,6 @@ public class JPanelCameraPreview extends JPanel {
 		// http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1
 		this.camera = new Camera(link);
 		this.camera.open();
-		this.link = link;
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
 		this.geometry();
@@ -77,7 +76,6 @@ public class JPanelCameraPreview extends JPanel {
 	private JLabel lbCameraPreview;
 	private ICamera camera;
 
-	private String link;
 	private String cameraName;
 	private String cameraDescription;
 	

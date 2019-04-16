@@ -5,8 +5,6 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
-import fluffy.network.camera.decorator.CameraFaceDetection;
-import fluffy.network.camera.decorator.CameraRotation;
 import fluffy.network.camera.decorator.ICamera;
 import fluffy.userinterface.main.JPanelCameraPreview;
 

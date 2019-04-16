@@ -6,8 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fluffy.imageprocessing.snapshot.SnapshotTaker;
-import fluffy.network.camera.decorator.Camera;
-import fluffy.network.camera.decorator.CameraDecorator;
 import fluffy.network.camera.decorator.CameraFaceDetection;
 import fluffy.network.camera.decorator.CameraRotation;
 import fluffy.network.camera.decorator.ICamera;

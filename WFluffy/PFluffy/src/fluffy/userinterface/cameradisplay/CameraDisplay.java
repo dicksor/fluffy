@@ -22,7 +22,7 @@ public class CameraDisplay implements Runnable {
 		this.lbCameraDisplay = cameraDisplay;
 		this.camera = camera;
 		this.isPreview = isPreview;
-		this.lock = new ReentrantLock();
+		new ReentrantLock();
 	}
 
 	@Override
@@ -56,6 +56,5 @@ public class CameraDisplay implements Runnable {
 	private JLabel lbCameraDisplay;
 	private ICamera camera;
 	private Boolean isPreview;
-	private Lock lock;
 
 }
