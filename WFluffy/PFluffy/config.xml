@@ -274,5 +274,70 @@
     </void>
    </object>
   </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
  </object>
 </java>
