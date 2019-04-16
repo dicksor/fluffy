@@ -35,9 +35,6 @@ public class JPanelCameraGUI extends JPanel
 		this.appearance();
 		this.camera = null;
 		this.frameRoot = frameRoot;
-		this.geometry();
-		this.control();
-		this.appearance();
 		}
 
 	private void appearance()
@@ -67,7 +64,7 @@ public class JPanelCameraGUI extends JPanel
 
 	private void geometry()
 		{
-
+		System.out.println(cameraName);
 		this.panelWest = new JPanelWest(this, cameraName, cameraDescription);
 		this.panelEast = new JPanel();
 		this.panelEast.setPreferredSize(new Dimension(panelWest.getPreferredSize().width, panelWest.getPreferredSize().height));
@@ -84,7 +81,7 @@ public class JPanelCameraGUI extends JPanel
 		this.add(this.panelEast, BorderLayout.EAST);
 		this.add(boxCameraPreview, BorderLayout.CENTER);
 		}
-	
+
 	public void setFaceDetection(boolean hasFaceDetection) {
 		this.stopStream();
 		if(hasFaceDetection) {
@@ -95,26 +92,26 @@ public class JPanelCameraGUI extends JPanel
 		this.streamCamera();
 		this.rotateCamera(this.cameraRotationAngle);
 	}
-	
+
 	public void setCamera(ICamera camera) {
 		this.cameraWithoutFaceDetection = new CameraRotation(camera, 0);
 		this.camera = this.cameraWithoutFaceDetection;
 		this.cameraWithFaceDetection = new CameraRotation(new CameraFaceDetection(camera), 0);
 	}
-	
+
 	public void rotateCamera(double angle) {
 		this.stopStream();
 		this.cameraRotationAngle = angle;
 		((CameraRotation) this.camera).setAngle(this.cameraRotationAngle);
 		this.streamCamera();
 	}
-	
+
 	public void takeSnapShot()
 	{
 	Thread snapThread = new Thread(new DialogSnapshotTaker(this.camera));
 	snapThread.start();
 	}
-	
+
 	public void streamCamera() {
 		if(this.camera != null) {
 			this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, this.camera, false);

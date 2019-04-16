@@ -21,16 +21,10 @@ import fluffy.userinterface.main.JPanelCameraPreview;
 public class CameraGUI extends JFrame
 	{
 
-	public CameraGUI(ICamera camera, String cameraName, String cameraDescription)
+	public CameraGUI(ICamera camera, JPanelCameraPreview jPanelCameraPreview, String cameraName, String cameraDescription)
 		{
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
-		this.geometry();
-		this.control();
-		this.appearance();
-	}
-	
-	public CameraGUI(JPanelCameraPreview jPanelCameraPreview, ICamera camera) {
 		this.geometry();
 		this.control();
 		this.appearance();
@@ -56,15 +50,18 @@ public class CameraGUI extends JFrame
 				{
 				panelCamera.stopStream();
 				// FIXME : Find dynamic delay
-				try {
+				try
+					{
 					Thread.sleep(2000);
-				} catch (InterruptedException e1) {
+					}
+				catch (InterruptedException e1)
+					{
 					e1.printStackTrace();
-				}
+					}
 				CameraGUI.this.panelCameraPreview.streamCamera();
-		    }
-		});
-	}
+				}
+			});
+		}
 
 	private void geometry()
 		{

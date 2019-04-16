@@ -50,7 +50,7 @@ public class JPanelCameraPreview extends JPanel {
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				new CameraGUI(JPanelCameraPreview.this, camera);
+				new CameraGUI(camera, JPanelCameraPreview.this, cameraName, cameraDescription);
 			}
 
 		});
@@ -73,7 +73,7 @@ public class JPanelCameraPreview extends JPanel {
 		Thread threadDisplayImage = new Thread(cameraDisplay);
 		threadDisplayImage.start();
 	}
-	
+
 	private void stopStream() {
 		this.cameraDisplay.setIsRunning(false);
 	}
@@ -85,7 +85,7 @@ public class JPanelCameraPreview extends JPanel {
 
 	private String cameraName;
 	private String cameraDescription;
-	
+
 	private CameraDisplay cameraDisplay;
 
 }
