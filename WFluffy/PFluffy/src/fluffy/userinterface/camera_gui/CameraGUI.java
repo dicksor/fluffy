@@ -55,12 +55,12 @@ public class CameraGUI extends JFrame
 			public void windowClosing(WindowEvent e)
 				{
 				panelCamera.stopStream();
-				// FIXME : Find dynamic delay
+				/*// FIXME : Find dynamic delay
 				try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
-				}
+				}*/
 				CameraGUI.this.panelCameraPreview.streamCamera();
 		    }
 		});

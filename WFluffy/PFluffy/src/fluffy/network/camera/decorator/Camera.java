@@ -53,11 +53,12 @@ public class Camera implements ICamera {
 		return frame;
 	}
 
-	@Override
+	// FIXME : peut-être que le problème expected boundary vient de là
+	/*@Override
 	protected void finalize() throws Throwable {
 		if (this.camera.isOpened())
 			this.camera.release();
-	}
+	}*/
 
 	private VideoCapture camera;
 	private String link;

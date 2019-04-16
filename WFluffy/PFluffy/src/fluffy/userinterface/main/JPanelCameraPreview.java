@@ -44,12 +44,12 @@ public class JPanelCameraPreview extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				JPanelCameraPreview.this.stopStream();
-				// FIXME : Find dynamic delay
-				try {
+				// FIXME : Find dynamic delay -> une classe et un observer
+				/*try {
 					Thread.sleep(2000);
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
-				}
+				}*/
 				new CameraGUI(JPanelCameraPreview.this, camera);
 			}
 

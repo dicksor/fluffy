@@ -12,10 +12,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class JPanelZoom extends JPanel {
 
-	public JPanelZoom() {
+	public JPanelZoom(JPanelCameraGUI panelCamera) {
+		this.panelCamera = panelCamera;
 		geometry();
 		control();
 		appearance();
@@ -23,7 +26,7 @@ public class JPanelZoom extends JPanel {
 
 	private void geometry() {
 		this.lblZoom = new JLabel("Zoom : ");
-		this.spZoom = new JSpinner(new SpinnerNumberModel(1,1,10,1));
+		this.spZoom = new JSpinner(new SpinnerNumberModel(1,1,5,1));
 
 		this.add(lblZoom);
 		this.add(spZoom);
@@ -31,8 +34,14 @@ public class JPanelZoom extends JPanel {
 	}
 
 	private void control() {
-		// TODO Auto-generated method stub
-
+		this.spZoom.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				Integer zoom = (Integer) JPanelZoom.this.spZoom.getValue();
+				panelCamera.zoomCamera(zoom);
+			}
+		});
 	}
 
 	private void appearance() {
@@ -42,4 +51,5 @@ public class JPanelZoom extends JPanel {
 
 	private JLabel lblZoom;
 	private JSpinner spZoom;
+	private JPanelCameraGUI panelCamera;
 }

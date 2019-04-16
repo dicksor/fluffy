@@ -42,7 +42,7 @@ public class JPanelWest extends JPanel {
 		this.btnRotateLeft = new JButton("Rotate left");
 		this.btnRotateRight = new JButton("Rotate right");
 		this.ckbFaceDetection = new JCheckBox("With face detection");
-		this.panelZoom = new JPanelZoom();
+		this.panelZoom = new JPanelZoom(this.panelCamera);
 
 		Box boxV = Box.createVerticalBox();
 

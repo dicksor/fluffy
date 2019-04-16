@@ -15,7 +15,7 @@ import fluffy.network.camera.exception.EmptyImageException;
 
 public class CameraZoom extends CameraDecorator {
 
-	public CameraZoom(ICamera camera, double scale) {
+	public CameraZoom(ICamera camera, int scale) {
 		super(camera);
 		this.scale = scale;
 	}
@@ -24,11 +24,15 @@ public class CameraZoom extends CameraDecorator {
 	public Mat getImage() throws EmptyImageException {
 		return this.getImageWithZoom(super.getImage());
 	}
+	
+	public void setScale(int scaleFactor) {
+		this.scale = scaleFactor;
+	}
 
 	private Mat getImageWithZoom(Mat m) {
 		return OpenCvUtil.zoomImage(m, this.scale);
 	}
 
-	private double scale;
+	private int scale;
 
 }

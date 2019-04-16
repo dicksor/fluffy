@@ -41,9 +41,10 @@ public class OpenCvUtil {
 		return mRotatedImage;
 	}
 	
-	public static Mat zoomImage(Mat m, double scale) {
+	public static Mat zoomImage(Mat m, int scale) {
 		Mat mScaledImage = new Mat();
-		Imgproc.resize(m, mScaledImage, new Size(m.rows(), m.cols()), scale, scale);
+		System.out.println(scale);
+		Imgproc.resize(m, mScaledImage, new Size(m.rows() * scale, m.cols() * scale), scale, scale, Imgproc.INTER_NEAREST);
 		return mScaledImage;
 	}
 

@@ -37,7 +37,6 @@ public abstract class SnapshotTaker implements Runnable {
 		// FIXME : BUG avec caméra ip
 		try {
 			Mat image = this.camera.getImage();
-			System.out.println(image.size());
 			snapShot = OpenCvUtil.matToBufferedImage(image);
 			JFileChooser fileChooser = new JFileChooser();
 			int returnVal = fileChooser.showSaveDialog(null);

@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import fluffy.imageprocessing.snapshot.DialogSnapshotTaker;
 import fluffy.network.camera.decorator.CameraFaceDetection;
 import fluffy.network.camera.decorator.CameraRotation;
+import fluffy.network.camera.decorator.CameraZoom;
 import fluffy.network.camera.decorator.ICamera;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
 
@@ -99,6 +100,7 @@ public class JPanelCameraGUI extends JPanel
 	public void setCamera(ICamera camera) {
 		this.cameraWithoutFaceDetection = new CameraRotation(camera, 0);
 		this.camera = this.cameraWithoutFaceDetection;
+		this.cameraZoom = new CameraZoom(this.camera, 1);
 		this.cameraWithFaceDetection = new CameraRotation(new CameraFaceDetection(camera), 0);
 	}
 	
@@ -106,6 +108,13 @@ public class JPanelCameraGUI extends JPanel
 		this.stopStream();
 		this.cameraRotationAngle = angle;
 		((CameraRotation) this.camera).setAngle(this.cameraRotationAngle);
+		this.streamCamera();
+	}
+	
+	public void zoomCamera(int zoomFactor) {
+		this.stopStream();
+		((CameraZoom)this.cameraZoom).setScale(zoomFactor);
+		this.camera = this.cameraZoom;
 		this.streamCamera();
 	}
 	
@@ -141,6 +150,7 @@ public class JPanelCameraGUI extends JPanel
 	private double cameraRotationAngle;
 	private ICamera cameraWithFaceDetection;
 	private ICamera cameraWithoutFaceDetection;
+	private ICamera cameraZoom;
 
 	private String cameraName;
 	private String cameraDescription;
