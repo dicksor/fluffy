@@ -16,33 +16,32 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 
-public class JPanelWest extends JPanel
-	{
+public class JPanelWest extends JPanel {
 
-	public JPanelWest(JPanel panelCamera, String cameraName, String cameraDescription)
-		{
+	public JPanelWest(JPanelCameraGUI panelCamera, String cameraName, String cameraDescription) {
+		this.panelCamera = panelCamera;
 		this.cameraRotationAngle = 0;
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
 		geometry();
 		control();
 		appearance();
-		this.panelCamera = panelCamera;
-		}
+	}
 
-	private void geometry()
-		{
-		this.lblCameraName = new JLabel("<html><strong>Camera name : </strong>"+ cameraName +"</html>");
-		this.lblCameraDescription = new JLabel("<html><strong>Description : </strong>"+ cameraDescription +"</html>");
+	private void geometry() {
+		this.lblCameraName = new JLabel("<html><strong>Camera name : </strong>" + cameraName + "</html>");
+		this.lblCameraDescription = new JLabel("<html><strong>Description : </strong>" + cameraDescription + "</html>");
 		this.btnSnapshot = new JButton("Take Snapshot");
 		this.btnRotateLeft = new JButton("Rotate left");
 		this.btnRotateRight = new JButton("Rotate right");
+		this.ckbFaceDetection = new JCheckBox("With face detection");
 		this.panelZoom = new JPanelZoom();
 
 		Box boxV = Box.createVerticalBox();
@@ -58,50 +57,57 @@ public class JPanelWest extends JPanel
 		boxV.add(Box.createVerticalStrut(30));
 		boxV.add(btnRotateRight);
 		boxV.add(Box.createVerticalStrut(30));
+		boxV.add(ckbFaceDetection);
+		boxV.add(Box.createVerticalStrut(30));
 		boxV.add(panelZoom);
 		boxV.add(Box.createVerticalGlue());
 
 		setLayout(new BorderLayout());
 		this.add(boxV, BorderLayout.CENTER);
-		}
+	}
 
-	private void control()
-		{
-		this.btnRotateLeft.addActionListener(new ActionListener()
-			{
+	private void control() {
+		this.btnRotateLeft.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e)
-				{
+			public void actionPerformed(ActionEvent e) {
 				cameraRotationAngle += 90;
-				((JPanelCameraGUI)panelCamera).rotateCamera(cameraRotationAngle);
-				}
-			});
+				((JPanelCameraGUI) panelCamera).rotateCamera(cameraRotationAngle);
+			}
+		});
 
-		this.btnRotateRight.addActionListener(new ActionListener()
-			{
+		this.btnRotateRight.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e)
-				{
+			public void actionPerformed(ActionEvent e) {
 				cameraRotationAngle -= 90;
-				((JPanelCameraGUI)panelCamera).rotateCamera(cameraRotationAngle);
-				}
-			});
+				((JPanelCameraGUI) panelCamera).rotateCamera(cameraRotationAngle);
+			}
+		});
 
-		this.btnSnapshot.addActionListener(new ActionListener()
-			{
+		this.btnSnapshot.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e)
-				{
-				((JPanelCameraGUI)panelCamera).takeSnapShot();
-				}
-			});
-		}
+			public void actionPerformed(ActionEvent e) {
+				((JPanelCameraGUI) panelCamera).takeSnapShot();
+			}
+		});
 
-	private void appearance()
-		{
+		this.ckbFaceDetection.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (JPanelWest.this.ckbFaceDetection.isSelected()) {
+					panelCamera.setFaceDetection(true);
+				} else {
+					panelCamera.setFaceDetection(false);
+				}
+			}
+		});
+
+	}
+
+	private void appearance() {
 		this.btnSnapshot.setBackground(MaterialColors.LIGHT_BLUE_400);
 		this.btnSnapshot.setForeground(Color.WHITE);
 		MaterialUIMovement.add(this.btnSnapshot, MaterialColors.GRAY_200);
@@ -113,22 +119,22 @@ public class JPanelWest extends JPanel
 		this.btnRotateRight.setBackground(MaterialColors.LIGHT_BLUE_400);
 		this.btnRotateRight.setForeground(Color.WHITE);
 		MaterialUIMovement.add(this.btnRotateRight, MaterialColors.GRAY_200);
-		}
+	}
 
-	public JButton getBtnRotateLeft()
-		{
+	public JButton getBtnRotateLeft() {
 		return btnRotateLeft;
-		}
+	}
 
 	private JLabel lblCameraName;
 	private JLabel lblCameraDescription;
 	private JButton btnSnapshot;
 	private JButton btnRotateLeft;
 	private JButton btnRotateRight;
+	private JCheckBox ckbFaceDetection;
 	private JPanelZoom panelZoom;
-	private JPanel panelCamera;
+	private JPanelCameraGUI panelCamera;
 	private double cameraRotationAngle;
 
 	private String cameraName;
 	private String cameraDescription;
-	}
+}

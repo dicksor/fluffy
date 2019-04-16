@@ -18,8 +18,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fluffy.imageprocessing.snapshot.DialogSnapshotTaker;
-import fluffy.network.camera.CameraRotation;
-import fluffy.network.camera.ICamera;
+import fluffy.network.camera.decorator.CameraFaceDetection;
+import fluffy.network.camera.decorator.CameraRotation;
+import fluffy.network.camera.decorator.ICamera;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
 
 public class JPanelCameraGUI extends JPanel
@@ -83,35 +84,40 @@ public class JPanelCameraGUI extends JPanel
 		this.add(this.panelEast, BorderLayout.EAST);
 		this.add(boxCameraPreview, BorderLayout.CENTER);
 		}
-
-	public void setCamera(ICamera camera)
-		{
-		this.camera = new CameraRotation(camera, 0);
+	
+	public void setFaceDetection(boolean hasFaceDetection) {
+		this.stopStream();
+		if(hasFaceDetection) {
+			this.camera = this.cameraWithFaceDetection;
+		} else {
+			this.camera = this.cameraWithoutFaceDetection;
 		}
-
-	public void rotateCamera(double angle)
-		{
-		// FIXME : Pas très DRY
-		((CameraRotation)this.camera).setAngle(angle);
-		this.cameraDisplay.setIsRunning(false);
-		this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, this.camera, false);
-		this.threadDisplayImage = new Thread(this.cameraDisplay);
-		this.threadDisplayImage.start();
-		}
-
+		this.streamCamera();
+		this.rotateCamera(this.cameraRotationAngle);
+	}
+	
+	public void setCamera(ICamera camera) {
+		this.cameraWithoutFaceDetection = new CameraRotation(camera, 0);
+		this.camera = this.cameraWithoutFaceDetection;
+		this.cameraWithFaceDetection = new CameraRotation(new CameraFaceDetection(camera), 0);
+	}
+	
+	public void rotateCamera(double angle) {
+		this.stopStream();
+		this.cameraRotationAngle = angle;
+		((CameraRotation) this.camera).setAngle(this.cameraRotationAngle);
+		this.streamCamera();
+	}
+	
 	public void takeSnapShot()
-		{
-		Thread snapThread = new Thread(new DialogSnapshotTaker(this.camera));
-		snapThread.start();
-		}
-
-	// FIXME : Almost duplicate code from JPannelCameraPreview
-	public void streamCamera()
-		{
-		if (this.camera != null)
-			{
+	{
+	Thread snapThread = new Thread(new DialogSnapshotTaker(this.camera));
+	snapThread.start();
+	}
+	
+	public void streamCamera() {
+		if(this.camera != null) {
 			this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, this.camera, false);
-
 			this.threadDisplayImage = new Thread(this.cameraDisplay);
 			this.threadDisplayImage.start();
 			}
@@ -132,6 +138,9 @@ public class JPanelCameraGUI extends JPanel
 	private JFrame frameRoot;
 	private CameraDisplay cameraDisplay;
 	private Thread threadDisplayImage;
+	private double cameraRotationAngle;
+	private ICamera cameraWithFaceDetection;
+	private ICamera cameraWithoutFaceDetection;
 
 	private String cameraName;
 	private String cameraDescription;

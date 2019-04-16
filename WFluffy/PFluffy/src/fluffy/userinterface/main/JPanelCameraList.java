@@ -9,32 +9,22 @@
 package fluffy.userinterface.main;
 
 import java.awt.FlowLayout;
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.swing.Box;
 import javax.swing.JPanel;
 
 public class JPanelCameraList extends JPanel {
 
-	public JPanelCameraList() {
-		this.setJPanelCamPrev = new LinkedList<JPanelCameraPreview>();
+	public JPanelCameraList() {	
 		this.geometry();
 		this.control();
 		this.appearance();
 	}
 
 	public void addCameraPreview(JPanelCameraPreview panelCameraPreview) {
-		this.setJPanelCamPrev.add(panelCameraPreview);
+		this.add(panelCameraPreview);
 		panelCameraPreview.streamCamera();
 		this.boxV.add(panelCameraPreview);
 		this.add(boxV);
-	}
-
-	public void streamCameras() {
-		/*for(JPanelCameraPreview jPannelCameraPreview : this.setJPanelCamPrev) {
-			jPannelCameraPreview.streamCamera();
-		}*/
 	}
 
 	private void appearance() {
@@ -55,7 +45,6 @@ public class JPanelCameraList extends JPanel {
 		this.setLayout(new FlowLayout());
 	}
 
-	private List<JPanelCameraPreview> setJPanelCamPrev;
 	private JPanelEmail jPanelEmail;
 	private Box boxV;
 }

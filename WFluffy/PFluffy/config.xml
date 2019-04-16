@@ -1,7 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-<entry key="link">link_test</entry>
-<entry key="cameraDescription">description...</entry>
-<entry key="cameraName">test</entry>
-</properties>
+<java version="10.0.2" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>description...</string>
+    </void>
+    <void property="link">
+     <string>link_test</string>
+    </void>
+    <void property="name">
+     <string>test</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

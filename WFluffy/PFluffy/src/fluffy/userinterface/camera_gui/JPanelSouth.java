@@ -11,6 +11,7 @@ package fluffy.userinterface.camera_gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -44,8 +45,8 @@ public class JPanelSouth extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JPanelSouth.this.frameRoot.setVisible(false);
-				JPanelSouth.this.frameRoot.dispose();
+				JFrame frameRoot = JPanelSouth.this.frameRoot;
+				frameRoot.dispatchEvent(new WindowEvent(frameRoot, WindowEvent.WINDOW_CLOSING));
 			}
 		});
 	}

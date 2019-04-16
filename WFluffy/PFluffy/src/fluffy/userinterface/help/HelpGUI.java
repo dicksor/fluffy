@@ -30,7 +30,6 @@ public class HelpGUI extends JFrame {
 	}
 
 	private void appearance() {
-		// TODO Auto-generated method stub
 		this.setTitle("Fluffy : Aide");
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.fldHelp.setEditable(false);

@@ -10,42 +10,33 @@ package fluffy.imageprocessing.snapshot;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
-import fluffy.network.camera.ICamera;
+import fluffy.network.camera.decorator.ICamera;
+import fluffy.network.camera.exception.EmptyImageException;
 
-public class DialogSnapshotTaker extends SnapshotTaker
-	{
+public class DialogSnapshotTaker extends SnapshotTaker {
 
-	public DialogSnapshotTaker(ICamera camera)
-		{
+	public DialogSnapshotTaker(ICamera camera) {
 		super(camera);
-		this.lock = new ReentrantLock();
-		}
+	}
 
 	@Override
-	public void run()
-		{
+	public void run() {
 		JFileChooser fileChooser = new JFileChooser();
 		int returnVal = fileChooser.showSaveDialog(null);
-		if (returnVal == JFileChooser.APPROVE_OPTION)
-			{
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			String filePath = fileChooser.getSelectedFile().toString() + ".jpg";
 			File file = new File(filePath);
-			try
-				{
+			try {
 				ImageIO.write(getBuffuredImage(), "jpg", file);
-				}
-			catch (IOException e)
-				{
+			} catch (IOException e) {
 				e.printStackTrace();
-				}
+			} catch (EmptyImageException e) {
+				e.printStackTrace();
 			}
 		}
-
-	private Lock lock;
 	}
+}

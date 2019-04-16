@@ -6,11 +6,12 @@
  * Printemps 2019
  * He-arc
  */
-package fluffy.network.camera;
+package fluffy.network.camera.decorator;
 
 import org.opencv.core.Mat;
 
 import fluffy.imageprocessing.OpenCvUtil;
+import fluffy.network.camera.exception.EmptyImageException;
 
 public class CameraRotation extends CameraDecorator {
 
@@ -24,7 +25,7 @@ public class CameraRotation extends CameraDecorator {
 	}
 	
 	@Override
-	public Mat getImage() {
+	public Mat getImage() throws EmptyImageException {
 		return this.getImageWithRotation(super.getImage());
 	}
 	

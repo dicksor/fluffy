@@ -15,44 +15,39 @@ import java.util.Date;
 
 import javax.imageio.ImageIO;
 
-import fluffy.network.camera.ICamera;
+import fluffy.network.camera.decorator.ICamera;
+import fluffy.network.camera.exception.EmptyImageException;
 
-public class AutoSnapshotTaker extends SnapshotTaker
-	{
+public class AutoSnapshotTaker extends SnapshotTaker {
 
-	public AutoSnapshotTaker(ICamera camera, String filename)
-		{
+	public AutoSnapshotTaker(ICamera camera, String filename) {
 		super(camera);
 		this.filename = filename;
-		}
+	}
 
 	@Override
-	public void run()
-		{
+	public void run() {
 		String filePath = createFolderFromDate() + "\\" + this.filename + ".jpg";
 		System.out.println(filePath);
 		File file = new File(filePath);
-		try
-			{
+		try {
 			ImageIO.write(getBuffuredImage(), "jpg", file);
-			}
-		catch (IOException e)
-			{
+		} catch (IOException e) {
 			e.printStackTrace();
-			}
+		} catch (EmptyImageException e) {
+			e.printStackTrace();
 		}
+	}
 
-	private String createFolderFromDate()
-		{
+	private String createFolderFromDate() {
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-YYY");
 
 		File snapshotsDir = new File("snapshots\\" + format.format(new Date()));
-		if(!snapshotsDir.exists())
-			{
+		if (!snapshotsDir.exists()) {
 			snapshotsDir.mkdir();
-			}
-		return snapshotsDir.toString();
 		}
+		return snapshotsDir.toString();
+	}
 
 	private String filename;
-	}
+}

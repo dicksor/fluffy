@@ -13,7 +13,8 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import fluffy.userinterface.connection.CameraList;
+import fluffy.network.camera.model.CameraList;
+import fluffy.network.camera.model.CameraModel;
 
 public class MainGUI extends JFrame {
 
@@ -38,9 +39,12 @@ public class MainGUI extends JFrame {
 		this.jPanelLabel = new JPanelLabel();
 		this.jPanelLabel.repaint();
 		this.jPanelCameraList = new JPanelCameraList();
-		this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview("", "test1", "test"));
+		// http://192.168.1.200/axis-cgi/mjpg/video.cgi
+		this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview("", "test", "test"));
 
-		CameraList.addCam("test", "link_test", "description...");
+		CameraList cameraList = CameraList.getInstance();
+		CameraModel cam = new CameraModel("test", "link_test", "description...");
+		cameraList.add(cam);
 
 		this.setLayout(new BorderLayout());
 

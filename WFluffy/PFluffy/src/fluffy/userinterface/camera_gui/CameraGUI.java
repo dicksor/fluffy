@@ -15,8 +15,8 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
-import fluffy.network.camera.CameraFaceDetection;
-import fluffy.network.camera.ICamera;
+import fluffy.network.camera.decorator.ICamera;
+import fluffy.userinterface.main.JPanelCameraPreview;
 
 public class CameraGUI extends JFrame
 	{
@@ -28,7 +28,13 @@ public class CameraGUI extends JFrame
 		this.geometry();
 		this.control();
 		this.appearance();
-		camera = new CameraFaceDetection(camera);
+	}
+	
+	public CameraGUI(JPanelCameraPreview jPanelCameraPreview, ICamera camera) {
+		this.geometry();
+		this.control();
+		this.appearance();
+		this.panelCameraPreview = jPanelCameraPreview;
 		this.panelCamera.setCamera(camera);
 		this.panelCamera.streamCamera();
 		}
@@ -49,9 +55,16 @@ public class CameraGUI extends JFrame
 			public void windowClosing(WindowEvent e)
 				{
 				panelCamera.stopStream();
+				// FIXME : Find dynamic delay
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
 				}
-			});
-		}
+				CameraGUI.this.panelCameraPreview.streamCamera();
+		    }
+		});
+	}
 
 	private void geometry()
 		{
@@ -59,6 +72,7 @@ public class CameraGUI extends JFrame
 		this.add(this.panelCamera);
 		}
 
+	private JPanelCameraPreview panelCameraPreview;
 	private JPanelCameraGUI panelCamera;
 	private String cameraName;
 	private String cameraDescription;
