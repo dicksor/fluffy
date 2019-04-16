@@ -18,10 +18,13 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import fluffy.network.tools.EmailValidator;
+import fluffy.network.mail.tools.EmailValidator;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
-
+/**
+ * Panel that contains EmailInfo items and button to apply the change
+ *
+ */
 public class JPanelEmail extends JPanel
 	{
 
@@ -67,9 +70,10 @@ public class JPanelEmail extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 				{
+				//check if the email is in the correct format
 				if((new EmailValidator()).validate(JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText().trim()))
 					{
-					//mettre ces valeurs dans un fichier texte
+					//TODO: mettre ces valeurs dans un fichier texte
 					String email = JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText();
 					int hour = JPanelEmail.this.jPanelEmailInfo.getCbxHours().getSelectedIndex();
 					JOptionPane.showMessageDialog(null, "Settings correctly applied", "InfoBox: fluffy", JOptionPane.INFORMATION_MESSAGE);

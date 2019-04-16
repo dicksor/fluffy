@@ -6,11 +6,15 @@
  * Printemps 2019
  * He-arc
  */
-package fluffy.network.tools;
+package fluffy.network.mail.tools;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Insipired by : https://stackoverflow.com/questions/15269507/how-to-validate-a-jtextfield-of-email-id-with-a-regex-in-swing-code
+ * This class is used to check if the mail is in the correct format
+ */
 public class EmailValidator
 	{
 
@@ -21,14 +25,13 @@ public class EmailValidator
 
 	public EmailValidator()
 		{
-		pattern = Pattern.compile(EMAIL_PATTERN);
+		pattern = Pattern.compile(EMAIL_PATTERN);//set the pattern of regular expression
 		}
 
 	/**
-	 * Validate hex with regular expression
+	 * Validate email with regular expression
 	 *
-	 * @param hex
-	 *            hex for validation
+	 * @param hex for validation
 	 * @return true valid hex, false invalid hex
 	 */
 	public boolean validate(final String hex)

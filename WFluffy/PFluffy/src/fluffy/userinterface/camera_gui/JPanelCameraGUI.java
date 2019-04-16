@@ -22,12 +22,15 @@ import fluffy.network.camera.decorator.CameraFaceDetection;
 import fluffy.network.camera.decorator.CameraRotation;
 import fluffy.network.camera.decorator.ICamera;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
+import fluffy.userinterface.main.JPanelCameraPreview;
 
 public class JPanelCameraGUI extends JPanel
 	{
 
-	public JPanelCameraGUI(JFrame frameRoot, String cameraName, String cameraDescription)
+	public JPanelCameraGUI(JFrame frameRoot, String cameraName, String cameraDescription, JPanelCameraGUI panelCamera, JPanelCameraPreview panelCameraPreview)
 		{
+		this.panelCameraPreview = panelCameraPreview;
+		this.panelCamera = panelCamera;
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
 		this.geometry();
@@ -68,7 +71,7 @@ public class JPanelCameraGUI extends JPanel
 		this.panelWest = new JPanelWest(this, cameraName, cameraDescription);
 		this.panelEast = new JPanel();
 		this.panelEast.setPreferredSize(new Dimension(panelWest.getPreferredSize().width, panelWest.getPreferredSize().height));
-		this.panelSouth = new JPanelSouth(this.frameRoot);
+		this.panelSouth = new JPanelSouth(this.frameRoot, panelCamera, panelCameraPreview);
 		this.lbCameraDisplay = new JLabel();
 
 		Box boxCameraPreview = centerCamera(lbCameraDisplay);
@@ -125,6 +128,9 @@ public class JPanelCameraGUI extends JPanel
 		{
 		this.cameraDisplay.setIsRunning(false);
 		}
+
+	private JPanelCameraPreview panelCameraPreview;
+	private JPanelCameraGUI panelCamera;
 
 	private JLabel lbCameraDisplay;
 	private JPanelWest panelWest;

@@ -65,7 +65,7 @@ public class CameraGUI extends JFrame
 
 	private void geometry()
 		{
-		this.panelCamera = new JPanelCameraGUI(this, cameraName, cameraDescription);
+		this.panelCamera = new JPanelCameraGUI(this, cameraName, cameraDescription, panelCamera, panelCameraPreview);
 		this.add(this.panelCamera);
 		}
 

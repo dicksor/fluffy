@@ -22,6 +22,10 @@ import fluffy.userinterface.help.HelpGUI;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 
+/**
+ * Panel that contains add camera button, help button and quit button
+ *
+ */
 public class JPanelButtons extends JPanel {
 
 	public JPanelButtons() {

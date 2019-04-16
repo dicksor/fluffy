@@ -16,6 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Panel that contains the email field with his label and the combox box hours with his label
+ *
+ *
+ */
 public class JPanelEmailInfo extends JPanel
 	{
 
@@ -54,6 +59,9 @@ public class JPanelEmailInfo extends JPanel
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
+	/**
+	 * fill the combobox with hours
+	 */
 	private void fillComboBox()
 		{
 		int n = 23;

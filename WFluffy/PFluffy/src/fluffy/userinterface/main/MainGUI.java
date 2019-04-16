@@ -16,6 +16,10 @@ import javax.swing.JFrame;
 import fluffy.network.camera.model.CameraList;
 import fluffy.network.camera.model.CameraModel;
 
+/**
+ * Main JFrame of the program
+ *
+ */
 public class MainGUI extends JFrame {
 
 	public MainGUI() {
@@ -39,7 +43,7 @@ public class MainGUI extends JFrame {
 		this.jPanelLabel = new JPanelLabel();
 		this.jPanelLabel.repaint();
 		this.jPanelCameraList = new JPanelCameraList();
-		// http://192.168.1.200/axis-cgi/mjpg/video.cgi
+
 		this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview("", "test", "test"));
 
 		CameraList cameraList = CameraList.getInstance();

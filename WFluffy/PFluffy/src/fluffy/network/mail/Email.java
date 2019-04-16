@@ -6,6 +6,7 @@
  * Printemps 2019
  * He-arc
  */
+
 package fluffy.network.mail;
 
 import java.util.Date;
@@ -24,22 +25,36 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-//https://www.journaldev.com/2532/javamail-example-send-mail-in-java-smtp
-public class Mail {
+/**
+ * Insipred by : https://www.journaldev.com/2532/javamail-example-send-mail-in-java-smtp
+ * This class is used to send mail
+ *
+ */
+public class Email
+	{
 
-	public Mail(String userEmail, String zipFilePath) {
-		// userEmail = new String("romain.capocasale@he-arc.ch");//FIXME: change email
-		// adress
+	/**
+	 *
+	 * @param userEmail
+	 * @param zipFilePath
+	 */
+	public Email(String userEmail, String zipFilePath)
+		{
 		this.userEmail = userEmail;
 		this.zipFilePath = zipFilePath;
 
 		Properties props = System.getProperties();
-		props.put("mail.smtp.host", SMTP_SERVER);
+		props.put("mail.smtp.host", SMTP_SERVER);//set smtp server
 		session = Session.getInstance(props, null);
-	}
+		}
 
-	public void sendEmail() {
-		try {
+	/**
+	 * Create the email header, message and add zip file
+	 */
+	public void sendEmail()
+		{
+		try
+			{
 			// set header
 			MimeMessage msg = new MimeMessage(session);
 			msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
@@ -71,10 +86,12 @@ public class Mail {
 			Transport.send(msg);
 
 			System.out.println("EMail Sent Successfully!!");
-		} catch (Exception e) {
+			}
+		catch (Exception e)
+			{
 			e.printStackTrace();
+			}
 		}
-	}
 
 	private Session session;
 	private String userEmail;
@@ -82,4 +99,4 @@ public class Mail {
 	private static final String SUBJECT = "Daily Snapshot Review";
 	private static final String MESSAGE = "Daily Snapshot Review";
 	private static final String SMTP_SERVER = "smtprel.he-arc.ch";
-}
+	}
