@@ -15,13 +15,13 @@ import java.util.Date;
 
 import javax.imageio.ImageIO;
 
-import fluffy.network.camera.decorator.ICamera;
 import fluffy.network.camera.exception.EmptyImageException;
+import fluffy.network.camera.pipeline.CameraPipeline;
 
 public class AutoSnapshotTaker extends SnapshotTaker {
 
-	public AutoSnapshotTaker(ICamera camera, String filename) {
-		super(camera);
+	public AutoSnapshotTaker(CameraPipeline cameraPipeline, String filename) {
+		super(cameraPipeline);
 		this.filename = filename;
 	}
 

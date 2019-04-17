@@ -4,9 +4,11 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,12 @@ public class CameraList {
 	private CameraList() {
 		this.listCamera = new ArrayList<CameraModel>();
 		this.FILENAME = "config.xml";
+		this.file = new File(this.FILENAME);
+		try {
+			this.file.createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		this.load();
 	}
 
@@ -38,6 +46,7 @@ public class CameraList {
 	private void save() {
 		try {
 			this.xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILENAME)));
+			this.xmlEncoder.remove(this.listCamera);
 			this.xmlEncoder.writeObject(this.listCamera);
 			this.xmlEncoder.flush();
 			this.xmlEncoder.close();
@@ -68,4 +77,5 @@ public class CameraList {
 	// Tools
 	private XMLEncoder xmlEncoder;
 	private XMLDecoder xmlDecoder;
+	private File file;
 }

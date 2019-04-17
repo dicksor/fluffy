@@ -14,6 +14,10 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Panel that contains title of the main window
+ *
+ */
 public class JPanelLabel extends JPanel
 	{
 

@@ -15,23 +15,35 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fluffy.network.camera.decorator.Camera;
-import fluffy.network.camera.decorator.ICamera;
+import fluffy.network.camera.Camera;
+import fluffy.network.camera.pipeline.CameraPipeline;
 import fluffy.userinterface.camera_gui.CameraGUI;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
 
 public class JPanelCameraPreview extends JPanel {
 
 	public JPanelCameraPreview(String link, String cameraName, String cameraDescription) {
+		this.geometry();
+		this.control();
+		this.appearance();
+		
 		// Pour streamer la vidéo surveillance remplacer "" par ->
 		// http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1
 		this.camera = new Camera(link);
 		this.camera.open();
+		
+		// Todo : fermer à un moment ou instancier ailleurs
+		Thread cameraThread = new Thread(this.camera);
+		cameraThread.start();
+		
+		this.cameraPipeline = new CameraPipeline();
+		this.camera.addPropertyChangeListener(this.cameraPipeline);
+		
+		this.cameraDisplay = new CameraDisplay(this.lbCameraPreview, true);
+		this.cameraPipeline.addPropertyChangeListener(this.cameraDisplay);
+		
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
-		this.geometry();
-		this.control();
-		this.appearance();
 	}
 
 	private void appearance() {
@@ -43,14 +55,7 @@ public class JPanelCameraPreview extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JPanelCameraPreview.this.stopStream();
-				// FIXME : Find dynamic delay -> une classe et un observer
-				/*try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}*/
-				new CameraGUI(JPanelCameraPreview.this, camera);
+				new CameraGUI(camera, JPanelCameraPreview.this, cameraName, cameraDescription);
 			}
 
 		});
@@ -67,25 +72,15 @@ public class JPanelCameraPreview extends JPanel {
 		this.add(this.lbCameraPreview);
 	}
 
-	public void streamCamera() {
-		this.cameraDisplay = new CameraDisplay(this.lbCameraPreview, this.camera, true);
-
-		Thread threadDisplayImage = new Thread(cameraDisplay);
-		threadDisplayImage.start();
-	}
-	
-	private void stopStream() {
-		this.cameraDisplay.setIsRunning(false);
-	}
-
 	private FlowLayout flowLayout;
 	private JLabel lbCameraData;
 	private JLabel lbCameraPreview;
-	private ICamera camera;
+	private Camera camera;
+	private CameraPipeline cameraPipeline;
 
 	private String cameraName;
 	private String cameraDescription;
-	
+
 	private CameraDisplay cameraDisplay;
 
 }

@@ -20,7 +20,7 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
 import fluffy.imageprocessing.snapshot.AutoSnapshotTaker;
-import fluffy.network.camera.decorator.ICamera;
+import fluffy.network.camera.pipeline.CameraPipeline;
 
 public class OpenCvFaceDetection extends OpenCvDetection {
 
@@ -29,12 +29,16 @@ public class OpenCvFaceDetection extends OpenCvDetection {
 	Date dateCapture;
 	Date dateActuelle;
 	String strDateCapture;
-
-	public OpenCvFaceDetection(String xmlModelFile, ICamera camera) {
-		// "C:\\opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml"
+	
+	public OpenCvFaceDetection(String xmlModelFile) {
 		super(xmlModelFile);
+	}
 
-		this.camera = camera;
+	public OpenCvFaceDetection(String xmlModelFile, CameraPipeline cameraPipeline) {
+		// "C:\\opencv\\sources\\data\\lbpcascades\\lbpcascade_frontalface.xml"
+		this(xmlModelFile);
+
+		this.cameraPipeline = cameraPipeline;
 		try {
 			format = new SimpleDateFormat("HH.mm.ss");
 			dateCapture = format.parse(format.format(new Date()));
@@ -51,7 +55,7 @@ public class OpenCvFaceDetection extends OpenCvDetection {
 			if (difference >= DELAY_BETWEEN_CAPTURE) {
 				String strDateCapture = format.format(new Date());
 				dateCapture = format.parse(strDateCapture);
-				Thread snapThread = new Thread(new AutoSnapshotTaker(camera, strDateCapture));
+				Thread snapThread = new Thread(new AutoSnapshotTaker(this.cameraPipeline, strDateCapture));
 				snapThread.start();
 			}
 		} catch (ParseException e) {
@@ -65,21 +69,19 @@ public class OpenCvFaceDetection extends OpenCvDetection {
 		this.classifier.detectMultiScale(m, faceDetections);
 
 		for (Rect rect : faceDetections.toArray()) {
-			System.out.println("detection");
 			Imgproc.rectangle(m, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height),
 					new Scalar(0, 0, 255), 3);
 		}
 
 		// test if array > 1, because we would take only on snapshot
 		if (faceDetections.toArray().length >= 1) {
-			takeSnapshot();
-			System.out.println("detection");
+			//takeSnapshot();
 		}
 
 		// TODO : return object with matrix, and face detected count
 		return m;
 	}
 
-	ICamera camera;
+	private CameraPipeline cameraPipeline;
 	private static final long DELAY_BETWEEN_CAPTURE = 10000;// temps en milliseconde
 }

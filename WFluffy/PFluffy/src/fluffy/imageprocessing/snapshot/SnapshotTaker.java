@@ -17,42 +17,37 @@ import javax.swing.JFileChooser;
 import org.opencv.core.Mat;
 
 import fluffy.imageprocessing.OpenCvUtil;
-import fluffy.network.camera.decorator.ICamera;
 import fluffy.network.camera.exception.EmptyImageException;
+import fluffy.network.camera.pipeline.CameraPipeline;
 
 public abstract class SnapshotTaker implements Runnable {
 
-	public SnapshotTaker(ICamera camera) {
-		this.camera = camera;
+	public SnapshotTaker(CameraPipeline cameraPipeline) {
+		this.cameraPipeline = cameraPipeline;
 	}
 
 	protected BufferedImage getBuffuredImage() throws EmptyImageException {
-		BufferedImage snapShot = OpenCvUtil.matToBufferedImage(this.camera.getImage());
+		BufferedImage snapShot = OpenCvUtil.matToBufferedImage(this.cameraPipeline.getImage());
 		return snapShot;
 	}
 
 	@Override
 	public void run() {
 		BufferedImage snapShot;
-		// FIXME : BUG avec caméra ip
-		try {
-			Mat image = this.camera.getImage();
-			snapShot = OpenCvUtil.matToBufferedImage(image);
-			JFileChooser fileChooser = new JFileChooser();
-			int returnVal = fileChooser.showSaveDialog(null);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				String filePath = fileChooser.getSelectedFile().toString() + ".jpg";
-				File file = new File(filePath);
-				try {
-					ImageIO.write(snapShot, "jpg", file);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+		Mat image = this.cameraPipeline.getImage();
+		snapShot = OpenCvUtil.matToBufferedImage(image);
+		JFileChooser fileChooser = new JFileChooser();
+		int returnVal = fileChooser.showSaveDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			String filePath = fileChooser.getSelectedFile().toString() + ".jpg";
+			File file = new File(filePath);
+			try {
+				ImageIO.write(snapShot, "jpg", file);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (EmptyImageException e) {
-			e.printStackTrace();
 		}
 	}
 
-	private ICamera camera;
+	private CameraPipeline cameraPipeline;
 }

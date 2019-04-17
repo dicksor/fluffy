@@ -9,12 +9,15 @@
 
 package fluffy;
 
+import java.io.File;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileLock;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import org.opencv.core.Core;
 
-import fluffy.network.mail.EmailSender;
 import fluffy.userinterface.main.MainGUI;
 import mdlaf.MaterialLookAndFeel;
 
@@ -23,17 +26,61 @@ public class UseFluffy
 
 	public static void main(String[] args)
 		{
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		System.loadLibrary("opencv_ffmpeg401_64");
+		if(lockInstance("fluffy.lock"))
+			{
+			System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+			System.loadLibrary("opencv_ffmpeg401_64");
+			try
+				{
+				UIManager.setLookAndFeel(new MaterialLookAndFeel());
+				}
+			catch (UnsupportedLookAndFeelException e)
+				{
+				e.printStackTrace();
+				}
+			new MainGUI();
+			}
+		else
+			{
+			System.err.println("Only one instance of Fluffy can run!");
+			System.exit(-1);
+			}
+		}
+
+	private static boolean lockInstance(final String lockFile)
+		{
 		try
 			{
-			UIManager.setLookAndFeel(new MaterialLookAndFeel());
+			final File file = new File(lockFile);
+			final RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rw");
+			final FileLock fileLock = randomAccessFile.getChannel().tryLock();
+			if (fileLock != null)
+				{
+				Runtime.getRuntime().addShutdownHook(new Thread()
+					{
+
+					@Override
+					public void run()
+						{
+						try
+							{
+							fileLock.release();
+							randomAccessFile.close();
+							file.delete();
+							}
+						catch (Exception e)
+							{
+							System.err.println("Unable to remove lock file: " + lockFile);
+							}
+						}
+					});
+				return true;
+				}
 			}
-		catch (UnsupportedLookAndFeelException e)
+		catch (Exception e)
 			{
-			e.printStackTrace();
+			System.err.println("Unable to remove lock file: " + lockFile);
 			}
-		EmailSender emailSender = new EmailSender();
-		new MainGUI();
+		return false;
 		}
 	}

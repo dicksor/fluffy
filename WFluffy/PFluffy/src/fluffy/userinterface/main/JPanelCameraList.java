@@ -22,7 +22,6 @@ public class JPanelCameraList extends JPanel {
 
 	public void addCameraPreview(JPanelCameraPreview panelCameraPreview) {
 		this.add(panelCameraPreview);
-		panelCameraPreview.streamCamera();
 		this.boxV.add(panelCameraPreview);
 		this.add(boxV);
 	}

@@ -14,13 +14,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
-import fluffy.network.camera.decorator.ICamera;
 import fluffy.network.camera.exception.EmptyImageException;
+import fluffy.network.camera.pipeline.CameraPipeline;
 
 public class DialogSnapshotTaker extends SnapshotTaker {
 
-	public DialogSnapshotTaker(ICamera camera) {
-		super(camera);
+	public DialogSnapshotTaker(CameraPipeline cameraPipeline) {
+		super(cameraPipeline);
 	}
 
 	@Override

@@ -43,7 +43,6 @@ public class OpenCvUtil {
 	
 	public static Mat zoomImage(Mat m, int scale) {
 		Mat mScaledImage = new Mat();
-		System.out.println(scale);
 		Imgproc.resize(m, mScaledImage, new Size(m.rows() * scale, m.cols() * scale), scale, scale, Imgproc.INTER_NEAREST);
 		return mScaledImage;
 	}
