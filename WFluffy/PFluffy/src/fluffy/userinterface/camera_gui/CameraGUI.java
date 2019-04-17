@@ -16,6 +16,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 import fluffy.network.camera.decorator.ICamera;
+import fluffy.tools.image.MagasinImage;
 import fluffy.userinterface.main.JPanelCameraPreview;
 
 public class CameraGUI extends JFrame
@@ -36,6 +37,7 @@ public class CameraGUI extends JFrame
 	private void appearance()
 		{
 		this.setTitle("Fluffy : Camera");
+		this.setIconImage(MagasinImage.logo.getImage());
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 		}

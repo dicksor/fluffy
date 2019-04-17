@@ -6,7 +6,7 @@
  * Printemps 2019
  * He-arc
  */
-package fluffy.network.mail.tools;
+package fluffy.tools.mail;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

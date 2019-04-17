@@ -13,6 +13,8 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
+import fluffy.tools.image.MagasinImage;
+
 public class ConnectionGUI extends JFrame {
 
 	public ConnectionGUI() {
@@ -38,6 +40,7 @@ public class ConnectionGUI extends JFrame {
 
 	private void appearance() {
 		this.setTitle("Fluffy: Connection");
+		this.setIconImage(MagasinImage.logo.getImage());
 		this.setSize(360, 180);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);

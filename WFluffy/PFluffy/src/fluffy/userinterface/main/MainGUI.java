@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 
 import fluffy.network.camera.model.CameraList;
 import fluffy.network.camera.model.CameraModel;
+import fluffy.tools.image.MagasinImage;
 
 /**
  * Main JFrame of the program
@@ -30,6 +31,7 @@ public class MainGUI extends JFrame {
 
 	private void appearance() {
 		this.setTitle("Fluffy : Main");
+		this.setIconImage(MagasinImage.logo.getImage());
 		this.setMinimumSize(new Dimension(700, 400));
 		this.setVisible(true);
 	}
