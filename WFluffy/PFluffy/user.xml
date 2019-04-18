@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="10.0.2" class="java.beans.XMLDecoder">
+ <object class="fluffy.network.camera.model.UserModel">
+  <void property="email">
+   <string>a.a@gmail.com</string>
+  </void>
+ </object>
 </java>

@@ -8,34 +8,74 @@
  */
 package fluffy.imageprocessing.snapshot;
 
+import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.imageio.ImageIO;
 
-import fluffy.network.camera.exception.EmptyImageException;
-import fluffy.network.camera.pipeline.CameraPipeline;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfRect;
+import fluffy.imageprocessing.OpenCvFaceDetection;
+import fluffy.imageprocessing.OpenCvUtil;
 
-public class AutoSnapshotTaker extends SnapshotTaker {
+public class AutoSnapshotTaker extends SnapshotTaker{
 
-	public AutoSnapshotTaker(CameraPipeline cameraPipeline, String filename) {
-		super(cameraPipeline);
-		this.filename = filename;
+	public AutoSnapshotTaker() {
+		this.faceDetection = new OpenCvFaceDetection();
+		try {
+			this.format = new SimpleDateFormat("HH.mm.ss");
+			this.dateCapture = this.format.parse(this.format.format(new Date()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
-
+	
 	@Override
-	public void run() {
+	public void propertyChange(PropertyChangeEvent evt) {
+		String name = evt.getPropertyName();
+		this.setImage((Mat) evt.getNewValue());
+		this.detecte();
+	}
+	
+	@Override
+	public void getSnapShot() {
 		String filePath = createFolderFromDate() + "\\" + this.filename + ".jpg";
 		System.out.println(filePath);
 		File file = new File(filePath);
 		try {
-			ImageIO.write(getBuffuredImage(), "jpg", file);
+			ImageIO.write(OpenCvUtil.matToBufferedImage(this.getImage()), "jpg", file);
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (EmptyImageException e) {
+		}
+	}
+	
+	private void detecte() {
+		MatOfRect faceDetections = this.faceDetection.detecte(this.getImage());
+
+		// test if array > 1, because we would take only on snapshot
+		if (faceDetections.toArray().length >= 1) {
+			takeSnapshot();
+		}
+	}
+	
+	private void takeSnapshot() {
+		try {
+			dateActuelle = format.parse(format.format(new Date()));
+			long difference = dateActuelle.getTime() - dateCapture.getTime();
+
+			if (difference >= DELAY_BETWEEN_CAPTURE) {
+				String strDateCapture = format.format(new Date());
+				this.filename = strDateCapture;
+				dateCapture = format.parse(strDateCapture);
+				this.getSnapShot();
+			}
+		} catch (ParseException e) {
 			e.printStackTrace();
+			System.err.println("Error with the snapshot");
 		}
 	}
 
@@ -50,4 +90,9 @@ public class AutoSnapshotTaker extends SnapshotTaker {
 	}
 
 	private String filename;
+	private static final long DELAY_BETWEEN_CAPTURE = 10000;// temps en milliseconde
+	private SimpleDateFormat format;
+	private Date dateCapture;
+	private Date dateActuelle;
+	private OpenCvFaceDetection faceDetection;
 }

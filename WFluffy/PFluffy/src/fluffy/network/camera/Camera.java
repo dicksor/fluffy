@@ -18,9 +18,10 @@ import fluffy.network.camera.exception.EmptyImageException;
 
 public class Camera implements Runnable {
 
-	public Camera(String link) {
+	public Camera(String link, String name) {
 		this.support = new PropertyChangeSupport(this);
 		this.link = link;
+		this.name = name;
 		this.camera = new VideoCapture();
 		this.image = new Mat();
 		this.isRunning = true;
@@ -60,7 +61,7 @@ public class Camera implements Runnable {
 			if (!camera.read(frame)) {
 				throw new EmptyImageException("Read error");
 			} else {
-				support.firePropertyChange("img", this.image, frame);
+				support.firePropertyChange(this.name, this.image, frame);
 				this.image = frame;
 			}
 		} else {
@@ -84,6 +85,7 @@ public class Camera implements Runnable {
 	}
 
 	private VideoCapture camera;
+	private String name;
 	private String link;
 	private PropertyChangeSupport support;
 	private Mat image;

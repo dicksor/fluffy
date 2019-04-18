@@ -12,7 +12,6 @@ package fluffy.userinterface.camera_gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,10 +27,10 @@ public class JPanelSouth extends JPanel
 		{
 		this.panelCameraPreview = panelCameraPreview;
 		this.panelCamera = panelCamera;
+		this.frameRoot = frameRoot;
 		geometry();
 		control();
 		appearance();
-		this.frameRoot = frameRoot;
 		}
 
 	private void appearance()
@@ -50,7 +49,8 @@ public class JPanelSouth extends JPanel
 			public void actionPerformed(ActionEvent e)
 				{
 				//FIXME: le bouton ne fonctionne plus genere une erreur
-				System.exit(-1);
+				JPanelSouth.this.frameRoot.setVisible(false);
+				JPanelSouth.this.frameRoot.dispose();
 				/*JPanelSouth.this.panelCamera.stopStream();
 
 				try

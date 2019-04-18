@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fluffy.imageprocessing.snapshot.DialogSnapshotTaker;
+import fluffy.imageprocessing.snapshot.SnapshotTaker;
 import fluffy.network.camera.Camera;
 import fluffy.network.camera.pipeline.CameraPipeline;
 import fluffy.network.camera.pipeline.Operators;
@@ -32,10 +33,11 @@ public class JPanelCameraGUI extends JPanel {
 		this.panelCamera = panelCamera;
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
+		this.frameRoot = frameRoot;
+		this.snapshotTaker = new DialogSnapshotTaker();
 		this.geometry();
 		this.control();
 		this.appearance();
-		this.frameRoot = frameRoot;
 	}
 
 	private void appearance() {
@@ -85,8 +87,11 @@ public class JPanelCameraGUI extends JPanel {
 	}
 
 	public void setCamera(Camera camera) {
+		// FIXME : constructeur
+		this.camera = camera;
 		this.cameraPipeline = new CameraPipeline();
-		camera.addPropertyChangeListener(this.cameraPipeline);	
+		this.camera.addPropertyChangeListener(this.cameraPipeline);	
+		this.camera.addPropertyChangeListener(this.snapshotTaker);
 	}
 
 	public void rotateCamera(double angle) {
@@ -98,8 +103,7 @@ public class JPanelCameraGUI extends JPanel {
 	}
 
 	public void takeSnapShot() {
-		Thread snapThread = new Thread(new DialogSnapshotTaker(this.cameraPipeline));
-		snapThread.start();
+		this.snapshotTaker.getSnapShot();
 	}
 
 	public void streamCamera() {
@@ -124,4 +128,6 @@ public class JPanelCameraGUI extends JPanel {
 	private CameraDisplay cameraDisplay;
 	private String cameraName;
 	private String cameraDescription;
+	private SnapshotTaker snapshotTaker;
+	private Camera camera;
 }

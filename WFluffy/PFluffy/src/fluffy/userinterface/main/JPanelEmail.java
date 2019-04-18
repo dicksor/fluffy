@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import fluffy.network.camera.model.UserModel;
 import fluffy.network.camera.model.UserXml;
 import fluffy.network.mail.tools.EmailValidator;
 import mdlaf.animation.MaterialUIMovement;
@@ -79,8 +80,8 @@ public class JPanelEmail extends JPanel
 					int hour = JPanelEmail.this.jPanelEmailInfo.getCbxHours().getSelectedIndex();
 
 					UserXml userXml = UserXml.getInstance();
-					//UserModel userModel = new UserModel(email, hour);
-					//userXml.add(userModel);
+					UserModel userModel = new UserModel(email, hour);
+					userXml.add(userModel);
 					JOptionPane.showMessageDialog(null, "Settings correctly applied", "InfoBox: fluffy", JOptionPane.INFORMATION_MESSAGE);
 					}
 				else
