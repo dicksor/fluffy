@@ -12,13 +12,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CameraXml {
 
 	private CameraXml() {
 		this.support = new PropertyChangeSupport(this);
-		this.listCamera = new ArrayList<CameraModel>();
+		this.setCamera = new HashSet<CameraModel>();
 		this.FILENAME = "config.xml";
 		this.file = new File(this.FILENAME);
 		try {
@@ -38,14 +41,13 @@ public class CameraXml {
 	}
 
 	public void add(CameraModel cam) {
-		this.xmlEncoder.remove(this.listCamera);
-		this.listCamera.add(cam);
+		this.setCamera.add(cam);
 		this.save();
 		this.support.firePropertyChange("newcamera", null, cam);
 	}
 
-	public List<CameraModel> getCameras() {
-		return this.listCamera;
+	public Set<CameraModel> getCameras() {
+		return this.setCamera;
 	}
 	
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
@@ -64,7 +66,7 @@ public class CameraXml {
 	private void save() {
 		try {
 			this.xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILENAME)));
-			this.xmlEncoder.writeObject(this.listCamera);
+			this.xmlEncoder.writeObject(this.setCamera);
 			this.xmlEncoder.flush();
 			this.xmlEncoder.close();
 		} catch (FileNotFoundException e) {
@@ -80,7 +82,7 @@ public class CameraXml {
 
 				Object o = this.xmlDecoder.readObject();
 				if (o instanceof List<?>) {
-					this.listCamera = (ArrayList<CameraModel>) o;
+					this.setCamera = (HashSet<CameraModel>) o;
 				} else {
 					System.out.println("Wrong format.");
 				}
@@ -95,7 +97,7 @@ public class CameraXml {
 
 	// Attributes
 	private static CameraXml INSTANCE = null;
-	private List<CameraModel> listCamera;
+	private Set<CameraModel> setCamera;
 	private final String FILENAME;
 
 	// Tools

@@ -12,15 +12,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.List;
+import java.util.Set;
 
 import javax.swing.JFrame;
 
-import org.opencv.core.Mat;
-
 import fluffy.network.camera.model.CameraXml;
 import fluffy.network.camera.model.CameraModel;
-import fluffy.tools.image.MagasinImage;
 
 /**
  * Main JFrame of the program
@@ -73,7 +70,7 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 		cameraXml.addPropertyChangeListener(this);
 		
 		// TODO : check camera open correctly
-		List<CameraModel> cameraList = cameraXml.getCameras();
+		Set<CameraModel> cameraList = cameraXml.getCameras();
 		for (CameraModel cameraModel : cameraList)
 			this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview(cameraModel.getLink(), cameraModel.getName(),
 					cameraModel.getDescription()));

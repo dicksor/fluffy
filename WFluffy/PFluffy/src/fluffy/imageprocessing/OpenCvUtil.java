@@ -13,6 +13,7 @@ import java.awt.image.DataBufferByte;
 
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
+import org.opencv.core.Rect;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
@@ -33,18 +34,20 @@ public class OpenCvUtil {
 	}
 	
 	public static Mat rotateImage(Mat m, double angle) {
-		Point center = new Point(m.cols() / 2.0, m.cols() / 2.0);
+		Point center = new Point(m.cols() / 2.0, m.rows() / 2.0);
 		double scale = 1.0;
 		Mat mRotation = Imgproc.getRotationMatrix2D(center, angle, scale);
 		Mat mRotatedImage = new Mat();
-		Imgproc.warpAffine(m, mRotatedImage, mRotation, new Size(m.rows(), m.cols()));
+		Imgproc.warpAffine(m, mRotatedImage, mRotation, new Size(m.cols(), m.rows()));
 		return mRotatedImage;
 	}
 	
 	public static Mat zoomImage(Mat m, int scale) {
 		Mat mScaledImage = new Mat();
-		Imgproc.resize(m, mScaledImage, new Size(m.rows() * scale, m.cols() * scale), scale, scale, Imgproc.INTER_NEAREST);
-		return mScaledImage;
+		Imgproc.resize(m, mScaledImage, new Size(m.cols() * scale, m.rows() * scale), scale, scale, Imgproc.INTER_NEAREST);
+		Rect rectCrop = new Rect(0, 0, m.width(), m.height());
+		Mat croppedImage = new Mat(mScaledImage, rectCrop);
+		return croppedImage;
 	}
 
 }
