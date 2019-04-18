@@ -24,11 +24,12 @@ import fluffy.userinterface.cameradisplay.CameraDisplay;
 public class JPanelCameraPreview extends JPanel {
 
 	public JPanelCameraPreview(String link, String cameraName, String cameraDescription) {
+		this.cameraName = cameraName;
+		this.cameraDescription = cameraDescription;
+		
 		this.geometry();
 		this.control();
 		this.appearance();
-		
-		// FIXME : Mettre ailleurs
 		// Pour streamer la vidéo surveillance remplacer "" par ->
 		// http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1
 		this.camera = new Camera(link, cameraName);

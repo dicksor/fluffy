@@ -83,9 +83,8 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-YYY");
 
 		File snapshotsDir = new File("snapshots\\" + format.format(new Date()));
-		if (!snapshotsDir.exists()) {
-			snapshotsDir.mkdir();
-		}
+		if (!snapshotsDir.exists())
+			snapshotsDir.mkdirs();
 		return snapshotsDir.toString();
 	}
 

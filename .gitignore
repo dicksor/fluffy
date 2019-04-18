@@ -1,6 +1,9 @@
 # Created by https://www.gitignore.io/api/java,eclipse
 # Edit at https://www.gitignore.io/?templates=java,eclipse
 
+WFluffy/PFluffy/snapshots/
+snapshots/
+
 ### Eclipse ###
 
 .metadata

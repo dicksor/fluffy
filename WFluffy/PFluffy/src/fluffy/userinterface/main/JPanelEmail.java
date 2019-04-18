@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 
 import fluffy.network.camera.model.UserModel;
 import fluffy.network.camera.model.UserXml;
-import fluffy.network.mail.tools.EmailValidator;
+import fluffy.tools.mail.EmailValidator;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 /**

@@ -13,24 +13,24 @@ import java.awt.Frame;
 import javax.swing.JFrame;
 
 import fluffy.network.camera.Camera;
+import fluffy.tools.image.MagasinImage;
 import fluffy.userinterface.main.JPanelCameraPreview;
 
 public class CameraGUI extends JFrame {
 
 	public CameraGUI(Camera camera, JPanelCameraPreview jPanelCameraPreview, String cameraName,
 			String cameraDescription) {
+		this.camera = camera;
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
 		this.geometry();
 		this.control();
 		this.appearance();
-		this.panelCameraPreview = jPanelCameraPreview;
-		this.panelCamera.setCamera(camera);
-		this.panelCamera.streamCamera();
 	}
 
 	private void appearance() {
 		this.setTitle("Fluffy : Camera");
+		//this.setIconImage(MagasinImage.logo.getImage());
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 	}
@@ -39,12 +39,12 @@ public class CameraGUI extends JFrame {
 	}
 
 	private void geometry() {
-		this.panelCamera = new JPanelCameraGUI(this, cameraName, cameraDescription, panelCamera, panelCameraPreview);
+		this.panelCamera = new JPanelCameraGUI(this, this.cameraName, this.cameraDescription, this.camera);
 		this.add(this.panelCamera);
 	}
 
-	private JPanelCameraPreview panelCameraPreview;
 	private JPanelCameraGUI panelCamera;
 	private String cameraName;
 	private String cameraDescription;
+	private Camera camera;
 }

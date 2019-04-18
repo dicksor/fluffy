@@ -14,12 +14,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import fluffy.network.camera.model.CameraModel;
+import fluffy.network.camera.model.CameraXml;
+
 public class JPanelForm extends JPanel {
 
 	public JPanelForm() {
 		geometry();
 		control();
 		appearance();
+	}
+	
+	public void save() {
+		CameraXml cameraXml = CameraXml.getInstance();
+		// TODO : check valid link and not already saved
+		String link = "";
+		if(!this.fldAdressIP.getText().isEmpty())
+			link = this.fldAdressIP.getText();	
+		CameraModel cameraModel = new CameraModel(this.fldCameraName.getText(), link, this.fldCameraDescription.getText());
+		cameraXml.add(cameraModel);
 	}
 
 	private void geometry() {
