@@ -20,6 +20,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fluffy.network.camera.model.CameraXml;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 
@@ -35,6 +36,13 @@ public class JPanelWest extends JPanel
 		geometry();
 		control();
 		appearance();
+
+		CameraXml cameraXml = CameraXml.getInstance();
+		if(!cameraXml.getCameras().get(cameraName).getAngle().equals(""))
+			{
+			cameraRotationAngle = Double.valueOf(cameraXml.getCameras().get(cameraName).getAngle());
+			panelCamera.rotateCamera(cameraRotationAngle);
+			}
 		}
 
 	private void geometry()
@@ -45,7 +53,7 @@ public class JPanelWest extends JPanel
 		this.btnRotateLeft = new JButton("Rotate left");
 		this.btnRotateRight = new JButton("Rotate right");
 		this.ckbFaceDetection = new JCheckBox("With face detection");
-		this.panelZoom = new JPanelZoom(this.panelCamera);
+		this.panelZoom = new JPanelZoom(this.panelCamera, cameraName);
 
 		Box boxV = Box.createVerticalBox();
 

@@ -16,15 +16,27 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import fluffy.network.camera.model.CameraXml;
+
 public class JPanelZoom extends JPanel
 	{
 
-	public JPanelZoom(JPanelCameraGUI panelCamera)
+	public JPanelZoom(JPanelCameraGUI panelCamera, String cameraName)
 		{
 		this.panelCamera = panelCamera;
+		this.cameraName = cameraName;
 		geometry();
 		control();
 		appearance();
+
+		CameraXml cameraXml = CameraXml.getInstance();
+		if(!cameraXml.getCameras().get(cameraName).getZoom().equals(""))
+			{
+			zoom = Integer.valueOf(cameraXml.getCameras().get(cameraName).getZoom());
+			panelCamera.rotateCamera(zoom);
+			spZoom.setValue(zoom);
+			}
+
 		}
 
 	private void geometry()
@@ -62,6 +74,7 @@ public class JPanelZoom extends JPanel
 		return zoom;
 		}
 
+	private String cameraName;
 	private int zoom;
 	private JLabel lblZoom;
 	private JSpinner spZoom;
