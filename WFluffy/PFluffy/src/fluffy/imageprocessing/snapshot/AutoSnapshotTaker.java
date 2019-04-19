@@ -41,8 +41,7 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 		this.detecte();
 	}
 	
-	@Override
-	public void getSnapShot() {
+	private void getSnapShot() {
 		String filePath = createFolderFromDate() + "\\" + this.filename + ".jpg";
 		System.out.println(filePath);
 		File file = new File(filePath);
@@ -58,6 +57,7 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 
 		// test if array > 1, because we would take only on snapshot
 		if (faceDetections.toArray().length >= 1) {
+			System.out.println("should snap");
 			takeSnapshot();
 		}
 	}
