@@ -6,6 +6,7 @@
  * Printemps 2019
  * He-arc
  */
+
 package fluffy.userinterface.main;
 
 import java.awt.Color;
@@ -20,11 +21,11 @@ import javax.swing.JPanel;
 
 import fluffy.network.camera.model.UserModel;
 import fluffy.network.camera.model.UserXml;
-import fluffy.network.mail.Email;
-import fluffy.network.mail.zip.ZipCreator;
+import fluffy.network.mail.EmailSender;
 import fluffy.tools.mail.EmailValidator;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
+
 /**
  * Panel that contains EmailInfo items and button to apply the change
  *
@@ -55,8 +56,6 @@ public class JPanelEmail extends JPanel
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
-
-
 	private void geometry()
 		{
 		jPanelEmailInfo = new JPanelEmailInfo();
@@ -78,13 +77,40 @@ public class JPanelEmail extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 				{
-				//TODO prendre la valeur de l'input
-				String email = "romain.capocasale99@gmail.com";
-				String snapShotFileName = Email.getSnapShotFileName();
-				ZipCreator zipCreator = new ZipCreator(snapShotFileName);//zip the content of the snapshot folder of the day
-				Email mail = new Email(email, snapShotFileName + ".zip");//create email object with zip file
-				mail.sendEmail();
-				ZipCreator.deleteZip(snapShotFileName + ".zip");//delete zip file
+				String email = JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText();
+				if (!email.equals(""))
+					{
+					if ((new EmailValidator()).validate(email.trim()))
+						{
+						EmailSender.sendSnapShot(email);
+						int hour = JPanelEmail.this.jPanelEmailInfo.getCbxHours().getSelectedIndex();
+
+						UserXml userXml = UserXml.getInstance();
+						UserModel userModel = new UserModel(email, String.valueOf(hour));
+						userXml.add(userModel);
+						JOptionPane.showMessageDialog(null, "Email was sent and settings are correctly applied", "InfoBox: fluffy", JOptionPane.INFORMATION_MESSAGE);
+						}
+					else
+						{
+						JOptionPane.showMessageDialog(null, "Error please enter a correct email", "ErrBox: fluffy", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				else
+					{
+					UserXml userXml = UserXml.getInstance();
+					UserModel userModel = userXml.getUserModel();
+					String emailXML = userModel.getEmail();
+					if (!emailXML.equals(""))
+						{
+						EmailSender.sendSnapShot(emailXML);
+						JOptionPane.showMessageDialog(null, "Email was sent", "InfoBox: fluffy", JOptionPane.INFORMATION_MESSAGE);
+						}
+					else
+						{
+						JOptionPane.showMessageDialog(null, "Error please enter a email", "ErrBox: fluffy", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+
 				}
 			});
 
@@ -95,14 +121,13 @@ public class JPanelEmail extends JPanel
 			public void actionPerformed(ActionEvent e)
 				{
 				//check if the email is in the correct format
-				if((new EmailValidator()).validate(JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText().trim()))
+				if ((new EmailValidator()).validate(JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText().trim()))
 					{
-					//TODO: mettre ces valeurs dans un fichier texte
 					String email = JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText();
 					int hour = JPanelEmail.this.jPanelEmailInfo.getCbxHours().getSelectedIndex();
 
 					UserXml userXml = UserXml.getInstance();
-					UserModel userModel = new UserModel(email, hour);
+					UserModel userModel = new UserModel(email, String.valueOf(hour));
 					userXml.add(userModel);
 					JOptionPane.showMessageDialog(null, "Settings correctly applied", "InfoBox: fluffy", JOptionPane.INFORMATION_MESSAGE);
 					}
@@ -111,6 +136,7 @@ public class JPanelEmail extends JPanel
 					JOptionPane.showMessageDialog(null, "Error please enter a correct email", "ErrBox: fluffy", JOptionPane.ERROR_MESSAGE);
 					}
 				}
+
 			});
 		}
 

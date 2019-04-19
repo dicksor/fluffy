@@ -7,10 +7,10 @@ public class UserModel implements Serializable {
 
 	public UserModel() {
 		this.email = "";
-		this.hour = 0;
+		this.hour = "";
 	}
 
-	public UserModel(String email, int hour) {
+	public UserModel(String email, String hour) {
 		this.email = email;
 		this.hour = hour;
 	}
@@ -19,7 +19,7 @@ public class UserModel implements Serializable {
 		this.email = email;
 	}
 
-	public void setHour(int hour) {
+	public void setHour(String hour) {
 		this.hour = hour;
 	}
 
@@ -27,7 +27,7 @@ public class UserModel implements Serializable {
 		return this.email;
 	}
 
-	public int getHour() {
+	public String getHour() {
 		return this.hour;
 	}
 
@@ -39,5 +39,5 @@ public class UserModel implements Serializable {
 	}
 
 	private String email;
-	private int hour;
+	private String hour;
 }

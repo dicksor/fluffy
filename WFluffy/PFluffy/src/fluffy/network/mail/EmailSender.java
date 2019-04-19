@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import fluffy.network.camera.model.UserModel;
+import fluffy.network.camera.model.UserXml;
 import fluffy.network.mail.zip.ZipCreator;
 
 /**
@@ -32,20 +34,29 @@ public class EmailSender
 			public void run()
 				{
 				//lecture de l'adresse mail et de l'heure dans le fichier xml
-				String email = "romain.capocasale99@gmail.com";
-				int hour = 9;
+
+				UserXml userXml = UserXml.getInstance();
+				UserModel userModel = userXml.getUserModel();
+				String email = userModel.getEmail();
+				int hour = Integer.valueOf(userModel.getHour());
+
 				//check if hour in xml file is current hour
 				if (LocalDateTime.now().getHour() == hour)
 					{
-					String snapShotFileName = Email.getSnapShotFileName();
-					ZipCreator zipCreator = new ZipCreator(snapShotFileName);//zip the content of the snapshot folder of the day
-					Email mail = new Email(email, snapShotFileName + ".zip");//create email object with zip file
-					mail.sendEmail();
-					ZipCreator.deleteZip(snapShotFileName + ".zip");//delete zip file
+					EmailSender.sendSnapShot(email);
 					}
 
 				}
 			};
 		timer.schedule(hourTimerTask, 0l, 1000 * 60 * 60);//execute TimerTask function every hour
+		}
+
+	public static void sendSnapShot(String email)
+		{
+		String snapShotFileName = Email.getSnapShotFileName();
+		ZipCreator zipCreator = new ZipCreator(snapShotFileName);//zip the content of the snapshot folder of the day
+		Email mail = new Email(email, snapShotFileName + ".zip");//create email object with zip file
+		mail.sendEmail();
+		ZipCreator.deleteZip(snapShotFileName + ".zip");//delete zip file
 		}
 	}

@@ -10,66 +10,105 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 
-public class UserXml {
+public class UserXml
+	{
 
-	private UserXml() {
+	private UserXml()
+		{
+		//this.support = new PropertyChangeSupport(this);
+		this.model = new UserModel();
 		this.FILENAME = "user.xml";
 		this.file = new File(this.FILENAME);
-		try {
+		try
+			{
 			this.file.createNewFile();
-		} catch (IOException e) {
+			}
+		catch (IOException e)
+			{
 			e.printStackTrace();
-		}
+			}
 		this.load();
-	}
+		this.save();
+		}
+
+	public UserModel getUserModel()
+		{
+		return model;
+		}
 
 	@Override
-	protected void finalize() throws Throwable {
+	protected void finalize() throws Throwable
+		{
 		this.xmlEncoder.close();
-	}
-
-	public static UserXml getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new UserXml();
 		}
-		return INSTANCE;
-	}
 
-	public void add(UserModel model) {
+	public static UserXml getInstance()
+		{
+		if (INSTANCE == null)
+			{
+			INSTANCE = new UserXml();
+			}
+		return INSTANCE;
+		}
+
+	public void add(UserModel model)
+		{
 		this.model = model;
 		save();
-	}
+		}
 
-	private void save() {
-		try {
+	private void save()
+		{
+		try
+			{
 			this.xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILENAME)));
 			this.xmlEncoder.writeObject(this.model);
 			this.xmlEncoder.flush();
 			this.xmlEncoder.close();
-		} catch (FileNotFoundException e) {
+			}
+		catch (FileNotFoundException e)
+			{
 			e.printStackTrace();
+			}
 		}
-	}
 
-	private void load() {
-		try {
-			this.xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FILENAME)));
-			// FIXME Cast exception
-			this.model = (UserModel) this.xmlDecoder.readObject();
-		} catch (FileNotFoundException e) {
+	private void load()
+		{
+		try
+			{
+			FileInputStream file = new FileInputStream(FILENAME);
+			if (file.available() > 0)
+				{
+				this.xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FILENAME)));
+
+				Object o = this.xmlDecoder.readObject();
+				if (o instanceof UserModel)
+					{
+					this.model = (UserModel)o;
+					}
+				else
+					{
+					System.out.println("Wrong format.");
+					}
+				}
+			file.close();
+			}
+		catch (IOException e)
+			{
 			e.printStackTrace();
-		} catch (ClassCastException e) {
+			}
+		catch (ClassCastException e)
+			{
 			e.printStackTrace();
+			}
 		}
-	}
 
 	private static UserXml INSTANCE = null;
 	private UserModel model;
 	private final String FILENAME;
-	private File file;
 
 	private XMLEncoder xmlEncoder;
 	private XMLDecoder xmlDecoder;
-}
+	private File file;
+	}
