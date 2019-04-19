@@ -40,9 +40,11 @@ public class EmailSender
 				String email = userModel.getEmail();
 				int hour = Integer.valueOf(userModel.getHour());
 
+				//System.out.println("send email at " + email + ", hour : " + hour);
 				//check if hour in xml file is current hour
 				if (LocalDateTime.now().getHour() == hour)
 					{
+					//System.out.println("send email at " + email + ", hour : " + hour);
 					EmailSender.sendSnapShot(email);
 					}
 

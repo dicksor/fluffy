@@ -77,14 +77,19 @@ public class JPanelEmail extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 				{
-				String email = JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText();
+				String email = JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText();//get input email
+
+				//if email is not null, user want to update email
 				if (!email.equals(""))
 					{
+					//check email is in correct format
 					if ((new EmailValidator()).validate(email.trim()))
 						{
+						//send email
 						EmailSender.sendSnapShot(email);
-						int hour = JPanelEmail.this.jPanelEmailInfo.getCbxHours().getSelectedIndex();
+						int hour = JPanelEmail.this.jPanelEmailInfo.getCbxHours().getSelectedIndex();//get input hour
 
+						//save user email and hour in config
 						UserXml userXml = UserXml.getInstance();
 						UserModel userModel = new UserModel(email, String.valueOf(hour));
 						userXml.add(userModel);
@@ -95,13 +100,17 @@ public class JPanelEmail extends JPanel
 						JOptionPane.showMessageDialog(null, "Error please enter a correct email", "ErrBox: fluffy", JOptionPane.ERROR_MESSAGE);
 						}
 					}
-				else
+				else//if the email is null, user want to receive email with config informations
 					{
+					//get user email in config
 					UserXml userXml = UserXml.getInstance();
 					UserModel userModel = userXml.getUserModel();
 					String emailXML = userModel.getEmail();
+
+					//if the mail in config is not null
 					if (!emailXML.equals(""))
 						{
+						//send the mail with config email
 						EmailSender.sendSnapShot(emailXML);
 						JOptionPane.showMessageDialog(null, "Email was sent", "InfoBox: fluffy", JOptionPane.INFORMATION_MESSAGE);
 						}
@@ -126,6 +135,7 @@ public class JPanelEmail extends JPanel
 					String email = JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText();
 					int hour = JPanelEmail.this.jPanelEmailInfo.getCbxHours().getSelectedIndex();
 
+					//save mail and hour in config
 					UserXml userXml = UserXml.getInstance();
 					UserModel userModel = new UserModel(email, String.valueOf(hour));
 					userXml.add(userModel);
