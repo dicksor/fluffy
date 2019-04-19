@@ -9,6 +9,8 @@
 
 package fluffy.network.mail;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
@@ -91,6 +93,17 @@ public class Email
 			{
 			e.printStackTrace();
 			}
+		}
+
+	/**
+	 * return date of the day at String format
+	 * @return date of the day
+	 */
+	public static String getSnapShotFileName()
+		{
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		Date date = new Date();
+		return dateFormat.format(date);
 		}
 
 	private Session session;

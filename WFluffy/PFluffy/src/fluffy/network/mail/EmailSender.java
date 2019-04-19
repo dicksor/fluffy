@@ -9,10 +9,7 @@
 
 package fluffy.network.mail;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,7 +37,7 @@ public class EmailSender
 				//check if hour in xml file is current hour
 				if (LocalDateTime.now().getHour() == hour)
 					{
-					String snapShotFileName = getSnapShotFileName();
+					String snapShotFileName = Email.getSnapShotFileName();
 					ZipCreator zipCreator = new ZipCreator(snapShotFileName);//zip the content of the snapshot folder of the day
 					Email mail = new Email(email, snapShotFileName + ".zip");//create email object with zip file
 					mail.sendEmail();
@@ -50,16 +47,5 @@ public class EmailSender
 				}
 			};
 		timer.schedule(hourTimerTask, 0l, 1000 * 60 * 60);//execute TimerTask function every hour
-		}
-
-	/**
-	 * return date of the day at String format
-	 * @return date of the day
-	 */
-	private String getSnapShotFileName()
-		{
-		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		Date date = new Date();
-		return dateFormat.format(date);
 		}
 	}

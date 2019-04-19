@@ -20,6 +20,8 @@ import javax.swing.JPanel;
 
 import fluffy.network.camera.model.UserModel;
 import fluffy.network.camera.model.UserXml;
+import fluffy.network.mail.Email;
+import fluffy.network.mail.zip.ZipCreator;
 import fluffy.tools.mail.EmailValidator;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
@@ -58,14 +60,34 @@ public class JPanelEmail extends JPanel
 	private void geometry()
 		{
 		jPanelEmailInfo = new JPanelEmailInfo();
+		btnForceEmail = new JButton("Force Email");
 		btnApply = new JButton("Apply Change");
+
 		setLayout(new FlowLayout());
+
 		add(jPanelEmailInfo);
 		add(btnApply);
+		add(btnForceEmail);
 		}
 
 	private void control()
 		{
+		btnForceEmail.addActionListener(new ActionListener()
+			{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+				{
+				//TODO prendre la valeur de l'input
+				String email = "romain.capocasale99@gmail.com";
+				String snapShotFileName = Email.getSnapShotFileName();
+				ZipCreator zipCreator = new ZipCreator(snapShotFileName);//zip the content of the snapshot folder of the day
+				Email mail = new Email(email, snapShotFileName + ".zip");//create email object with zip file
+				mail.sendEmail();
+				ZipCreator.deleteZip(snapShotFileName + ".zip");//delete zip file
+				}
+			});
+
 		btnApply.addActionListener(new ActionListener()
 			{
 
@@ -98,6 +120,12 @@ public class JPanelEmail extends JPanel
 		this.btnApply.setForeground(Color.WHITE);
 		this.btnApply.setPreferredSize(new Dimension(150, 50));
 		MaterialUIMovement.add(this.btnApply, MaterialColors.GRAY_200);
+
+		this.btnForceEmail.setBackground(MaterialColors.LIGHT_BLUE_400);
+		this.btnForceEmail.setForeground(Color.WHITE);
+		this.btnForceEmail.setPreferredSize(new Dimension(150, 50));
+		MaterialUIMovement.add(this.btnForceEmail, MaterialColors.GRAY_200);
+
 		}
 
 	/*------------------------------------------------------------------*\
@@ -110,5 +138,5 @@ public class JPanelEmail extends JPanel
 
 	private JButton btnApply;
 	private JPanelEmailInfo jPanelEmailInfo;
-
+	private JButton btnForceEmail;
 	}
