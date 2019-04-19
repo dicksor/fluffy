@@ -101,9 +101,12 @@ public class JPanelWest extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (JPanelWest.this.ckbFaceDetection.isSelected()) {
+					JPanelWest.this.ckbYoloDetection.setSelected(false);
+					JPanelWest.this.ckbYoloDetection.setEnabled(false);
 					panelCamera.setFaceDetection(true);
 				} else {
 					panelCamera.setFaceDetection(false);
+					JPanelWest.this.ckbYoloDetection.setEnabled(true);
 				}
 			}
 		});
@@ -113,9 +116,12 @@ public class JPanelWest extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (JPanelWest.this.ckbYoloDetection.isSelected()) {
+					JPanelWest.this.ckbFaceDetection.setSelected(false);
+					JPanelWest.this.ckbFaceDetection.setEnabled(false);
 					panelCamera.setYoloDetection(true);
 				} else {
 					panelCamera.setYoloDetection(false);
+					JPanelWest.this.ckbFaceDetection.setEnabled(true);
 				}
 			}
 		});
