@@ -46,7 +46,6 @@ public class UseFluffy
 			CameraModel cam = new CameraModel("webcam", "", "Webcam du staff...");
 			cameraList.add(cam);
 
-			EmailSender emailSender = new EmailSender();
 			new MainGUI();
 			}
 		else

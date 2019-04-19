@@ -32,8 +32,8 @@ public class CameraDisplay implements PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		Mat matCam = (Mat) evt.getNewValue();
-		if (isPreview)
-			Imgproc.resize(matCam, matCam, new Size(150, 150));
+		if (this.isPreview)
+			Imgproc.resize(matCam, matCam, new Size(150, 150));	
 		BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCam);
 		ImageIcon imgIcn = new ImageIcon(imgCam);
 		this.lbCameraDisplay.setIcon(imgIcn);

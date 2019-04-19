@@ -13,7 +13,6 @@ import java.awt.Frame;
 import javax.swing.JFrame;
 
 import fluffy.network.camera.Camera;
-import fluffy.tools.image.MagasinImage;
 import fluffy.userinterface.main.JPanelCameraPreview;
 
 public class CameraGUI extends JFrame {
@@ -21,6 +20,7 @@ public class CameraGUI extends JFrame {
 	public CameraGUI(Camera camera, JPanelCameraPreview jPanelCameraPreview, String cameraName,
 			String cameraDescription) {
 		this.camera = camera;
+		this.jPanelCameraPreview = jPanelCameraPreview;
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
 		this.geometry();
@@ -39,10 +39,11 @@ public class CameraGUI extends JFrame {
 	}
 
 	private void geometry() {
-		this.panelCamera = new JPanelCameraGUI(this, this.cameraName, this.cameraDescription, this.camera);
+		this.panelCamera = new JPanelCameraGUI(this, this.jPanelCameraPreview, this.cameraName, this.cameraDescription, this.camera);
 		this.add(this.panelCamera);
 	}
 
+	private JPanelCameraPreview jPanelCameraPreview;
 	private JPanelCameraGUI panelCamera;
 	private String cameraName;
 	private String cameraDescription;

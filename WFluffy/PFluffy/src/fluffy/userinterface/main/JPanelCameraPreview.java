@@ -39,17 +39,18 @@ public class JPanelCameraPreview extends JPanel {
 		Thread cameraThread = new Thread(this.camera);
 		cameraThread.start();
 		
-		this.cameraPipeline = new CameraPipeline();
-		this.camera.addPropertyChangeListener(this.cameraPipeline);
-		
-		this.cameraDisplay = new CameraDisplay(this.lbCameraPreview, true);
-		this.cameraPipeline.addPropertyChangeListener(this.cameraDisplay);
+		this.streamCamera();
 		
 		this.autoSnapShotTaker = new AutoSnapshotTaker();
 		this.camera.addPropertyChangeListener(this.autoSnapShotTaker);
 		
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
+	}
+	
+	public void streamCamera() {
+		this.cameraDisplay = new CameraDisplay(this.lbCameraPreview, true);
+		this.camera.addPropertyChangeListener(this.cameraDisplay);
 	}
 
 	private void appearance() {
@@ -61,6 +62,7 @@ public class JPanelCameraPreview extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				JPanelCameraPreview.this.camera.removePropertyChangeListener(JPanelCameraPreview.this.cameraDisplay);
 				new CameraGUI(camera, JPanelCameraPreview.this, cameraName, cameraDescription);
 			}
 

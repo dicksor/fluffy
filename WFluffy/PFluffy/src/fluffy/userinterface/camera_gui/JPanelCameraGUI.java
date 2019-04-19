@@ -22,19 +22,21 @@ import fluffy.network.camera.Camera;
 import fluffy.network.camera.pipeline.CameraPipeline;
 import fluffy.network.camera.pipeline.Operators;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
+import fluffy.userinterface.main.JPanelCameraPreview;
 
 public class JPanelCameraGUI extends JPanel {
 
-	public JPanelCameraGUI(JFrame frameRoot, String cameraName, String cameraDescription, Camera camera) {
+	public JPanelCameraGUI(JFrame frameRoot, JPanelCameraPreview jPanelCameraPreview, String cameraName, String cameraDescription, Camera camera) {
+		this.frameRoot = frameRoot;
+		this.jPanelCameraPreview = jPanelCameraPreview;
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
-		this.frameRoot = frameRoot;
 		this.camera = camera;
 		
 		this.cameraPipeline = new CameraPipeline();
 		this.camera.addPropertyChangeListener(this.cameraPipeline);	
-		this.camera.addPropertyChangeListener(this.snapshotTaker);
 		this.snapshotTaker = new DialogSnapshotTaker();
+		this.camera.addPropertyChangeListener(this.snapshotTaker);
 		
 		this.geometry();
 		this.control();
@@ -67,12 +69,11 @@ public class JPanelCameraGUI extends JPanel {
 	}
 
 	private void geometry() {
-		System.out.println(cameraName);
 		this.panelWest = new JPanelWest(this, cameraName, cameraDescription);
 		this.panelEast = new JPanel();
 		this.panelEast.setPreferredSize(
 				new Dimension(panelWest.getPreferredSize().width, panelWest.getPreferredSize().height));
-		this.panelSouth = new JPanelSouth(this.frameRoot);
+		this.panelSouth = new JPanelSouth(this.jPanelCameraPreview, this.frameRoot);
 		this.lbCameraDisplay = new JLabel();
 
 		Box boxCameraPreview = centerCamera(lbCameraDisplay);
@@ -88,6 +89,10 @@ public class JPanelCameraGUI extends JPanel {
 
 	public void setFaceDetection(boolean hasFaceDetection) {
 		this.cameraPipeline.setIsActive(Operators.FACEDETECTION, hasFaceDetection);
+	}
+	
+	public void setYoloDetection(boolean hasYoloDetection) {
+		this.cameraPipeline.setIsActive(Operators.YOLO, hasYoloDetection);
 	}
 
 	public void rotateCamera(double angle) {
@@ -106,6 +111,7 @@ public class JPanelCameraGUI extends JPanel {
 		this.cameraPipeline.removePropertyChangeListener(this.cameraDisplay);
 	}
 
+	private JPanelCameraPreview jPanelCameraPreview;
 	private JLabel lbCameraDisplay;
 	private JPanelWest panelWest;
 	private JPanelSouth panelSouth;

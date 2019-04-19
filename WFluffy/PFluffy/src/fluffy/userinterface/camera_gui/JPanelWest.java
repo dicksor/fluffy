@@ -42,24 +42,27 @@ public class JPanelWest extends JPanel {
 		this.btnRotateLeft = new JButton("Rotate left");
 		this.btnRotateRight = new JButton("Rotate right");
 		this.ckbFaceDetection = new JCheckBox("With face detection");
+		this.ckbYoloDetection = new JCheckBox("With yolo detection");
 		this.panelZoom = new JPanelZoom(this.panelCamera);
 
 		Box boxV = Box.createVerticalBox();
 
 		boxV.add(Box.createVerticalGlue());
-		boxV.add(lblCameraName);
+		boxV.add(this.lblCameraName);
 		boxV.add(Box.createVerticalStrut(30));
-		boxV.add(lblCameraDescription);
+		boxV.add(this.lblCameraDescription);
 		boxV.add(Box.createVerticalStrut(30));
-		boxV.add(btnSnapshot);
+		boxV.add(this.btnSnapshot);
 		boxV.add(Box.createVerticalStrut(30));
-		boxV.add(btnRotateLeft);
+		boxV.add(this.btnRotateLeft);
 		boxV.add(Box.createVerticalStrut(30));
-		boxV.add(btnRotateRight);
+		boxV.add(this.btnRotateRight);
 		boxV.add(Box.createVerticalStrut(30));
-		boxV.add(ckbFaceDetection);
+		boxV.add(this.ckbFaceDetection);
 		boxV.add(Box.createVerticalStrut(30));
-		boxV.add(panelZoom);
+		boxV.add(this.ckbYoloDetection);
+		boxV.add(Box.createVerticalStrut(30));
+		boxV.add(this.panelZoom);
 		boxV.add(Box.createVerticalGlue());
 
 		setLayout(new BorderLayout());
@@ -104,6 +107,18 @@ public class JPanelWest extends JPanel {
 				}
 			}
 		});
+		
+		this.ckbYoloDetection.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (JPanelWest.this.ckbYoloDetection.isSelected()) {
+					panelCamera.setYoloDetection(true);
+				} else {
+					panelCamera.setYoloDetection(false);
+				}
+			}
+		});
 
 	}
 
@@ -131,6 +146,7 @@ public class JPanelWest extends JPanel {
 	private JButton btnRotateLeft;
 	private JButton btnRotateRight;
 	private JCheckBox ckbFaceDetection;
+	private JCheckBox ckbYoloDetection;
 	private JPanelZoom panelZoom;
 	private JPanelCameraGUI panelCamera;
 	private double cameraRotationAngle;
