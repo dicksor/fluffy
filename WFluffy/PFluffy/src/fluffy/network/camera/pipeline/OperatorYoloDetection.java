@@ -15,7 +15,6 @@ public class OperatorYoloDetection extends AbstractOperator {
 	public Mat operate(Mat image) {
 		return this.yoloDetection.feedForward(image);
 	}
-	
-	private OpenCvYoloDetection yoloDetection;
 
+	private OpenCvYoloDetection yoloDetection;
 }
