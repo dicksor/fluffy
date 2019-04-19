@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
+
 import fluffy.imageprocessing.OpenCvFaceDetection;
 import fluffy.imageprocessing.OpenCvUtil;
 
@@ -33,17 +34,17 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		String name = evt.getPropertyName();
+		this.cameraName = evt.getPropertyName();
 		this.setImage((Mat) evt.getNewValue());
 		this.detecte();
 	}
-	
+
 	@Override
 	public void getSnapShot() {
-		String filePath = createFolderFromDate() + "\\" + this.filename + ".jpg";
+		String filePath = createFolderFromDate() + "\\" + this.filename +"_" + this.cameraName +".jpg";
 		System.out.println(filePath);
 		File file = new File(filePath);
 		try {
@@ -52,7 +53,7 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void detecte() {
 		MatOfRect faceDetections = this.faceDetection.detecte(this.getImage());
 
@@ -61,7 +62,7 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 			takeSnapshot();
 		}
 	}
-	
+
 	private void takeSnapshot() {
 		try {
 			dateActuelle = format.parse(format.format(new Date()));
@@ -84,11 +85,14 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 
 		File snapshotsDir = new File("snapshots\\" + format.format(new Date()));
 		if (!snapshotsDir.exists())
-			snapshotsDir.mkdirs();
+			{
+				snapshotsDir.mkdirs();
+				}
 		return snapshotsDir.toString();
 	}
 
 	private String filename;
+	private String cameraName;
 	private static final long DELAY_BETWEEN_CAPTURE = 10000;// temps en milliseconde
 	private SimpleDateFormat format;
 	private Date dateCapture;
