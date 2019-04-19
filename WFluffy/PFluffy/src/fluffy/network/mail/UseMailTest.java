@@ -13,8 +13,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import fluffy.network.mail.zip.ZipCreator;
-
 public class UseMailTest
 	{
 
@@ -29,13 +27,6 @@ public class UseMailTest
 
 	public static void main()
 		{
-		//a supprimer pour tester l'envoie de mail
-		String email = "romain.capocasale@he-arc.ch";
-		int hour = 9;
-		ZipCreator zipCreator = new ZipCreator(getSnapShotFileName());
-		Email mail = new Email(email, getSnapShotFileName() + ".zip");
-		mail.sendEmail();
-		ZipCreator.deleteZip(getSnapShotFileName() + ".zip");
 		}
 
 	private static String getSnapShotFileName()
