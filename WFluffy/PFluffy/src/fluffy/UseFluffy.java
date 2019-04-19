@@ -43,7 +43,7 @@ public class UseFluffy
 				}
 			// FIXME : remove when production mode
 			CameraXml cameraList = CameraXml.getInstance();
-			CameraModel cam = new CameraModel("webcam", "", "Webcam du staff...");
+			CameraModel cam = new CameraModel("webcam", "", "Webcam du staff...", "90", "1");
 			cameraList.add(cam);
 
 			new MainGUI();

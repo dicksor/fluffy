@@ -26,22 +26,24 @@ import fluffy.userinterface.main.JPanelCameraPreview;
 
 public class JPanelCameraGUI extends JPanel {
 
-	public JPanelCameraGUI(JFrame frameRoot, JPanelCameraPreview jPanelCameraPreview, String cameraName, String cameraDescription, Camera camera) {
+	public JPanelCameraGUI(JFrame frameRoot, JPanelCameraPreview jPanelCameraPreview, String cameraName,
+			String cameraDescription, Camera camera) {
 		this.frameRoot = frameRoot;
 		this.jPanelCameraPreview = jPanelCameraPreview;
+
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
 		this.camera = camera;
-		
+
 		this.cameraPipeline = new CameraPipeline();
-		this.camera.addPropertyChangeListener(this.cameraPipeline);	
-		this.snapshotTaker = new DialogSnapshotTaker();
+		this.camera.addPropertyChangeListener(this.cameraPipeline);
 		this.camera.addPropertyChangeListener(this.snapshotTaker);
-		
+		this.snapshotTaker = new DialogSnapshotTaker();
+
 		this.geometry();
 		this.control();
 		this.appearance();
-		
+
 		this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, false);
 		this.cameraPipeline.addPropertyChangeListener(this.cameraDisplay);
 	}
@@ -52,6 +54,14 @@ public class JPanelCameraGUI extends JPanel {
 
 	private void control() {
 
+	}
+
+	public int getZoom() {
+		return panelWest.getZoom();
+	}
+
+	public double getRotationAngle() {
+		return panelWest.getRotationAngle();
 	}
 
 	private Box centerCamera(JLabel label) {
@@ -73,7 +83,7 @@ public class JPanelCameraGUI extends JPanel {
 		this.panelEast = new JPanel();
 		this.panelEast.setPreferredSize(
 				new Dimension(panelWest.getPreferredSize().width, panelWest.getPreferredSize().height));
-		this.panelSouth = new JPanelSouth(this.jPanelCameraPreview, this.frameRoot);
+		this.panelSouth = new JPanelSouth(this.frameRoot, this, this.jPanelCameraPreview, cameraName);
 		this.lbCameraDisplay = new JLabel();
 
 		Box boxCameraPreview = centerCamera(lbCameraDisplay);
@@ -90,7 +100,7 @@ public class JPanelCameraGUI extends JPanel {
 	public void setFaceDetection(boolean hasFaceDetection) {
 		this.cameraPipeline.setIsActive(Operators.FACEDETECTION, hasFaceDetection);
 	}
-	
+
 	public void setYoloDetection(boolean hasYoloDetection) {
 		this.cameraPipeline.setIsActive(Operators.YOLO, hasYoloDetection);
 	}

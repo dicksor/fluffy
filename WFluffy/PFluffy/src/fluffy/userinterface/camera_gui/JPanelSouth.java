@@ -12,19 +12,23 @@ package fluffy.userinterface.camera_gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import fluffy.userinterface.main.JPanelCameraPreview;
+import fluffy.network.camera.model.CameraXml;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 
 public class JPanelSouth extends JPanel {
 
-	public JPanelSouth(JPanelCameraPreview jPanelCameraPreview, JFrame frameRoot) {
-		this.jPanelCameraPreview = jPanelCameraPreview;
+	public JPanelSouth(JFrame frameRoot, JPanelCameraGUI jPanelCameraGUI, JPanelCameraPreview jPanelCameraPreview, String camerName) {
 		this.frameRoot = frameRoot;
+		this.jPanelCameraPreview = jPanelCameraPreview;
+		this.jPanelCameraGUI = jPanelCameraGUI;
+		this.cameraName = camerName;
 		geometry();
 		control();
 		appearance();
@@ -42,6 +46,9 @@ public class JPanelSouth extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JPanelSouth.this.jPanelCameraPreview.streamCamera();
+				CameraXml cameraXml = CameraXml.getInstance();
+				cameraXml.setCameraAngle(cameraName, String.valueOf(JPanelSouth.this.jPanelCameraGUI.getRotationAngle()));
+				cameraXml.setCameraZoom(cameraName, String.valueOf(JPanelSouth.this.jPanelCameraGUI.getZoom()));
 				JPanelSouth.this.frameRoot.setVisible(false);
 				JPanelSouth.this.frameRoot.dispose();
 			}
@@ -55,7 +62,8 @@ public class JPanelSouth extends JPanel {
 	}
 
 	private JPanelCameraPreview jPanelCameraPreview;
+	private String cameraName;
 	private JButton btnReturn;
 	private JFrame frameRoot;
-
+	private JPanelCameraGUI jPanelCameraGUI;
 }

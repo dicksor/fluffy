@@ -20,6 +20,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fluffy.network.camera.model.CameraXml;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 
@@ -33,6 +34,12 @@ public class JPanelWest extends JPanel {
 		geometry();
 		control();
 		appearance();
+
+		CameraXml cameraXml = CameraXml.getInstance();
+		if (!cameraXml.getCameras().get(cameraName).getAngle().equals("")) {
+			cameraRotationAngle = Double.valueOf(cameraXml.getCameras().get(cameraName).getAngle());
+			panelCamera.rotateCamera(cameraRotationAngle);
+		}
 	}
 
 	private void geometry() {
@@ -43,7 +50,7 @@ public class JPanelWest extends JPanel {
 		this.btnRotateRight = new JButton("Rotate right");
 		this.ckbFaceDetection = new JCheckBox("With face detection");
 		this.ckbYoloDetection = new JCheckBox("With yolo detection");
-		this.panelZoom = new JPanelZoom(this.panelCamera);
+		this.panelZoom = new JPanelZoom(this.panelCamera, cameraName);
 
 		Box boxV = Box.createVerticalBox();
 
@@ -75,7 +82,7 @@ public class JPanelWest extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cameraRotationAngle += 90;
-				((JPanelCameraGUI) panelCamera).rotateCamera(cameraRotationAngle);
+				panelCamera.rotateCamera(cameraRotationAngle);
 			}
 		});
 
@@ -84,7 +91,7 @@ public class JPanelWest extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cameraRotationAngle -= 90;
-				((JPanelCameraGUI) panelCamera).rotateCamera(cameraRotationAngle);
+				panelCamera.rotateCamera(cameraRotationAngle);
 			}
 		});
 
@@ -92,7 +99,7 @@ public class JPanelWest extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				((JPanelCameraGUI) panelCamera).takeSnapShot();
+				panelCamera.takeSnapShot();
 			}
 		});
 
@@ -110,7 +117,7 @@ public class JPanelWest extends JPanel {
 				}
 			}
 		});
-		
+
 		this.ckbYoloDetection.addActionListener(new ActionListener() {
 
 			@Override
@@ -126,6 +133,14 @@ public class JPanelWest extends JPanel {
 			}
 		});
 
+	}
+
+	public double getRotationAngle() {
+		return cameraRotationAngle;
+	}
+
+	public int getZoom() {
+		return panelZoom.getZoom();
 	}
 
 	private void appearance() {
