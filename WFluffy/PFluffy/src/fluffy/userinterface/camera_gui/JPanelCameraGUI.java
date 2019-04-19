@@ -24,36 +24,51 @@ import fluffy.network.camera.pipeline.CameraPipeline;
 import fluffy.network.camera.pipeline.Operators;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
 
-public class JPanelCameraGUI extends JPanel {
+public class JPanelCameraGUI extends JPanel
+	{
 
-	public JPanelCameraGUI(JFrame frameRoot, String cameraName, String cameraDescription, Camera camera) {
+	public JPanelCameraGUI(JFrame frameRoot, String cameraName, String cameraDescription, Camera camera)
+		{
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
 		this.frameRoot = frameRoot;
 		this.camera = camera;
-		
+
 		this.cameraPipeline = new CameraPipeline();
-		this.camera.addPropertyChangeListener(this.cameraPipeline);	
+		this.camera.addPropertyChangeListener(this.cameraPipeline);
 		this.camera.addPropertyChangeListener(this.snapshotTaker);
 		this.snapshotTaker = new DialogSnapshotTaker();
-		
+
 		this.geometry();
 		this.control();
 		this.appearance();
-		
+
 		this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, false);
 		this.cameraPipeline.addPropertyChangeListener(this.cameraDisplay);
-	}
+		}
 
-	private void appearance() {
+	private void appearance()
+		{
 
-	}
+		}
 
-	private void control() {
+	private void control()
+		{
 
-	}
+		}
 
-	private Box centerCamera(JLabel label) {
+	public int getZoom()
+		{
+		return panelWest.getZoom();
+		}
+
+	public double getRotationAngle()
+		{
+		return panelWest.getRotationAngle();
+		}
+
+	private Box centerCamera(JLabel label)
+		{
 		Box boxV = Box.createHorizontalBox();
 		Box boxH = Box.createVerticalBox();
 
@@ -65,15 +80,15 @@ public class JPanelCameraGUI extends JPanel {
 		boxH.add(boxV);
 		boxH.add(Box.createHorizontalGlue());
 		return boxH;
-	}
+		}
 
-	private void geometry() {
+	private void geometry()
+		{
 		System.out.println(cameraName);
 		this.panelWest = new JPanelWest(this, cameraName, cameraDescription);
 		this.panelEast = new JPanel();
-		this.panelEast.setPreferredSize(
-				new Dimension(panelWest.getPreferredSize().width, panelWest.getPreferredSize().height));
-		this.panelSouth = new JPanelSouth(this.frameRoot);
+		this.panelEast.setPreferredSize(new Dimension(panelWest.getPreferredSize().width, panelWest.getPreferredSize().height));
+		this.panelSouth = new JPanelSouth(this.frameRoot, this, cameraName);
 		this.lbCameraDisplay = new JLabel();
 
 		Box boxCameraPreview = centerCamera(lbCameraDisplay);
@@ -85,27 +100,32 @@ public class JPanelCameraGUI extends JPanel {
 		this.add(this.panelSouth, BorderLayout.SOUTH);
 		this.add(this.panelEast, BorderLayout.EAST);
 		this.add(boxCameraPreview, BorderLayout.CENTER);
-	}
+		}
 
-	public void setFaceDetection(boolean hasFaceDetection) {
+	public void setFaceDetection(boolean hasFaceDetection)
+		{
 		this.cameraPipeline.setIsActive(Operators.FACEDETECTION, hasFaceDetection);
-	}
+		}
 
-	public void rotateCamera(double angle) {
+	public void rotateCamera(double angle)
+		{
 		this.cameraPipeline.setRotationAngle(angle);
-	}
+		}
 
-	public void zoomCamera(int zoomFactor) {
+	public void zoomCamera(int zoomFactor)
+		{
 		this.cameraPipeline.setZoomFactor(zoomFactor);
-	}
+		}
 
-	public void takeSnapShot() {
+	public void takeSnapShot()
+		{
 		this.snapshotTaker.getSnapShot();
-	}
+		}
 
-	public void stopStream() {
+	public void stopStream()
+		{
 		this.cameraPipeline.removePropertyChangeListener(this.cameraDisplay);
-	}
+		}
 
 	private JLabel lbCameraDisplay;
 	private JPanelWest panelWest;
@@ -119,4 +139,4 @@ public class JPanelCameraGUI extends JPanel {
 	private String cameraDescription;
 	private SnapshotTaker snapshotTaker;
 	private Camera camera;
-}
+	}

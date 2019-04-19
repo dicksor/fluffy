@@ -12,12 +12,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Set;
+import java.util.Map;
 
 import javax.swing.JFrame;
 
-import fluffy.network.camera.model.CameraXml;
 import fluffy.network.camera.model.CameraModel;
+import fluffy.network.camera.model.CameraXml;
 
 /**
  * Main JFrame of the program
@@ -30,7 +30,7 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 		this.control();
 		this.appearance();
 	}
-	
+
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		// TODO : check camera open correctly
@@ -68,12 +68,14 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 	private void loadCameras() {
 		CameraXml cameraXml = CameraXml.getInstance();
 		cameraXml.addPropertyChangeListener(this);
-		
+
 		// TODO : check camera open correctly
-		Set<CameraModel> cameraList = cameraXml.getCameras();
-		for (CameraModel cameraModel : cameraList)
-			this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview(cameraModel.getLink(), cameraModel.getName(),
-					cameraModel.getDescription()));
+		Map<String, CameraModel> cameraList = cameraXml.getCameras();
+		for (Map.Entry<String, CameraModel> pair: cameraList.entrySet())
+			{
+				this.jPanelCameraList.addCameraPreview(new JPanelCameraPreview(pair.getValue().getLink(), pair.getValue().getName(),
+						pair.getValue().getDescription()));
+				}
 	}
 
 	private JPanelButtons jPanelButtons;

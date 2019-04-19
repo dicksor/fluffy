@@ -23,9 +23,11 @@ import javax.swing.JPanel;
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 
-public class JPanelWest extends JPanel {
+public class JPanelWest extends JPanel
+	{
 
-	public JPanelWest(JPanelCameraGUI panelCamera, String cameraName, String cameraDescription) {
+	public JPanelWest(JPanelCameraGUI panelCamera, String cameraName, String cameraDescription)
+		{
 		this.panelCamera = panelCamera;
 		this.cameraRotationAngle = 0;
 		this.cameraName = cameraName;
@@ -33,9 +35,10 @@ public class JPanelWest extends JPanel {
 		geometry();
 		control();
 		appearance();
-	}
+		}
 
-	private void geometry() {
+	private void geometry()
+		{
 		this.lblCameraName = new JLabel("<html><strong>Camera name : </strong>" + cameraName + "</html>");
 		this.lblCameraDescription = new JLabel("<html><strong>Description : </strong>" + cameraDescription + "</html>");
 		this.btnSnapshot = new JButton("Take Snapshot");
@@ -64,50 +67,73 @@ public class JPanelWest extends JPanel {
 
 		setLayout(new BorderLayout());
 		this.add(boxV, BorderLayout.CENTER);
-	}
+		}
 
-	private void control() {
-		this.btnRotateLeft.addActionListener(new ActionListener() {
+	private void control()
+		{
+		this.btnRotateLeft.addActionListener(new ActionListener()
+			{
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e)
+				{
 				cameraRotationAngle += 90;
-				((JPanelCameraGUI) panelCamera).rotateCamera(cameraRotationAngle);
-			}
-		});
-
-		this.btnRotateRight.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cameraRotationAngle -= 90;
-				((JPanelCameraGUI) panelCamera).rotateCamera(cameraRotationAngle);
-			}
-		});
-
-		this.btnSnapshot.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				((JPanelCameraGUI) panelCamera).takeSnapShot();
-			}
-		});
-
-		this.ckbFaceDetection.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (JPanelWest.this.ckbFaceDetection.isSelected()) {
-					panelCamera.setFaceDetection(true);
-				} else {
-					panelCamera.setFaceDetection(false);
+				panelCamera.rotateCamera(cameraRotationAngle);
 				}
-			}
-		});
+			});
 
-	}
+		this.btnRotateRight.addActionListener(new ActionListener()
+			{
 
-	private void appearance() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+				{
+				cameraRotationAngle -= 90;
+				panelCamera.rotateCamera(cameraRotationAngle);
+				}
+			});
+
+		this.btnSnapshot.addActionListener(new ActionListener()
+			{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+				{
+				panelCamera.takeSnapShot();
+				}
+			});
+
+		this.ckbFaceDetection.addActionListener(new ActionListener()
+			{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+				{
+				if (JPanelWest.this.ckbFaceDetection.isSelected())
+					{
+					panelCamera.setFaceDetection(true);
+					}
+				else
+					{
+					panelCamera.setFaceDetection(false);
+					}
+				}
+			});
+
+		}
+
+	public double getRotationAngle()
+		{
+		return cameraRotationAngle;
+		}
+
+	public int getZoom()
+		{
+		return panelZoom.getZoom();
+		}
+
+	private void appearance()
+		{
 		this.btnSnapshot.setBackground(MaterialColors.LIGHT_BLUE_400);
 		this.btnSnapshot.setForeground(Color.WHITE);
 		MaterialUIMovement.add(this.btnSnapshot, MaterialColors.GRAY_200);
@@ -119,11 +145,12 @@ public class JPanelWest extends JPanel {
 		this.btnRotateRight.setBackground(MaterialColors.LIGHT_BLUE_400);
 		this.btnRotateRight.setForeground(Color.WHITE);
 		MaterialUIMovement.add(this.btnRotateRight, MaterialColors.GRAY_200);
-	}
+		}
 
-	public JButton getBtnRotateLeft() {
+	public JButton getBtnRotateLeft()
+		{
 		return btnRotateLeft;
-	}
+		}
 
 	private JLabel lblCameraName;
 	private JLabel lblCameraDescription;
@@ -137,4 +164,4 @@ public class JPanelWest extends JPanel {
 
 	private String cameraName;
 	private String cameraDescription;
-}
+	}
