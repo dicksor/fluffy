@@ -13,15 +13,13 @@ import org.opencv.core.Mat;
 
 public abstract class SnapshotTaker implements PropertyChangeListener {
 	
-	public void setImage(Mat image) {
+	protected void setImage(Mat image) {
 		this.image = image;
 	}
 	
-	public Mat getImage() {
+	protected Mat getImage() {
 		return this.image;
 	}
-	
-	public abstract void getSnapShot();
 	
 	private Mat image;
 

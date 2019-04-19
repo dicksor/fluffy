@@ -42,10 +42,8 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 		this.detecte();
 	}
 
-	@Override
-	public void getSnapShot() {
+	private void getSnapShot() {
 		String filePath = createFolderFromDate() + "\\" + this.filename +"_" + this.cameraName +".jpg";
-		System.out.println(filePath);
 		File file = new File(filePath);
 		try {
 			ImageIO.write(OpenCvUtil.matToBufferedImage(this.getImage()), "jpg", file);
@@ -57,7 +55,6 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 	private void detecte() {
 		MatOfRect faceDetections = this.faceDetection.detecte(this.getImage());
 
-		// test if array > 1, because we would take only on snapshot
 		if (faceDetections.toArray().length >= 1) {
 			takeSnapshot();
 		}

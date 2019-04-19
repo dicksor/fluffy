@@ -18,7 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fluffy.imageprocessing.snapshot.DialogSnapshotTaker;
-import fluffy.imageprocessing.snapshot.SnapshotTaker;
 import fluffy.network.camera.Camera;
 import fluffy.network.camera.pipeline.CameraPipeline;
 import fluffy.network.camera.pipeline.Operators;
@@ -137,6 +136,6 @@ public class JPanelCameraGUI extends JPanel
 	private CameraDisplay cameraDisplay;
 	private String cameraName;
 	private String cameraDescription;
-	private SnapshotTaker snapshotTaker;
+	private DialogSnapshotTaker snapshotTaker;
 	private Camera camera;
 	}
