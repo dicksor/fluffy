@@ -20,20 +20,29 @@ public class CameraPipeline implements PropertyChangeListener {
 
 	public CameraPipeline() {
 		this.support = new PropertyChangeSupport(this);
+
 		this.image = new Mat();
+		this.faceDetectedCount = 0;
+
 		this.operators = new HashMap<Operators, AbstractOperator>();
 		this.operators.put(Operators.YOLO, new OperatorYoloDetection(false));
 		this.operators.put(Operators.FACEDETECTION, new OperatorFaceDetection(false));
 		this.operators.put(Operators.ROTATION, new OperatorRotation(true, 0));
 		this.operators.put(Operators.ZOOM, new OperatorZoom(true, 1));
+
+		((OperatorFaceDetection) this.operators.get(Operators.FACEDETECTION)).addPropertyChangeListener(this);
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		Mat img = (Mat) evt.getNewValue();
-		img = this.applyOperationPipeline(img);
-		this.support.firePropertyChange("img", this.image, img);
-		this.image = img;
+		if (evt.getPropertyName() == "faceDetected") {
+			int faceDetected = (int) evt.getNewValue();
+			this.support.firePropertyChange("faceDetected", this.faceDetectedCount, faceDetected);
+			this.faceDetectedCount = faceDetected;
+		} else {
+			receivedImage(evt);
+		}
+		
 	}
 
 	public Mat getImage() {
@@ -57,13 +66,20 @@ public class CameraPipeline implements PropertyChangeListener {
 		if (zoomOperator != null)
 			zoomOperator.setScale(zoomFactor);
 	}
-	
+
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
 		support.addPropertyChangeListener(pcl);
 	}
 
 	public void removePropertyChangeListener(PropertyChangeListener pcl) {
 		support.removePropertyChangeListener(pcl);
+	}
+	
+	private void receivedImage(PropertyChangeEvent evt) {
+		Mat img = (Mat) evt.getNewValue();
+		img = this.applyOperationPipeline(img);
+		this.support.firePropertyChange("img", this.image, img);
+		this.image = img;
 	}
 
 	private Mat applyOperationPipeline(Mat img) {
@@ -77,4 +93,5 @@ public class CameraPipeline implements PropertyChangeListener {
 	private Mat image;
 	private Map<Operators, AbstractOperator> operators;
 	private PropertyChangeSupport support;
+	private int faceDetectedCount;
 }

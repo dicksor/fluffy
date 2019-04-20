@@ -9,6 +9,9 @@
 
 package fluffy.network.camera.pipeline;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Point;
@@ -22,7 +25,17 @@ public class OperatorFaceDetection extends AbstractOperator {
 
 	public OperatorFaceDetection(boolean isActive) {
 		super(isActive);
+		this.support = new PropertyChangeSupport(this);
+		this.faceDetectedCout = 0;
 		this.faceDetection = new OpenCvFaceDetection();
+	}
+	
+	public void addPropertyChangeListener(PropertyChangeListener pcl) {
+		support.addPropertyChangeListener(pcl);
+	}
+
+	public void removePropertyChangeListener(PropertyChangeListener pcl) {
+		support.removePropertyChangeListener(pcl);
 	}
 
 	@Override
@@ -32,9 +45,14 @@ public class OperatorFaceDetection extends AbstractOperator {
 			Imgproc.rectangle(image, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height),
 					new Scalar(0, 0, 255), 3);
 		}
+		int faceDetected = faceDetections.toArray().length;
+		support.firePropertyChange("faceDetected", this.faceDetectedCout, faceDetected);
+		this.faceDetectedCout = faceDetected;
 		return image;
 	}
 	
 	private OpenCvFaceDetection faceDetection;
+	private PropertyChangeSupport support;
+	private int faceDetectedCout;
 
 }

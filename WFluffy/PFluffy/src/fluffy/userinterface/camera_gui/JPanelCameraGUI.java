@@ -46,6 +46,8 @@ public class JPanelCameraGUI extends JPanel {
 
 		this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, false);
 		this.cameraPipeline.addPropertyChangeListener(this.cameraDisplay);
+		
+		this.cameraPipeline.addPropertyChangeListener(this.panelNorth);
 	}
 
 	private void appearance() {
@@ -84,6 +86,7 @@ public class JPanelCameraGUI extends JPanel {
 		this.panelEast.setPreferredSize(
 				new Dimension(panelWest.getPreferredSize().width, panelWest.getPreferredSize().height));
 		this.panelSouth = new JPanelSouth(this.frameRoot, this, this.jPanelCameraPreview, cameraName);
+		this.panelNorth = new JPanelNorth();
 		this.lbCameraDisplay = new JLabel();
 
 		Box boxCameraPreview = centerCamera(lbCameraDisplay);
@@ -93,11 +96,14 @@ public class JPanelCameraGUI extends JPanel {
 
 		this.add(this.panelWest, BorderLayout.WEST);
 		this.add(this.panelSouth, BorderLayout.SOUTH);
+		this.add(this.panelNorth, BorderLayout.NORTH);
 		this.add(this.panelEast, BorderLayout.EAST);
 		this.add(boxCameraPreview, BorderLayout.CENTER);
 	}
 
 	public void setFaceDetection(boolean hasFaceDetection) {
+		if(!hasFaceDetection)
+			this.panelNorth.resetFaceDetectedCount();
 		this.cameraPipeline.setIsActive(Operators.FACEDETECTION, hasFaceDetection);
 	}
 
@@ -125,6 +131,7 @@ public class JPanelCameraGUI extends JPanel {
 	private JLabel lbCameraDisplay;
 	private JPanelWest panelWest;
 	private JPanelSouth panelSouth;
+	private JPanelNorth panelNorth;
 	private JPanel panelEast;
 	private BorderLayout borderMainLayout;
 	private CameraPipeline cameraPipeline;

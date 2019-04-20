@@ -86,7 +86,7 @@ public class OpenCvYoloDetection {
 			Rect box = boxesArray[idx];
 			Imgproc.rectangle(image, box.tl(), box.br(), new Scalar(0, 0, 255), 2);
 			String predictionLabel = this.classes.get(clsIds.get(idx));
-			Imgproc.putText(image, predictionLabel, box.tl(), Imgproc.FONT_HERSHEY_SIMPLEX, 1, RED_COLOR);
+			Imgproc.putText(image, predictionLabel, box.tl(), Imgproc.FONT_HERSHEY_SIMPLEX, 2, RED_COLOR);
 		}
 
 		Mat resizedImage = new Mat();

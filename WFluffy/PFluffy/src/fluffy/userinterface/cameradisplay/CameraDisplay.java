@@ -31,12 +31,14 @@ public class CameraDisplay implements PropertyChangeListener {
 	
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		Mat matCam = (Mat) evt.getNewValue();
-		if (this.isPreview)
-			Imgproc.resize(matCam, matCam, new Size(150, 150));	
-		BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCam);
-		ImageIcon imgIcn = new ImageIcon(imgCam);
-		this.lbCameraDisplay.setIcon(imgIcn);
+		if(evt.getPropertyName() != "faceDetected") {
+			Mat matCam = (Mat) evt.getNewValue();
+			if (this.isPreview)
+				Imgproc.resize(matCam, matCam, new Size(150, 150));	
+			BufferedImage imgCam = OpenCvUtil.matToBufferedImage(matCam);
+			ImageIcon imgIcn = new ImageIcon(imgCam);
+			this.lbCameraDisplay.setIcon(imgIcn);
+		}
 	}
 
 	private JLabel lbCameraDisplay;
