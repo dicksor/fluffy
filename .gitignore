@@ -4,7 +4,7 @@
 WFluffy/PFluffy/snapshots/
 snapshots/
 WFluffy/PFluffy/yolov3/
-yolov3/
+yolov3
 
 *.cfg
 *.weights
