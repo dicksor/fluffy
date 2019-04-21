@@ -37,8 +37,8 @@ public class JPanelCameraGUI extends JPanel {
 
 		this.cameraPipeline = new CameraPipeline();
 		this.camera.addPropertyChangeListener(this.cameraPipeline);
-		this.camera.addPropertyChangeListener(this.snapshotTaker);
 		this.snapshotTaker = new DialogSnapshotTaker();
+		this.camera.addPropertyChangeListener(this.snapshotTaker);
 
 		this.geometry();
 		this.control();
