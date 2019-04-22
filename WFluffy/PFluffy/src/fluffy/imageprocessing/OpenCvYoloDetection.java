@@ -25,12 +25,11 @@ import org.opencv.core.Core;
 // Based on : https://github.com/suddh123/YOLO-object-detection-in-java/blob/code/yolo.java
 public class OpenCvYoloDetection {
 
-	public OpenCvYoloDetection() {
-		final String model = "yolov3\\yolov3.weights";
-		final String config = "yolov3\\yolov3.cfg";
+	public OpenCvYoloDetection(String model, String config, float confThreshold) {
 		this.classes = new LinkedList<String>();
 		this.readClasses();
 		this.net = Dnn.readNet(model, config);
+		this.confThreshold = confThreshold;
 	}
 
 	public Mat feedForward(Mat image) {
@@ -44,7 +43,6 @@ public class OpenCvYoloDetection {
 
 		this.net.forward(result, outBlobNames);
 
-		float confThreshold = 0.6f;
 		List<Integer> clsIds = new ArrayList<Integer>();
 		List<Float> confs = new ArrayList<Float>();
 		List<Rect> rects = new ArrayList<Rect>();
@@ -72,26 +70,30 @@ public class OpenCvYoloDetection {
 			}
 		}
 
-		float nmsThresh = 0.5f;
-		MatOfFloat confidences = new MatOfFloat(Converters.vector_float_to_Mat(confs));
-		Rect[] boxesArray = rects.toArray(new Rect[0]);
-		MatOfRect boxes = new MatOfRect(boxesArray);
-		MatOfInt indices = new MatOfInt();
-		Dnn.NMSBoxes(boxes, confidences, confThreshold, nmsThresh, indices);
+		if(confs.size() > 0) {
+			float nmsThresh = 0.5f;
+			MatOfFloat confidences = new MatOfFloat(Converters.vector_float_to_Mat(confs));
+			Rect[] boxesArray = rects.toArray(new Rect[0]);
+			MatOfRect boxes = new MatOfRect(boxesArray);
+			MatOfInt indices = new MatOfInt();
+			Dnn.NMSBoxes(boxes, confidences, confThreshold, nmsThresh, indices);
 
-		int[] ind = indices.toArray();
-		final Scalar RED_COLOR = new Scalar(0, 0, 255);
-		for (int i = 0; i < ind.length; ++i) {
-			int idx = ind[i];
-			Rect box = boxesArray[idx];
-			Imgproc.rectangle(image, box.tl(), box.br(), new Scalar(0, 0, 255), 2);
-			String predictionLabel = this.classes.get(clsIds.get(idx));
-			Imgproc.putText(image, predictionLabel, box.tl(), Imgproc.FONT_HERSHEY_SIMPLEX, 2, RED_COLOR);
+			int[] ind = indices.toArray();
+			final Scalar RED_COLOR = new Scalar(0, 0, 255);
+			for (int i = 0; i < ind.length; ++i) {
+				int idx = ind[i];
+				Rect box = boxesArray[idx];
+				Imgproc.rectangle(image, box.tl(), box.br(), new Scalar(0, 0, 255), 2);
+				String predictionLabel = this.classes.get(clsIds.get(idx));
+				Imgproc.putText(image, predictionLabel, box.tl(), Imgproc.FONT_HERSHEY_SIMPLEX, 2, RED_COLOR);
+			}
+
+			Mat resizedImage = new Mat();
+			Imgproc.resize(image, resizedImage, image.size());
+			return resizedImage;
 		}
-
-		Mat resizedImage = new Mat();
-		Imgproc.resize(image, resizedImage, image.size());
-		return resizedImage;
+		
+		return image;
 	}
 
 	private List<String> getOutputNames() {
@@ -116,5 +118,6 @@ public class OpenCvYoloDetection {
 
 	private Net net;
 	private List<String> classes;
+	private float confThreshold;
 
 }

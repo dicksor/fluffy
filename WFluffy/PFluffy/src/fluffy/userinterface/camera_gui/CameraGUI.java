@@ -46,6 +46,7 @@ public class CameraGUI extends JFrame {
 				CameraXml cameraXml = CameraXml.getInstance();
 				cameraXml.setCameraZoom(cameraName, String.valueOf(CameraGUI.this.panelCamera.getZoom()));
 				cameraXml.setCameraAngle(cameraName, String.valueOf(CameraGUI.this.panelCamera.getRotationAngle()));
+				CameraGUI.this.jPanelCameraPreview.streamCamera();
 			}
 		});
 	}

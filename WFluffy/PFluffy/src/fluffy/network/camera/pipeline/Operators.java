@@ -13,5 +13,6 @@ public enum Operators {
 	ROTATION,
 	ZOOM,
 	FACEDETECTION,
-	YOLO;
+	YOLO,
+	TINY_YOLO;
 }

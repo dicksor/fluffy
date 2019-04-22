@@ -110,6 +110,10 @@ public class JPanelCameraGUI extends JPanel {
 	public void setYoloDetection(boolean hasYoloDetection) {
 		this.cameraPipeline.setIsActive(Operators.YOLO, hasYoloDetection);
 	}
+	
+	public void setTinyYoloDetection(boolean hasTinyYoloDetection) {
+		this.cameraPipeline.setIsActive(Operators.TINY_YOLO, hasTinyYoloDetection);
+	}
 
 	public void rotateCamera(double angle) {
 		this.cameraPipeline.setRotationAngle(angle);

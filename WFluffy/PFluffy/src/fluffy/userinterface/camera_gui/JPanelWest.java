@@ -50,6 +50,7 @@ public class JPanelWest extends JPanel {
 		this.btnRotateRight = new JButton("Rotate right");
 		this.ckbFaceDetection = new JCheckBox("With face detection");
 		this.ckbYoloDetection = new JCheckBox("With yolo detection");
+		this.ckbTinyYoloDetection = new JCheckBox("With tiny yolo detection");
 		this.panelZoom = new JPanelZoom(this.panelCamera, cameraName);
 
 		Box boxV = Box.createVerticalBox();
@@ -68,6 +69,8 @@ public class JPanelWest extends JPanel {
 		boxV.add(this.ckbFaceDetection);
 		boxV.add(Box.createVerticalStrut(30));
 		boxV.add(this.ckbYoloDetection);
+		boxV.add(Box.createVerticalStrut(30));
+		boxV.add(this.ckbTinyYoloDetection);
 		boxV.add(Box.createVerticalStrut(30));
 		boxV.add(this.panelZoom);
 		boxV.add(Box.createVerticalGlue());
@@ -110,10 +113,13 @@ public class JPanelWest extends JPanel {
 				if (JPanelWest.this.ckbFaceDetection.isSelected()) {
 					JPanelWest.this.ckbYoloDetection.setSelected(false);
 					JPanelWest.this.ckbYoloDetection.setEnabled(false);
-					panelCamera.setFaceDetection(true);
+					JPanelWest.this.ckbTinyYoloDetection.setSelected(false);
+					JPanelWest.this.ckbTinyYoloDetection.setEnabled(false);
+					JPanelWest.this.panelCamera.setFaceDetection(true);
 				} else {
-					panelCamera.setFaceDetection(false);
+					JPanelWest.this.panelCamera.setFaceDetection(false);
 					JPanelWest.this.ckbYoloDetection.setEnabled(true);
+					JPanelWest.this.ckbTinyYoloDetection.setEnabled(true);
 				}
 			}
 		});
@@ -125,9 +131,30 @@ public class JPanelWest extends JPanel {
 				if (JPanelWest.this.ckbYoloDetection.isSelected()) {
 					JPanelWest.this.ckbFaceDetection.setSelected(false);
 					JPanelWest.this.ckbFaceDetection.setEnabled(false);
-					panelCamera.setYoloDetection(true);
+					JPanelWest.this.ckbTinyYoloDetection.setSelected(false);
+					JPanelWest.this.ckbTinyYoloDetection.setEnabled(false);
+					JPanelWest.this.panelCamera.setYoloDetection(true);
 				} else {
-					panelCamera.setYoloDetection(false);
+					JPanelWest.this.panelCamera.setYoloDetection(false);
+					JPanelWest.this.ckbFaceDetection.setEnabled(true);
+					JPanelWest.this.ckbTinyYoloDetection.setEnabled(true);
+				}
+			}
+		});
+		
+		this.ckbTinyYoloDetection.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (JPanelWest.this.ckbTinyYoloDetection.isSelected()) {
+					JPanelWest.this.ckbYoloDetection.setSelected(false);
+					JPanelWest.this.ckbYoloDetection.setEnabled(false);
+					JPanelWest.this.ckbFaceDetection.setSelected(false);
+					JPanelWest.this.ckbFaceDetection.setEnabled(false);
+					JPanelWest.this.panelCamera.setTinyYoloDetection(true);
+				} else {
+					JPanelWest.this.panelCamera.setTinyYoloDetection(false);
+					JPanelWest.this.ckbYoloDetection.setEnabled(true);
 					JPanelWest.this.ckbFaceDetection.setEnabled(true);
 				}
 			}
@@ -168,6 +195,7 @@ public class JPanelWest extends JPanel {
 	private JButton btnRotateRight;
 	private JCheckBox ckbFaceDetection;
 	private JCheckBox ckbYoloDetection;
+	private JCheckBox ckbTinyYoloDetection;
 	private JPanelZoom panelZoom;
 	private JPanelCameraGUI panelCamera;
 	private double cameraRotationAngle;

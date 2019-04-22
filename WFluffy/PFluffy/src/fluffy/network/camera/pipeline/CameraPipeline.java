@@ -26,6 +26,7 @@ public class CameraPipeline implements PropertyChangeListener {
 
 		this.operators = new HashMap<Operators, AbstractOperator>();
 		this.operators.put(Operators.YOLO, new OperatorYoloDetection(false));
+		this.operators.put(Operators.TINY_YOLO, new OperatorTinyYoloDetection(false));
 		this.operators.put(Operators.FACEDETECTION, new OperatorFaceDetection(false));
 		this.operators.put(Operators.ROTATION, new OperatorRotation(true, 0));
 		this.operators.put(Operators.ZOOM, new OperatorZoom(true, 1));

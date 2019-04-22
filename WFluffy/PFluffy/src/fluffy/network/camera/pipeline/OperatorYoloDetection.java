@@ -8,7 +8,7 @@ public class OperatorYoloDetection extends AbstractOperator {
 
 	public OperatorYoloDetection(boolean isActive) {
 		super(isActive);
-		this.yoloDetection = new OpenCvYoloDetection();
+		this.yoloDetection = new OpenCvYoloDetection("yolov3\\yolov3.weights", "yolov3\\yolov3.cfg", 0.6f);
 	}
 
 	@Override

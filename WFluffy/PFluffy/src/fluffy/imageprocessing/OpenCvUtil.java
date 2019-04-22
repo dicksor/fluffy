@@ -11,6 +11,7 @@ package fluffy.imageprocessing;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
@@ -32,7 +33,7 @@ public class OpenCvUtil {
 		System.arraycopy(b, 0, targetPixels, 0, b.length);
 		return image;
 	}
-	
+
 	public static Mat rotateImage(Mat m, double angle) {
 		Point center = new Point(m.cols() / 2.0, m.rows() / 2.0);
 		double scale = 1.0;
@@ -41,10 +42,14 @@ public class OpenCvUtil {
 		Imgproc.warpAffine(m, mRotatedImage, mRotation, new Size(m.cols(), m.rows()));
 		return mRotatedImage;
 	}
-	
+
 	public static Mat zoomImage(Mat m, int scale) {
 		Mat mScaledImage = new Mat();
 		Imgproc.resize(m, mScaledImage, new Size(m.cols() * scale, m.rows() * scale), scale, scale, Imgproc.INTER_NEAREST);
+//		Mat translation = new Mat(2, 3, CvType.CV_32F);
+//		translation.put(0, 0, new double[] {1, 0, -100, 0, 1, -50});
+//		Mat result = new Mat();
+//		Imgproc.warpAffine(mScaledImage, result, translation, new Size(mScaledImage.cols(), mScaledImage.rows()));
 		Rect rectCrop = new Rect(0, 0, m.width(), m.height());
 		Mat croppedImage = new Mat(mScaledImage, rectCrop);
 		return croppedImage;
