@@ -18,8 +18,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import org.opencv.core.Core;
 
-import fluffy.network.camera.model.CameraModel;
-import fluffy.network.camera.model.CameraXml;
 import fluffy.network.mail.EmailSender;
 import fluffy.userinterface.main.MainGUI;
 import mdlaf.MaterialLookAndFeel;
@@ -42,10 +40,11 @@ public class UseFluffy
 				e.printStackTrace();
 				}
 			// FIXME : remove when production mode
-			CameraXml cameraList = CameraXml.getInstance();
+			/*CameraXml cameraList = CameraXml.getInstance();
 			CameraModel cam = new CameraModel("webcam", "", "Webcam du staff...", "90", "1");
-			cameraList.add(cam);
+			cameraList.add(cam);*/
 
+			EmailSender emailSender = new EmailSender();
 			new MainGUI();
 			}
 		else

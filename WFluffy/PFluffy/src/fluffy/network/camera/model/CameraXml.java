@@ -21,7 +21,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class CameraXml
@@ -130,7 +129,7 @@ public class CameraXml
 				this.xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FILENAME)));
 
 				Object o = this.xmlDecoder.readObject();
-				if (o instanceof List<?>)
+				if (o instanceof Map<?,?>)
 					{
 					this.mapCamera = (HashMap<String, CameraModel>)o;
 					}
