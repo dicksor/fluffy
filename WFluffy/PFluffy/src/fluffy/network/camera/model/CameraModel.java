@@ -11,99 +11,77 @@ package fluffy.network.camera.model;
 
 import java.io.Serializable;
 
-public class CameraModel implements Serializable
-	{
+public class CameraModel implements Serializable {
 
-	public CameraModel()
-		{
+	public CameraModel() {
 		this.name = "";
 		this.link = "";
 		this.description = "";
 		this.angle = "";
 		this.zoom = "";
-		}
+	}
 
-	public CameraModel(String name, String link, String description)
-		{
+	public CameraModel(String name, String link, String description) {
 		this.name = name;
 		this.link = link;
 		this.description = description;
 		this.angle = "";
 		this.zoom = "";
-		}
+	}
 
-	public CameraModel(String name, String link, String description, String angle, String zoom)
-		{
+	public CameraModel(String name, String link, String description, String angle, String zoom) {
 		this.name = name;
 		this.link = link;
 		this.description = description;
 		this.angle = angle;
 		this.zoom = zoom;
-		}
+	}
 
-
-	public String getAngle()
-		{
+	public String getAngle() {
 		return this.angle;
-		}
+	}
 
-
-	public void setAngle(String angle)
-		{
+	public void setAngle(String angle) {
 		this.angle = angle;
-		}
+	}
 
-
-	public String getZoom()
-		{
+	public String getZoom() {
 		return this.zoom;
-		}
+	}
 
-
-	public void setZoom(String zoom)
-		{
+	public void setZoom(String zoom) {
 		this.zoom = zoom;
-		}
+	}
 
-	public String getName()
-		{
+	public String getName() {
 		return name;
-		}
+	}
 
-	public void setName(String name)
-		{
+	public void setName(String name) {
 		this.name = name;
-		}
+	}
 
-	public String getLink()
-		{
+	public String getLink() {
 		return link;
-		}
+	}
 
-	public void setLink(String link)
-		{
+	public void setLink(String link) {
 		this.link = link;
-		}
+	}
 
-	public String getDescription()
-		{
+	public String getDescription() {
 		return description;
-		}
+	}
 
-	public void setDescription(String description)
-		{
+	public void setDescription(String description) {
 		this.description = description;
-		}
-
-
+	}
 
 	@Override
-	public String toString()
-		{
-		return "CameraModel [name=" + this.name + ", link=" + this.link + ", description=" + this.description + ", angle=" + this.angle + ", zoom=" + this.zoom + "]";
-		}
-
-
+	public String toString() {
+		return "CameraModel [name=" + this.name + ", link=" + this.link + ", description=" + this.description
+				+ ", angle=" + this.angle + ", zoom=" + this.zoom + "]";
+	}
 
 	private static final long serialVersionUID = 1L;
 
@@ -113,4 +91,4 @@ public class CameraModel implements Serializable
 	private String description;
 	private String angle;
 	private String zoom;
-	}
+}

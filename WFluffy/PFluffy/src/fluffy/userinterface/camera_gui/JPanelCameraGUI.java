@@ -46,12 +46,12 @@ public class JPanelCameraGUI extends JPanel {
 
 		this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, false);
 		this.cameraPipeline.addPropertyChangeListener(this.cameraDisplay);
-		
 		this.cameraPipeline.addPropertyChangeListener(this.panelNorth);
 	}
 
 	private void appearance() {
 		this.displayStatistic(false);
+		this.panelEast.setVisible(false);
 	}
 
 	private void control() {
@@ -81,8 +81,8 @@ public class JPanelCameraGUI extends JPanel {
 	}
 
 	private void geometry() {
+		this.panelEast = new JPanelEast();
 		this.panelWest = new JPanelWest(this, cameraName, cameraDescription);
-		this.panelEast = new JPanel();
 		this.panelEast.setPreferredSize(
 				new Dimension(panelWest.getPreferredSize().width, panelWest.getPreferredSize().height));
 		this.panelSouth = new JPanelSouth(this.frameRoot, this, this.jPanelCameraPreview, cameraName);
@@ -131,6 +131,17 @@ public class JPanelCameraGUI extends JPanel {
 		this.cameraPipeline.removePropertyChangeListener(this.cameraDisplay);
 	}
 	
+	public void stopStatStream() {
+		this.panelEast.setVisible(false);
+		this.cameraPipeline.removePropertyChangeListener(this.panelEast);
+		this.panelEast.clearList();
+	}
+	
+	public void startStatStream() {
+		this.panelEast.setVisible(true);
+		this.cameraPipeline.addPropertyChangeListener(this.panelEast);
+	}
+	
 	public void displayStatistic(boolean isStatOn) {
 		this.panelNorth.setVisible(isStatOn);
 	}
@@ -140,7 +151,7 @@ public class JPanelCameraGUI extends JPanel {
 	private JPanelWest panelWest;
 	private JPanelSouth panelSouth;
 	private JPanelNorth panelNorth;
-	private JPanel panelEast;
+	private JPanelEast panelEast;
 	private BorderLayout borderMainLayout;
 	private CameraPipeline cameraPipeline;
 	private JFrame frameRoot;

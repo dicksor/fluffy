@@ -42,7 +42,7 @@ public class JPanelZoom extends JPanel
 	private void geometry()
 		{
 		this.lblZoom = new JLabel("Zoom : ");
-		this.spZoom = new JSpinner(new SpinnerNumberModel(1, 1, 5, 1));
+		this.spZoom = new JSpinner(new SpinnerNumberModel(1, 1, 10, 1));
 
 		this.add(lblZoom);
 		this.add(spZoom);

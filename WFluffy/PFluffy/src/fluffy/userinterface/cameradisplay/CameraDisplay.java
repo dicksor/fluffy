@@ -31,7 +31,7 @@ public class CameraDisplay implements PropertyChangeListener {
 	
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if(evt.getPropertyName() != "faceDetected") {
+		if(!evt.getPropertyName().equals("faceDetected") && !evt.getPropertyName().equals("detectionStatistic")) {
 			Mat matCam = (Mat) evt.getNewValue();
 			if (this.isPreview)
 				Imgproc.resize(matCam, matCam, new Size(150, 150));	

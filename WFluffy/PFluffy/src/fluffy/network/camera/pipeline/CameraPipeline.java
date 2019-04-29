@@ -13,7 +13,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+
 import org.opencv.core.Mat;
 
 public class CameraPipeline implements PropertyChangeListener {
@@ -23,6 +26,8 @@ public class CameraPipeline implements PropertyChangeListener {
 
 		this.image = new Mat();
 		this.faceDetectedCount = 0;
+		
+		this.detectionStat = new HashSet<String>();
 
 		this.operators = new HashMap<Operators, AbstractOperator>();
 		this.operators.put(Operators.YOLO, new OperatorYoloDetection(false));
@@ -32,15 +37,22 @@ public class CameraPipeline implements PropertyChangeListener {
 		this.operators.put(Operators.ZOOM, new OperatorZoom(true, 1));
 
 		((OperatorFaceDetection) this.operators.get(Operators.FACEDETECTION)).addPropertyChangeListener(this);
+		((OperatorTinyYoloDetection) this.operators.get(Operators.TINY_YOLO)).addPropertyChangeListener(this);
+		((OperatorYoloDetection) this.operators.get(Operators.YOLO)).addPropertyChangeListener(this);
 	}
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if (evt.getPropertyName() == "faceDetected") {
+		if (evt.getPropertyName().equals("faceDetected")) {
 			int faceDetected = (int) evt.getNewValue();
 			this.support.firePropertyChange("faceDetected", this.faceDetectedCount, faceDetected);
 			this.faceDetectedCount = faceDetected;
-		} else {
+		} else if (evt.getPropertyName().equals("detectionStatistic")) {
+			Set<String> detectionStats = (HashSet<String>) evt.getNewValue();
+			support.firePropertyChange("detectionStatistic", this.detectionStat, detectionStats);
+			this.detectionStat = detectionStats;
+		}
+		else {
 			receivedImage(evt);
 		}
 		
@@ -75,7 +87,7 @@ public class CameraPipeline implements PropertyChangeListener {
 	public void removePropertyChangeListener(PropertyChangeListener pcl) {
 		support.removePropertyChangeListener(pcl);
 	}
-	
+
 	private void receivedImage(PropertyChangeEvent evt) {
 		Mat img = (Mat) evt.getNewValue();
 		img = this.applyOperationPipeline(img);
@@ -95,4 +107,5 @@ public class CameraPipeline implements PropertyChangeListener {
 	private Map<Operators, AbstractOperator> operators;
 	private PropertyChangeSupport support;
 	private int faceDetectedCount;
+	private Set<String> detectionStat;
 }

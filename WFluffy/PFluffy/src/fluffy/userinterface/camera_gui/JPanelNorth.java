@@ -23,7 +23,7 @@ public class JPanelNorth extends JPanel implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if(evt.getPropertyName() == "faceDetected") {
+		if(evt.getPropertyName().equals("faceDetected")) {
 			this.faceDetectedCount = Integer.toString((int)evt.getNewValue());
 			this.lblFaceDetected.setText(this.faceDetected + this.faceDetectedCount);
 		}

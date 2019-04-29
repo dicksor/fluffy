@@ -49,6 +49,7 @@ public class JPanelSouth extends JPanel {
 				CameraXml cameraXml = CameraXml.getInstance();
 				cameraXml.setCameraAngle(cameraName, String.valueOf(JPanelSouth.this.jPanelCameraGUI.getRotationAngle()));
 				cameraXml.setCameraZoom(cameraName, String.valueOf(JPanelSouth.this.jPanelCameraGUI.getZoom()));
+				JPanelSouth.this.jPanelCameraGUI.stopStream();
 				JPanelSouth.this.frameRoot.setVisible(false);
 				JPanelSouth.this.frameRoot.dispose();
 			}
