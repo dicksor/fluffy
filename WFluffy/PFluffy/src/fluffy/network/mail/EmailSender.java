@@ -40,10 +40,13 @@ public class EmailSender
 				String email = userModel.getEmail();
 				int hour = Integer.valueOf(userModel.getHour());
 
-				//check if hour in xml file is current hour
-				if (LocalDateTime.now().getHour() == hour)
+				if (!email.equals(""))
 					{
-					EmailSender.sendSnapShot(email);
+					//check if hour in xml file is current hour
+					if (LocalDateTime.now().getHour() == hour)
+						{
+						EmailSender.sendSnapShot(email);
+						}
 					}
 
 				}
