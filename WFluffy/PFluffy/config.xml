@@ -5,7 +5,7 @@
    <string>webcam</string>
    <object class="fluffy.network.camera.model.CameraModel">
     <void property="angle">
-     <string>0.0</string>
+     <string>90.0</string>
     </void>
     <void property="description">
      <string>Webcam du staff...</string>
@@ -15,6 +15,26 @@
     </void>
     <void property="zoom">
      <string>1</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>Ip camera</string>
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="angle">
+     <string>0.0</string>
+    </void>
+    <void property="description">
+     <string>Ip camera demo</string>
+    </void>
+    <void property="link">
+     <string>http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&amp;clock=1&amp;date=1</string>
+    </void>
+    <void property="name">
+     <string>Ip camera</string>
+    </void>
+    <void property="zoom">
+     <string>0</string>
     </void>
    </object>
   </void>

@@ -111,12 +111,14 @@ public class JPanelWest extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (JPanelWest.this.ckbFaceDetection.isSelected()) {
+					JPanelWest.this.panelCamera.displayStatistic(true);
 					JPanelWest.this.ckbYoloDetection.setSelected(false);
 					JPanelWest.this.ckbYoloDetection.setEnabled(false);
 					JPanelWest.this.ckbTinyYoloDetection.setSelected(false);
 					JPanelWest.this.ckbTinyYoloDetection.setEnabled(false);
 					JPanelWest.this.panelCamera.setFaceDetection(true);
 				} else {
+					JPanelWest.this.panelCamera.displayStatistic(false);
 					JPanelWest.this.panelCamera.setFaceDetection(false);
 					JPanelWest.this.ckbYoloDetection.setEnabled(true);
 					JPanelWest.this.ckbTinyYoloDetection.setEnabled(true);

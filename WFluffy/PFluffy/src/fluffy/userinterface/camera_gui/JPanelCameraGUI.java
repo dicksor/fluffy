@@ -51,7 +51,7 @@ public class JPanelCameraGUI extends JPanel {
 	}
 
 	private void appearance() {
-
+		this.displayStatistic(false);
 	}
 
 	private void control() {
@@ -129,6 +129,10 @@ public class JPanelCameraGUI extends JPanel {
 
 	public void stopStream() {
 		this.cameraPipeline.removePropertyChangeListener(this.cameraDisplay);
+	}
+	
+	public void displayStatistic(boolean isStatOn) {
+		this.panelNorth.setVisible(isStatOn);
 	}
 
 	private JPanelCameraPreview jPanelCameraPreview;
