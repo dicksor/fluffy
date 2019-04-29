@@ -22,7 +22,6 @@ import javax.swing.JPanel;
 
 import fluffy.imageprocessing.snapshot.AutoSnapshotTaker;
 import fluffy.network.camera.Camera;
-import fluffy.network.camera.pipeline.CameraPipeline;
 import fluffy.userinterface.camera_gui.CameraGUI;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
 import mdlaf.animation.MaterialUIMovement;
@@ -30,18 +29,24 @@ import mdlaf.utils.MaterialColors;
 
 public class JPanelCameraPreview extends JPanel {
 
-	public JPanelCameraPreview(String link, String cameraName, String cameraDescription) {
+	public JPanelCameraPreview(Camera camera, String cameraName, String cameraDescription) {
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
 
 		this.geometry();
 		this.control();
 		this.appearance();
+<<<<<<< HEAD
 		// Pour streamer la vidéo surveillance remplacer "" par ->
 		// http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&clock=1&date=1
 		this.camera = new Camera(link, cameraName);
 		this.camera.open();
 
+=======
+		
+		this.camera = camera;
+		
+>>>>>>> 141bbd96de29a76f329f3691a72ce3fd75f43bce
 		// Todo : fermer à un moment ou instancier ailleurs
 		Thread cameraThread = new Thread(this.camera);
 		cameraThread.start();
@@ -50,9 +55,12 @@ public class JPanelCameraPreview extends JPanel {
 
 		this.autoSnapShotTaker = new AutoSnapshotTaker();
 		this.camera.addPropertyChangeListener(this.autoSnapShotTaker);
+<<<<<<< HEAD
 
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
+=======
+>>>>>>> 141bbd96de29a76f329f3691a72ce3fd75f43bce
 	}
 
 	public void streamCamera() {
@@ -108,8 +116,6 @@ public class JPanelCameraPreview extends JPanel {
 	private JLabel lbCameraData;
 	private JLabel lbCameraPreview;
 	private Camera camera;
-	private CameraPipeline cameraPipeline;
-
 	private String cameraName;
 	private String cameraDescription;
 
