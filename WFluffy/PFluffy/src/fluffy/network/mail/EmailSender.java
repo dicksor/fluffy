@@ -48,7 +48,6 @@ public class EmailSender
 						EmailSender.sendSnapShot(email);
 						}
 					}
-
 				}
 			};
 		timer.schedule(hourTimerTask, 0l, 1000 * 60 * 60);//execute TimerTask function every hour
