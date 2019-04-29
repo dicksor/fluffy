@@ -53,6 +53,11 @@ public class CameraXml
 			}
 		return INSTANCE;
 		}
+	
+	public void remove(String camerName) {
+		this.mapCamera.remove(camerName);
+		this.save();
+	}
 
 	public void add(CameraModel cam)
 		{
@@ -130,7 +135,7 @@ public class CameraXml
 				this.xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(FILENAME)));
 
 				Object o = this.xmlDecoder.readObject();
-				if (o instanceof List<?>)
+				if (o instanceof HashMap<?, ?>)
 					{
 					this.mapCamera = (HashMap<String, CameraModel>)o;
 					}
