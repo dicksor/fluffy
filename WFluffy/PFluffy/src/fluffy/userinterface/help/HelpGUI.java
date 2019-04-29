@@ -9,19 +9,10 @@
 package fluffy.userinterface.help;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Frame;
-import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-
-import fluffy.tools.image.MagasinImage;
+import javax.swing.border.EmptyBorder;
 
 public class HelpGUI extends JFrame {
 
@@ -33,36 +24,30 @@ public class HelpGUI extends JFrame {
 
 	private void appearance() {
 		this.setTitle("Fluffy : Aide");
-		//this.setIconImage(MagasinImage.logo.getImage());
+		// this.setIconImage(MagasinImage.logo.getImage());
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
-		this.fldHelp.setEditable(false);
 		this.setVisible(true);
+
+		this.jPanelContent.setBorder(new EmptyBorder(50, 50, 50, 50));
+		this.jPanelControls.setBorder(new EmptyBorder(40, 250, 40, 250));
 	}
 
 	private void control() {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		this.btnQuit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Component root = SwingUtilities.getRoot((JButton)e.getSource());
-				root.dispatchEvent(new WindowEvent((Window) root, WindowEvent.WINDOW_CLOSING));
-			}
-		});
 	}
 
 	private void geometry() {
-		this.fldHelp = new JTextField("Ici s'affichera l'aide et à propos");
-		this.btnQuit = new JButton("Quitter");
+		this.jPanelContent = new JPanelContent();
+		this.jPanelControls = new JPanelControls();
 
 		this.setLayout(new BorderLayout());
 
-		this.add(this.fldHelp, BorderLayout.CENTER);
-		this.add(this.btnQuit, BorderLayout.SOUTH);
+		this.add(this.jPanelContent, BorderLayout.CENTER);
+		this.add(this.jPanelControls, BorderLayout.SOUTH);
 	}
 
-	private JTextField fldHelp;
-	private JButton btnQuit;
+	// Tools
+	private JPanelControls jPanelControls;
+	private JPanelContent jPanelContent;
 
 }

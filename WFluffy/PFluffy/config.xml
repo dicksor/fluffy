@@ -5,7 +5,7 @@
    <string>webcam</string>
    <object class="fluffy.network.camera.model.CameraModel">
     <void property="angle">
-     <string>0.0</string>
+     <string>360.0</string>
     </void>
     <void property="description">
      <string>Webcam du staff...</string>
