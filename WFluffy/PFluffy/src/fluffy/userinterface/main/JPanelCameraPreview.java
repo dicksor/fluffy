@@ -11,8 +11,6 @@ package fluffy.userinterface.main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -23,7 +21,6 @@ import javax.swing.JPanel;
 
 import fluffy.imageprocessing.snapshot.AutoSnapshotTaker;
 import fluffy.network.camera.Camera;
-import fluffy.network.camera.model.CameraXml;
 import fluffy.userinterface.camera_gui.CameraGUI;
 import fluffy.userinterface.cameradisplay.CameraDisplay;
 import mdlaf.animation.MaterialUIMovement;
@@ -77,7 +74,7 @@ public class JPanelCameraPreview extends JPanel {
 
 		});
 
-		this.btnDelete.addActionListener(new ActionListener()
+		/*this.btnDelete.addActionListener(new ActionListener()
 			{
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -89,7 +86,7 @@ public class JPanelCameraPreview extends JPanel {
 				root.revalidate();
 				root.repaint();
 				}
-			});
+			});*/
 	}
 
 	private void geometry() {

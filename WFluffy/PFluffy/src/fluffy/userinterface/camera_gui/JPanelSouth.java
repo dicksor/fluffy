@@ -24,7 +24,8 @@ import mdlaf.utils.MaterialColors;
 
 public class JPanelSouth extends JPanel {
 
-	public JPanelSouth(JFrame frameRoot, JPanelCameraGUI jPanelCameraGUI, JPanelCameraPreview jPanelCameraPreview, String camerName) {
+	public JPanelSouth(JFrame frameRoot, JPanelCameraGUI jPanelCameraGUI, JPanelCameraPreview jPanelCameraPreview,
+			String camerName) {
 		this.frameRoot = frameRoot;
 		this.jPanelCameraPreview = jPanelCameraPreview;
 		this.jPanelCameraGUI = jPanelCameraGUI;
@@ -47,7 +48,8 @@ public class JPanelSouth extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				JPanelSouth.this.jPanelCameraPreview.streamCamera();
 				CameraXml cameraXml = CameraXml.getInstance();
-				cameraXml.setCameraAngle(cameraName, String.valueOf(JPanelSouth.this.jPanelCameraGUI.getRotationAngle()));
+				cameraXml.setCameraAngle(cameraName,
+						String.valueOf(JPanelSouth.this.jPanelCameraGUI.getRotationAngle()));
 				cameraXml.setCameraZoom(cameraName, String.valueOf(JPanelSouth.this.jPanelCameraGUI.getZoom()));
 				JPanelSouth.this.frameRoot.setVisible(false);
 				JPanelSouth.this.frameRoot.dispose();
