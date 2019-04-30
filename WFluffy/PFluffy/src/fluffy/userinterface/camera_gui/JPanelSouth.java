@@ -45,11 +45,11 @@ public class JPanelSouth extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JPanelSouth.this.jPanelCameraPreview.streamCamera();
 				CameraXml cameraXml = CameraXml.getInstance();
 				cameraXml.setCameraAngle(cameraName, String.valueOf(JPanelSouth.this.jPanelCameraGUI.getRotationAngle()));
 				cameraXml.setCameraZoom(cameraName, String.valueOf(JPanelSouth.this.jPanelCameraGUI.getZoom()));
 				JPanelSouth.this.jPanelCameraGUI.stopStream();
+				JPanelSouth.this.jPanelCameraPreview.streamCamera();
 				JPanelSouth.this.frameRoot.setVisible(false);
 				JPanelSouth.this.frameRoot.dispose();
 			}

@@ -6,10 +6,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 import org.opencv.dnn.Net;
@@ -36,11 +37,11 @@ public class OpenCvYoloDetection {
 		this.readClasses();
 		this.net = Dnn.readNet(model, config);
 		this.confThreshold = confThreshold;
-		this.detectedClasses = new HashSet<String>();
+		this.detectedClasses = new ConcurrentHashMap<String, AtomicInteger>();
 	}
 
 	public Mat feedForward(Mat image) {
-		Set<String> stats = new HashSet<String>();
+		ConcurrentMap<String, AtomicInteger> stats = new ConcurrentHashMap<String, AtomicInteger>();
 		
 		Size sz = new Size(288, 288);
 
@@ -94,7 +95,8 @@ public class OpenCvYoloDetection {
 				Rect box = boxesArray[idx];
 				Imgproc.rectangle(image, box.tl(), box.br(), new Scalar(0, 0, 255), 2);
 				String predictionLabel = this.classes.get(clsIds.get(idx));
-				stats.add(predictionLabel);
+				stats.putIfAbsent(predictionLabel, new AtomicInteger(0));
+				stats.get(predictionLabel).incrementAndGet();
 				Imgproc.putText(image, predictionLabel, box.tl(), Imgproc.FONT_HERSHEY_SIMPLEX, 2, RED_COLOR);
 			}
 			
@@ -142,6 +144,6 @@ public class OpenCvYoloDetection {
 	private List<String> classes;
 	private float confThreshold;
 	private PropertyChangeSupport support;
-	private Set<String> detectedClasses;
+	private ConcurrentMap<String, AtomicInteger> detectedClasses;
 
 }

@@ -3,8 +3,9 @@ package fluffy.network.camera.pipeline;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.opencv.core.Mat;
 
@@ -15,7 +16,7 @@ public class OperatorYoloDetection extends AbstractOperator implements PropertyC
 	public OperatorYoloDetection(boolean isActive) {
 		super(isActive);
 		this.support = new PropertyChangeSupport(this);
-		this.detectionStat = new HashSet<String>();
+		this.detectionStat = new ConcurrentHashMap<String, AtomicInteger>();
 		this.yoloDetection = new OpenCvYoloDetection("yolov3\\yolov3.weights", "yolov3\\yolov3.cfg", 0.6f);
 		this.yoloDetection.addPropertyChangeListener(this);
 	}
@@ -36,7 +37,7 @@ public class OperatorYoloDetection extends AbstractOperator implements PropertyC
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("detectionStatistic")) {
-			Set<String> detectionStats = (HashSet<String>) evt.getNewValue();
+			ConcurrentMap<String, AtomicInteger> detectionStats = (ConcurrentHashMap<String, AtomicInteger>) evt.getNewValue();
 			support.firePropertyChange("detectionStatistic", this.detectionStat, detectionStats);
 			this.detectionStat = detectionStats;
 		} 
@@ -44,5 +45,5 @@ public class OperatorYoloDetection extends AbstractOperator implements PropertyC
 
 	private OpenCvYoloDetection yoloDetection;
 	private PropertyChangeSupport support;
-	private Set<String> detectionStat;
+	private ConcurrentMap<String, AtomicInteger> detectionStat;
 }

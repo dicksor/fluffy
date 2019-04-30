@@ -3,7 +3,11 @@ package fluffy.userinterface.camera_gui;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashSet;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -14,7 +18,7 @@ import javax.swing.JPanel;
 public class JPanelEast extends JPanel implements PropertyChangeListener {
 
 	public JPanelEast() {
-		this.stats = new HashSet<String>();
+		this.stats = new ConcurrentHashMap<String, AtomicInteger>();
 		this.model = new DefaultListModel<String>();
 		this.geometry();
 		this.control();
@@ -25,9 +29,9 @@ public class JPanelEast extends JPanel implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent evt) {
 		 if (evt.getPropertyName().equals("detectionStatistic")) {
 			 	this.clearList();
-				this.stats = (HashSet<String>) evt.getNewValue();
-				for(String stat: this.stats) {
-					this.model.addElement(stat);
+				this.stats = (ConcurrentHashMap<String, AtomicInteger>) evt.getNewValue();
+				for(Entry<String, AtomicInteger> stat: this.stats.entrySet()) {
+					this.model.addElement(stat.getKey() + " : " + stat.getValue());
 				}
 		 }
 	}
@@ -58,6 +62,6 @@ public class JPanelEast extends JPanel implements PropertyChangeListener {
 
 	private JList<String> statList;
 	private DefaultListModel<String> model;
-	private Set<String> stats;
+	private ConcurrentMap<String, AtomicInteger> stats;
 	private JLabel lblDetectionStatistic;
 }

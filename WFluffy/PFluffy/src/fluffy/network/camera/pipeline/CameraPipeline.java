@@ -13,9 +13,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.opencv.core.Mat;
 
@@ -27,7 +28,7 @@ public class CameraPipeline implements PropertyChangeListener {
 		this.image = new Mat();
 		this.faceDetectedCount = 0;
 		
-		this.detectionStat = new HashSet<String>();
+		this.detectionStat = new ConcurrentHashMap<String, AtomicInteger>();
 
 		this.operators = new HashMap<Operators, AbstractOperator>();
 		this.operators.put(Operators.YOLO, new OperatorYoloDetection(false));
@@ -48,7 +49,7 @@ public class CameraPipeline implements PropertyChangeListener {
 			this.support.firePropertyChange("faceDetected", this.faceDetectedCount, faceDetected);
 			this.faceDetectedCount = faceDetected;
 		} else if (evt.getPropertyName().equals("detectionStatistic")) {
-			Set<String> detectionStats = (HashSet<String>) evt.getNewValue();
+			ConcurrentMap<String, AtomicInteger> detectionStats = (ConcurrentHashMap<String, AtomicInteger>) evt.getNewValue();
 			support.firePropertyChange("detectionStatistic", this.detectionStat, detectionStats);
 			this.detectionStat = detectionStats;
 		}
@@ -107,5 +108,5 @@ public class CameraPipeline implements PropertyChangeListener {
 	private Map<Operators, AbstractOperator> operators;
 	private PropertyChangeSupport support;
 	private int faceDetectedCount;
-	private Set<String> detectionStat;
+	private ConcurrentMap<String, AtomicInteger> detectionStat;
 }
