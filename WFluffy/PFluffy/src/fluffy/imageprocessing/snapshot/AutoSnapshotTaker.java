@@ -37,9 +37,12 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
+	if(!evt.getPropertyName().equals("faceDetected") && !evt.getPropertyName().equals("detectionStatistic"))
+		{
 		this.cameraName = evt.getPropertyName();
 		this.setImage((Mat) evt.getNewValue());
 		this.detecte();
+		}
 	}
 
 	private void getSnapShot() {

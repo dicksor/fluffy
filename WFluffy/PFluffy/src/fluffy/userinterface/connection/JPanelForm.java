@@ -23,12 +23,14 @@ public class JPanelForm extends JPanel {
 		geometry();
 		appearance();
 	}
-	
+
 	public void save() {
 		CameraXml cameraXml = CameraXml.getInstance();
 		String link = "";
 		if(!this.fldAdressIP.getText().isEmpty())
-			link = this.fldAdressIP.getText();	
+			{
+				link = this.fldAdressIP.getText();
+				}
 		CameraModel cameraModel = new CameraModel(this.fldCameraName.getText(), link, this.fldCameraDescription.getText());
 		cameraXml.add(cameraModel);
 	}

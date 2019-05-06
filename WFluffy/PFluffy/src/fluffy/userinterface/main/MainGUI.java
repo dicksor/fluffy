@@ -37,7 +37,7 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		CameraModel cameraModel = (CameraModel) evt.getNewValue();
-		Camera camera = new Camera(cameraModel.getLink(), cameraModel.getLink());
+		Camera camera = new Camera(cameraModel.getLink(), cameraModel.getName());
 		if (!camera.open()) {
 			JOptionPane.showMessageDialog(null,
 					"Could not find a camera with the provided link : " + cameraModel.getLink(), "ErrBox: fluffy",
