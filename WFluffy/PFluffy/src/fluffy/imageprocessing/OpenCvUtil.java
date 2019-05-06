@@ -11,7 +11,6 @@ package fluffy.imageprocessing;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;

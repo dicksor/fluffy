@@ -24,10 +24,8 @@ public class JPanelZoom extends JPanel
 	public JPanelZoom(JPanelCameraGUI panelCamera, String cameraName)
 		{
 		this.panelCamera = panelCamera;
-		this.cameraName = cameraName;
-		geometry();
-		control();
-		appearance();
+		this.geometry();
+		this.control();
 
 		CameraXml cameraXml = CameraXml.getInstance();
 		if(!cameraXml.getCameras().get(cameraName).getZoom().equals(""))
@@ -63,18 +61,11 @@ public class JPanelZoom extends JPanel
 			});
 		}
 
-	private void appearance()
-		{
-		// TODO Auto-generated method stub
-
-		}
-
 	public int getZoom()
 		{
 		return zoom;
 		}
 
-	private String cameraName;
 	private int zoom;
 	private JLabel lblZoom;
 	private JSpinner spZoom;

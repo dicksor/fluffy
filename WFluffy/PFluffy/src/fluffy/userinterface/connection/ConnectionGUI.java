@@ -19,41 +19,32 @@ public class ConnectionGUI extends JFrame {
 
 	public ConnectionGUI() {
 		geometry();
-		control();
 		appearance();
 	}
 
 	private void geometry() {
-		this.jPanelForm = new JPanelForm();
-		this.jPanelButtons = new JPanelButtons(this, this.jPanelForm);
+		this.panelForm = new JPanelForm();
+		this.panelButtons = new JPanelButtons(this, this.panelForm);
 
 		this.borderlayout = new BorderLayout();
 		setLayout(borderlayout);
 
-		this.add(jPanelForm, BorderLayout.NORTH);
-		this.add(jPanelButtons, BorderLayout.SOUTH);
-	}
-
-	private void control() {
-
+		this.add(panelForm, BorderLayout.NORTH);
+		this.add(panelButtons, BorderLayout.SOUTH);
 	}
 
 	private void appearance() {
 		this.setTitle("Fluffy: Connection");
-		//this.setIconImage(MagasinImage.logo.getImage());
+		this.setIconImage(MagasinImage.logo.getImage());
 		this.setSize(360, 180);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 
-		this.jPanelForm.setBorder(new EmptyBorder(7, 7, 7, 7));
+		this.panelForm.setBorder(new EmptyBorder(7, 7, 7, 7));
 	}
 
-	// tools
-
 	private BorderLayout borderlayout;
-
-	// Panels
-	private JPanelForm jPanelForm;
-	private JPanelButtons jPanelButtons;
+	private JPanelForm panelForm;
+	private JPanelButtons panelButtons;
 }

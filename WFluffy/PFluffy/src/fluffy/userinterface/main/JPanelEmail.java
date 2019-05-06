@@ -33,10 +33,6 @@ import mdlaf.utils.MaterialColors;
 public class JPanelEmail extends JPanel
 	{
 
-	/*------------------------------------------------------------------*\
-	|*							Constructeurs							*|
-	\*------------------------------------------------------------------*/
-
 	public JPanelEmail()
 		{
 		geometry();
@@ -44,27 +40,15 @@ public class JPanelEmail extends JPanel
 		appearance();
 		}
 
-	/*------------------------------------------------------------------*\
-	|*							Methodes Public							*|
-	\*------------------------------------------------------------------*/
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
-
-	/*------------------------------------------------------------------*\
-	|*							Methodes Private						*|
-	\*------------------------------------------------------------------*/
-
 	private void geometry()
 		{
-		jPanelEmailInfo = new JPanelEmailInfo();
+		panelEmailInfo = new JPanelEmailInfo();
 		btnForceEmail = new JButton("Force Email");
 		btnApply = new JButton("Apply Change");
 
 		setLayout(new FlowLayout());
 
-		add(jPanelEmailInfo);
+		add(panelEmailInfo);
 		add(btnApply);
 		add(btnForceEmail);
 		}
@@ -77,7 +61,7 @@ public class JPanelEmail extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 				{
-				String email = JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText();//get input email
+				String email = JPanelEmail.this.panelEmailInfo.getFldEmail().getText();//get input email
 
 				//if email is not null, user want to update email
 				if (!email.equals(""))
@@ -87,7 +71,7 @@ public class JPanelEmail extends JPanel
 						{
 						//send email
 						EmailSender.sendSnapShot(email);
-						int hour = JPanelEmail.this.jPanelEmailInfo.getCbxHours().getSelectedIndex();//get input hour
+						int hour = JPanelEmail.this.panelEmailInfo.getCbxHours().getSelectedIndex();//get input hour
 
 						//save user email and hour in config
 						UserXml userXml = UserXml.getInstance();
@@ -130,10 +114,10 @@ public class JPanelEmail extends JPanel
 			public void actionPerformed(ActionEvent e)
 				{
 				//check if the email is in the correct format
-				if ((new EmailValidator()).validate(JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText().trim()))
+				if ((new EmailValidator()).validate(JPanelEmail.this.panelEmailInfo.getFldEmail().getText().trim()))
 					{
-					String email = JPanelEmail.this.jPanelEmailInfo.getFldEmail().getText();
-					int hour = JPanelEmail.this.jPanelEmailInfo.getCbxHours().getSelectedIndex();
+					String email = JPanelEmail.this.panelEmailInfo.getFldEmail().getText();
+					int hour = JPanelEmail.this.panelEmailInfo.getCbxHours().getSelectedIndex();
 
 					//save mail and hour in config
 					UserXml userXml = UserXml.getInstance();
@@ -164,15 +148,7 @@ public class JPanelEmail extends JPanel
 
 		}
 
-	/*------------------------------------------------------------------*\
-	|*							Attributs Private						*|
-	\*------------------------------------------------------------------*/
-
-	// Inputs
-
-	// Tools
-
 	private JButton btnApply;
-	private JPanelEmailInfo jPanelEmailInfo;
+	private JPanelEmailInfo panelEmailInfo;
 	private JButton btnForceEmail;
 	}

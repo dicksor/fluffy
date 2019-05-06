@@ -31,9 +31,9 @@ public class JPanelWest extends JPanel {
 		this.cameraRotationAngle = 0;
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
-		geometry();
-		control();
-		appearance();
+		this.geometry();
+		this.control();
+		this.appearance();
 
 		CameraXml cameraXml = CameraXml.getInstance();
 		if (!cameraXml.getCameras().get(cameraName).getAngle().equals("")) {

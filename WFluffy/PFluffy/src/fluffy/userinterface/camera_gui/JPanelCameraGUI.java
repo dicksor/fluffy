@@ -26,10 +26,10 @@ import fluffy.userinterface.main.JPanelCameraPreview;
 
 public class JPanelCameraGUI extends JPanel {
 
-	public JPanelCameraGUI(JFrame frameRoot, JPanelCameraPreview jPanelCameraPreview, String cameraName,
+	public JPanelCameraGUI(JFrame frameRoot, JPanelCameraPreview panelCameraPreview, String cameraName,
 			String cameraDescription, Camera camera) {
 		this.frameRoot = frameRoot;
-		this.jPanelCameraPreview = jPanelCameraPreview;
+		this.panelCameraPreview = panelCameraPreview;
 
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
@@ -41,7 +41,6 @@ public class JPanelCameraGUI extends JPanel {
 		this.camera.addPropertyChangeListener(this.snapshotTaker);
 
 		this.geometry();
-		this.control();
 		this.appearance();
 
 		this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, false);
@@ -52,10 +51,6 @@ public class JPanelCameraGUI extends JPanel {
 	private void appearance() {
 		this.displayStatistic(false);
 		this.panelEast.setVisible(false);
-	}
-
-	private void control() {
-
 	}
 
 	public int getZoom() {
@@ -85,7 +80,7 @@ public class JPanelCameraGUI extends JPanel {
 		this.panelWest = new JPanelWest(this, cameraName, cameraDescription);
 		this.panelEast.setPreferredSize(
 				new Dimension(panelWest.getPreferredSize().width, panelWest.getPreferredSize().height));
-		this.panelSouth = new JPanelSouth(this.frameRoot, this, this.jPanelCameraPreview, cameraName);
+		this.panelSouth = new JPanelSouth(this.frameRoot, this, this.panelCameraPreview, cameraName);
 		this.panelNorth = new JPanelNorth();
 		this.lbCameraDisplay = new JLabel();
 
@@ -146,7 +141,7 @@ public class JPanelCameraGUI extends JPanel {
 		this.panelNorth.setVisible(isStatOn);
 	}
 
-	private JPanelCameraPreview jPanelCameraPreview;
+	private JPanelCameraPreview panelCameraPreview;
 	private JLabel lbCameraDisplay;
 	private JPanelWest panelWest;
 	private JPanelSouth panelSouth;

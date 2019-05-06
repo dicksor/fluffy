@@ -32,7 +32,6 @@ public class JPanelCameraPreview extends JPanel {
 		
 		this.camera = camera;
 		
-		// Todo : fermer à un moment ou instancier ailleurs
 		Thread cameraThread = new Thread(this.camera);
 		cameraThread.start();
 		
@@ -80,10 +79,7 @@ public class JPanelCameraPreview extends JPanel {
 	private Camera camera;
 	private String cameraName;
 	private String cameraDescription;
-
 	private CameraDisplay cameraDisplay;
-	
-	// FIXME : Mettre ailleurs
 	private AutoSnapshotTaker autoSnapShotTaker;
 
 }

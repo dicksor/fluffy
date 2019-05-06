@@ -33,7 +33,7 @@ public class HelpGUI extends JFrame {
 
 	private void appearance() {
 		this.setTitle("Fluffy : Aide");
-		//this.setIconImage(MagasinImage.logo.getImage());
+		this.setIconImage(MagasinImage.logo.getImage());
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.fldHelp.setEditable(false);
 		this.setVisible(true);

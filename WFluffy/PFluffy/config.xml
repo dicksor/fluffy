@@ -18,5 +18,25 @@
     </void>
    </object>
   </void>
+  <void method="put">
+   <string>ip</string>
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="angle">
+     <string>0.0</string>
+    </void>
+    <void property="description">
+     <string>ip</string>
+    </void>
+    <void property="link">
+     <string>http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&amp;clock=1&amp;date=1</string>
+    </void>
+    <void property="name">
+     <string>ip</string>
+    </void>
+    <void property="zoom">
+     <string>1</string>
+    </void>
+   </object>
+  </void>
  </object>
 </java>

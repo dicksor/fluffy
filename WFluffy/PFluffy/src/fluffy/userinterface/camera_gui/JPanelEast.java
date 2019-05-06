@@ -2,9 +2,7 @@ package fluffy.userinterface.camera_gui;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.HashSet;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,8 +19,6 @@ public class JPanelEast extends JPanel implements PropertyChangeListener {
 		this.stats = new ConcurrentHashMap<String, AtomicInteger>();
 		this.model = new DefaultListModel<String>();
 		this.geometry();
-		this.control();
-		this.appearance();
 	}
 
 	@Override
@@ -38,16 +34,6 @@ public class JPanelEast extends JPanel implements PropertyChangeListener {
 	
 	public void clearList() {
 		this.model.clear();
-	}
-
-	private void appearance() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private void control() {
-		// TODO Auto-generated method stub
-
 	}
 
 	private void geometry() {

@@ -21,7 +21,6 @@ public class JPanelForm extends JPanel {
 
 	public JPanelForm() {
 		geometry();
-		control();
 		appearance();
 	}
 	
@@ -57,25 +56,15 @@ public class JPanelForm extends JPanel {
 		this.add(fldCameraDescription);
 	}
 
-	private void control() {
-		// TODO
-	}
-
 	private void appearance() {
 		gridlayout.setVgap(10);
 		gridlayout.setHgap(10);
 	}
 
-	// tools
-
 	private GridLayout gridlayout;
-
-	// Labels
 	private JLabel lbCameraName;
 	private JLabel lbAdressIP;
 	private JLabel lbCameraDescription;
-
-	// TextFields
 	private JTextField fldCameraName;
 	private JTextField fldAdressIP;
 	private JTextField fldCameraDescription;

@@ -16,8 +16,6 @@ public class JPanelCameraList extends JPanel {
 
 	public JPanelCameraList() {	
 		this.geometry();
-		this.control();
-		this.appearance();
 	}
 
 	public void addCameraPreview(JPanelCameraPreview panelCameraPreview) {
@@ -26,24 +24,14 @@ public class JPanelCameraList extends JPanel {
 		this.add(boxV);
 	}
 
-	private void appearance() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private void control() {
-		// TODO Auto-generated method stub
-
-	}
-
 	private void geometry() {
-		this.jPanelEmail = new JPanelEmail();
+		this.panelEmail = new JPanelEmail();
 		this.boxV = Box.createVerticalBox();
-		this.boxV.add(jPanelEmail);
+		this.boxV.add(panelEmail);
 
 		this.setLayout(new FlowLayout());
 	}
 
-	private JPanelEmail jPanelEmail;
+	private JPanelEmail panelEmail;
 	private Box boxV;
 }
