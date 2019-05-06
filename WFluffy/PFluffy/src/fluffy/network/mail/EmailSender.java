@@ -57,6 +57,7 @@ public class EmailSender
 		{
 		String snapShotFileName = Email.getSnapShotFileName();
 		ZipCreator zipCreator = new ZipCreator(snapShotFileName);//zip the content of the snapshot folder of the day
+		zipCreator.create();//create the zip archive
 		Email mail = new Email(email, snapShotFileName + ".zip");//create email object with zip file
 		mail.sendEmail();
 		ZipCreator.deleteZip(snapShotFileName + ".zip");//delete zip file

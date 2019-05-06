@@ -46,7 +46,7 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 			cameraXml.remove(cameraModel.getName());
 		} else {
 			this.jPanelCameraList.addCameraPreview(
-					new JPanelCameraPreview(camera, cameraModel.getName(), cameraModel.getDescription(), this));
+					new JPanelCameraPreview(camera, cameraModel.getName(), cameraModel.getDescription(),jPanelCameraList, this));
 		}
 	}
 
@@ -89,7 +89,7 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 						"ErrBox: fluffy", JOptionPane.ERROR_MESSAGE);
 			} else {
 				this.jPanelCameraList.addCameraPreview(
-						new JPanelCameraPreview(camera, pair.getValue().getName(), pair.getValue().getDescription(), this));
+						new JPanelCameraPreview(camera, pair.getValue().getName(), pair.getValue().getDescription(), jPanelCameraList, this));
 			}
 		}
 	}
