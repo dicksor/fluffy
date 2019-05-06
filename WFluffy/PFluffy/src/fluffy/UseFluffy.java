@@ -34,10 +34,6 @@ public class UseFluffy {
 			} catch (UnsupportedLookAndFeelException e) {
 				e.printStackTrace();
 			}
-			// FIXME : remove when production mode
-			CameraXml cameraList = CameraXml.getInstance();
-			CameraModel cam = new CameraModel("webcam", "", "Webcam du staff...", "90", "1");
-			cameraList.add(cam);
 
 			new MainGUI();
 		

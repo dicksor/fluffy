@@ -77,7 +77,6 @@ public class Camera implements Runnable {
 		support.removePropertyChangeListener(pcl);
 	}
 
-	// FIXME : peut-être que le problème expected boundary vient de là
 	@Override
 	protected void finalize() throws Throwable {
 		if (this.camera.isOpened())

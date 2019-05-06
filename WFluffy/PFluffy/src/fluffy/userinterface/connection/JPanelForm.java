@@ -26,7 +26,6 @@ public class JPanelForm extends JPanel {
 	
 	public void save() {
 		CameraXml cameraXml = CameraXml.getInstance();
-		// TODO : check valid link and not already saved
 		String link = "";
 		if(!this.fldAdressIP.getText().isEmpty())
 			link = this.fldAdressIP.getText();	
