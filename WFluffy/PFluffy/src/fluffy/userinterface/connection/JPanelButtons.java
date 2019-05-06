@@ -77,14 +77,8 @@ public class JPanelButtons extends JPanel {
 		JPanelButtons.this.parent.dispose();
 	}
 
-	// input
 	private JFrame parent;
-
-	// tools
-
 	private FlowLayout flowlayout;
-
-	// Buttons
 	private JButton btnConnectionCamera;
 	private JButton btnCancel;
 	private JPanelForm panelForm;

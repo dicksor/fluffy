@@ -24,25 +24,11 @@ public class JPanelLabel extends JPanel
 	public JPanelLabel()
 		{
 		this.geometry();
-		this.control();
-		this.appearance();
 		}
 
-	private void appearance()
-		{
-		// TODO Auto-generated method stub
-
-		}
-
-	private void control()
-		{
-		// TODO Auto-generated method stub
-
-		}
 
 	private void geometry()
 		{
-		// TODO Auto-generated method stub
 		this.lbTitle = new JLabel("<html><h1>Gestionaire de caméra IP</h1></html>");
 		this.setLayout(new FlowLayout());
 		this.add(this.lbTitle);

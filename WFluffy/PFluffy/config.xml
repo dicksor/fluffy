@@ -2,36 +2,16 @@
 <java version="10.0.2" class="java.beans.XMLDecoder">
  <object class="java.util.HashMap">
   <void method="put">
-   <string>tt</string>
+   <string>t</string>
    <object class="fluffy.network.camera.model.CameraModel">
     <void property="angle">
      <string>0.0</string>
     </void>
     <void property="description">
-     <string>tt</string>
-    </void>
-    <void property="link">
-     <string>http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&amp;clock=1&amp;date=1&amp;color=1</string>
+     <string>t</string>
     </void>
     <void property="name">
-     <string>tt</string>
-    </void>
-    <void property="zoom">
-     <string>1</string>
-    </void>
-   </object>
-  </void>
-  <void method="put">
-   <string>z</string>
-   <object class="fluffy.network.camera.model.CameraModel">
-    <void property="angle">
-     <string>0.0</string>
-    </void>
-    <void property="description">
-     <string>z</string>
-    </void>
-    <void property="name">
-     <string>z</string>
+     <string>t</string>
     </void>
     <void property="zoom">
      <string>1</string>

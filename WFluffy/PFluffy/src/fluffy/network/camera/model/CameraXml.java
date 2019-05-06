@@ -155,12 +155,9 @@ public class CameraXml
 			}
 		}
 
-	// Attributes
 	private static CameraXml INSTANCE = null;
 	private Map<String, CameraModel> mapCamera;
 	private final String FILENAME;
-
-	// Tools
 	private XMLEncoder xmlEncoder;
 	private XMLDecoder xmlDecoder;
 	private File file;

@@ -33,14 +33,10 @@ public class UseFluffy {
 			} catch (UnsupportedLookAndFeelException e) {
 				e.printStackTrace();
 			}
-			// FIXME : remove when production mode
-			/*CameraXml cameraList = CameraXml.getInstance();
-			CameraModel cam = new CameraModel("webcam", "", "Webcam du staff...", "90", "1");
-			cameraList.add(cam);*/
 
 			EmailSender emailSender = new EmailSender();
 			new MainGUI();
-		
+
 		} else {
 			System.err.println("Only one instance of Fluffy can run!");
 			System.exit(-1);

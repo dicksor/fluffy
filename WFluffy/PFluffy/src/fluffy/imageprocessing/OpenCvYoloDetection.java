@@ -1,11 +1,16 @@
 package fluffy.imageprocessing;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 import org.opencv.dnn.Net;
@@ -20,19 +25,24 @@ import org.opencv.core.Size;
 import org.opencv.dnn.Dnn;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.utils.Converters;
+
 import org.opencv.core.Core;
 
 // Based on : https://github.com/suddh123/YOLO-object-detection-in-java/blob/code/yolo.java
 public class OpenCvYoloDetection {
 
 	public OpenCvYoloDetection(String model, String config, float confThreshold) {
+		this.support = new PropertyChangeSupport(this);
 		this.classes = new LinkedList<String>();
 		this.readClasses();
 		this.net = Dnn.readNet(model, config);
 		this.confThreshold = confThreshold;
+		this.detectedClasses = new ConcurrentHashMap<String, AtomicInteger>();
 	}
 
 	public Mat feedForward(Mat image) {
+		ConcurrentMap<String, AtomicInteger> stats = new ConcurrentHashMap<String, AtomicInteger>();
+		
 		Size sz = new Size(288, 288);
 
 		List<Mat> result = new ArrayList<>();
@@ -85,8 +95,14 @@ public class OpenCvYoloDetection {
 				Rect box = boxesArray[idx];
 				Imgproc.rectangle(image, box.tl(), box.br(), new Scalar(0, 0, 255), 2);
 				String predictionLabel = this.classes.get(clsIds.get(idx));
+				stats.putIfAbsent(predictionLabel, new AtomicInteger(0));
+				stats.get(predictionLabel).incrementAndGet();
 				Imgproc.putText(image, predictionLabel, box.tl(), Imgproc.FONT_HERSHEY_SIMPLEX, 2, RED_COLOR);
 			}
+			
+			support.firePropertyChange("detectionStatistic", this.detectedClasses, stats);
+			this.detectedClasses = stats;
+			this.detectedClasses.clear();
 
 			Mat resizedImage = new Mat();
 			Imgproc.resize(image, resizedImage, image.size());
@@ -94,6 +110,14 @@ public class OpenCvYoloDetection {
 		}
 		
 		return image;
+	}
+	
+	public void addPropertyChangeListener(PropertyChangeListener pcl) {
+		support.addPropertyChangeListener(pcl);
+	}
+
+	public void removePropertyChangeListener(PropertyChangeListener pcl) {
+		support.removePropertyChangeListener(pcl);
 	}
 
 	private List<String> getOutputNames() {
@@ -119,5 +143,7 @@ public class OpenCvYoloDetection {
 	private Net net;
 	private List<String> classes;
 	private float confThreshold;
+	private PropertyChangeSupport support;
+	private ConcurrentMap<String, AtomicInteger> detectedClasses;
 
 }

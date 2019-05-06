@@ -31,9 +31,9 @@ public class JPanelWest extends JPanel {
 		this.cameraRotationAngle = 0;
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
-		geometry();
-		control();
-		appearance();
+		this.geometry();
+		this.control();
+		this.appearance();
 
 		CameraXml cameraXml = CameraXml.getInstance();
 		if (!cameraXml.getCameras().get(cameraName).getAngle().equals("")) {
@@ -131,12 +131,14 @@ public class JPanelWest extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (JPanelWest.this.ckbYoloDetection.isSelected()) {
+					JPanelWest.this.panelCamera.startStatStream();
 					JPanelWest.this.ckbFaceDetection.setSelected(false);
 					JPanelWest.this.ckbFaceDetection.setEnabled(false);
 					JPanelWest.this.ckbTinyYoloDetection.setSelected(false);
 					JPanelWest.this.ckbTinyYoloDetection.setEnabled(false);
 					JPanelWest.this.panelCamera.setYoloDetection(true);
 				} else {
+					JPanelWest.this.panelCamera.stopStatStream();
 					JPanelWest.this.panelCamera.setYoloDetection(false);
 					JPanelWest.this.ckbFaceDetection.setEnabled(true);
 					JPanelWest.this.ckbTinyYoloDetection.setEnabled(true);
@@ -149,12 +151,14 @@ public class JPanelWest extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (JPanelWest.this.ckbTinyYoloDetection.isSelected()) {
+					JPanelWest.this.panelCamera.startStatStream();
 					JPanelWest.this.ckbYoloDetection.setSelected(false);
 					JPanelWest.this.ckbYoloDetection.setEnabled(false);
 					JPanelWest.this.ckbFaceDetection.setSelected(false);
 					JPanelWest.this.ckbFaceDetection.setEnabled(false);
 					JPanelWest.this.panelCamera.setTinyYoloDetection(true);
 				} else {
+					JPanelWest.this.panelCamera.stopStatStream();
 					JPanelWest.this.panelCamera.setTinyYoloDetection(false);
 					JPanelWest.this.ckbYoloDetection.setEnabled(true);
 					JPanelWest.this.ckbFaceDetection.setEnabled(true);

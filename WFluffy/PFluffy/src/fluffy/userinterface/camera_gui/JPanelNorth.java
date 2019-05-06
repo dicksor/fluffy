@@ -11,9 +11,7 @@ public class JPanelNorth extends JPanel implements PropertyChangeListener {
 	public JPanelNorth() {
 		this.faceDetected = "Face detected : ";
 		this.faceDetectedCount = "0";
-		geometry();
-		control();
-		appearance();
+		this.geometry();
 	}
 	
 	public void resetFaceDetectedCount() {
@@ -23,20 +21,10 @@ public class JPanelNorth extends JPanel implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if(evt.getPropertyName() == "faceDetected") {
+		if(evt.getPropertyName().equals("faceDetected")) {
 			this.faceDetectedCount = Integer.toString((int)evt.getNewValue());
 			this.lblFaceDetected.setText(this.faceDetected + this.faceDetectedCount);
 		}
-	}
-
-	private void appearance() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private void control() {
-		// TODO Auto-generated method stub
-
 	}
 
 	private void geometry() {

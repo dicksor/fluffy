@@ -24,15 +24,15 @@ import mdlaf.utils.MaterialColors;
 
 public class JPanelSouth extends JPanel {
 
-	public JPanelSouth(JFrame frameRoot, JPanelCameraGUI jPanelCameraGUI, JPanelCameraPreview jPanelCameraPreview,
+	public JPanelSouth(JFrame frameRoot, JPanelCameraGUI panelCameraGUI, JPanelCameraPreview panelCameraPreview,
 			String camerName) {
 		this.frameRoot = frameRoot;
-		this.jPanelCameraPreview = jPanelCameraPreview;
-		this.jPanelCameraGUI = jPanelCameraGUI;
+		this.panelCameraPreview = panelCameraPreview;
+		this.panelCameraGUI = panelCameraGUI;
 		this.cameraName = camerName;
-		geometry();
-		control();
-		appearance();
+		this.geometry();
+		this.control();
+		this.appearance();
 	}
 
 	private void appearance() {
@@ -46,11 +46,14 @@ public class JPanelSouth extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JPanelSouth.this.jPanelCameraPreview.streamCamera();
 				CameraXml cameraXml = CameraXml.getInstance();
 				cameraXml.setCameraAngle(cameraName,
-						String.valueOf(JPanelSouth.this.jPanelCameraGUI.getRotationAngle()));
-				cameraXml.setCameraZoom(cameraName, String.valueOf(JPanelSouth.this.jPanelCameraGUI.getZoom()));
+						String.valueOf(JPanelSouth.this.panelCameraGUI.getRotationAngle()));
+				cameraXml.setCameraZoom(cameraName, String.valueOf(JPanelSouth.this.panelCameraGUI.getZoom()));
+				JPanelSouth.this.panelCameraGUI.stopStream();
+				JPanelSouth.this.panelCameraGUI.setYoloDetection(false);
+				JPanelSouth.this.panelCameraGUI.setTinyYoloDetection(false);
+				JPanelSouth.this.panelCameraPreview.streamCamera();
 				JPanelSouth.this.frameRoot.setVisible(false);
 				JPanelSouth.this.frameRoot.dispose();
 			}
@@ -63,9 +66,9 @@ public class JPanelSouth extends JPanel {
 		this.add(btnReturn);
 	}
 
-	private JPanelCameraPreview jPanelCameraPreview;
+	private JPanelCameraPreview panelCameraPreview;
 	private String cameraName;
 	private JButton btnReturn;
 	private JFrame frameRoot;
-	private JPanelCameraGUI jPanelCameraGUI;
+	private JPanelCameraGUI panelCameraGUI;
 }

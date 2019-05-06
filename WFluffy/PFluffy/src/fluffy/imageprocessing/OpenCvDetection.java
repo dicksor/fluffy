@@ -10,6 +10,9 @@ package fluffy.imageprocessing;
 
 import org.opencv.objdetect.CascadeClassifier;
 
+/**
+ * This class is used to initialize a Cascade classifier based on xml, with opencv
+ */
 public abstract class OpenCvDetection {
 	
 	public OpenCvDetection(String xmlModelFile) {

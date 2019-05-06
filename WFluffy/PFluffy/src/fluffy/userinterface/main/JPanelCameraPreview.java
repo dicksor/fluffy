@@ -44,9 +44,11 @@ public class JPanelCameraPreview extends JPanel
 		this.geometry();
 		this.control();
 		this.appearance();
-
 		// Todo : fermer à un moment ou instancier ailleurs
 		cameraThread = new Thread(this.camera);
+
+		this.camera = camera;
+
 		cameraThread.start();
 
 		this.streamCamera();
@@ -149,7 +151,6 @@ public class JPanelCameraPreview extends JPanel
 	private JPanelCameraList panelListCamera;
 	private Thread cameraThread;
 
-	// FIXME : Mettre ailleurs
 	private AutoSnapshotTaker autoSnapShotTaker;
 
 	}

@@ -26,10 +26,10 @@ import fluffy.userinterface.main.JPanelCameraPreview;
 
 public class JPanelCameraGUI extends JPanel {
 
-	public JPanelCameraGUI(JFrame frameRoot, JPanelCameraPreview jPanelCameraPreview, String cameraName,
+	public JPanelCameraGUI(JFrame frameRoot, JPanelCameraPreview panelCameraPreview, String cameraName,
 			String cameraDescription, Camera camera) {
 		this.frameRoot = frameRoot;
-		this.jPanelCameraPreview = jPanelCameraPreview;
+		this.panelCameraPreview = panelCameraPreview;
 
 		this.cameraName = cameraName;
 		this.cameraDescription = cameraDescription;
@@ -41,21 +41,16 @@ public class JPanelCameraGUI extends JPanel {
 		this.camera.addPropertyChangeListener(this.snapshotTaker);
 
 		this.geometry();
-		this.control();
 		this.appearance();
 
 		this.cameraDisplay = new CameraDisplay(this.lbCameraDisplay, false);
 		this.cameraPipeline.addPropertyChangeListener(this.cameraDisplay);
-		
 		this.cameraPipeline.addPropertyChangeListener(this.panelNorth);
 	}
 
 	private void appearance() {
 		this.displayStatistic(false);
-	}
-
-	private void control() {
-
+		this.panelEast.setVisible(false);
 	}
 
 	public int getZoom() {
@@ -81,11 +76,11 @@ public class JPanelCameraGUI extends JPanel {
 	}
 
 	private void geometry() {
+		this.panelEast = new JPanelEast();
 		this.panelWest = new JPanelWest(this, cameraName, cameraDescription);
-		this.panelEast = new JPanel();
 		this.panelEast.setPreferredSize(
 				new Dimension(panelWest.getPreferredSize().width, panelWest.getPreferredSize().height));
-		this.panelSouth = new JPanelSouth(this.frameRoot, this, this.jPanelCameraPreview, cameraName);
+		this.panelSouth = new JPanelSouth(this.frameRoot, this, this.panelCameraPreview, cameraName);
 		this.panelNorth = new JPanelNorth();
 		this.lbCameraDisplay = new JLabel();
 
@@ -131,16 +126,27 @@ public class JPanelCameraGUI extends JPanel {
 		this.cameraPipeline.removePropertyChangeListener(this.cameraDisplay);
 	}
 	
+	public void stopStatStream() {
+		this.panelEast.setVisible(false);
+		this.cameraPipeline.removePropertyChangeListener(this.panelEast);
+		this.panelEast.clearList();
+	}
+	
+	public void startStatStream() {
+		this.panelEast.setVisible(true);
+		this.cameraPipeline.addPropertyChangeListener(this.panelEast);
+	}
+	
 	public void displayStatistic(boolean isStatOn) {
 		this.panelNorth.setVisible(isStatOn);
 	}
 
-	private JPanelCameraPreview jPanelCameraPreview;
+	private JPanelCameraPreview panelCameraPreview;
 	private JLabel lbCameraDisplay;
 	private JPanelWest panelWest;
 	private JPanelSouth panelSouth;
 	private JPanelNorth panelNorth;
-	private JPanel panelEast;
+	private JPanelEast panelEast;
 	private BorderLayout borderMainLayout;
 	private CameraPipeline cameraPipeline;
 	private JFrame frameRoot;

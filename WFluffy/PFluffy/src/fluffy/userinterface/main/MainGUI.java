@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import fluffy.network.camera.Camera;
 import fluffy.network.camera.model.CameraModel;
 import fluffy.network.camera.model.CameraXml;
+import fluffy.tools.image.MagasinImage;
 
 /**
  * Main JFrame of the program
@@ -35,7 +36,6 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO : check camera open correctly
 		CameraModel cameraModel = (CameraModel) evt.getNewValue();
 		Camera camera = new Camera(cameraModel.getLink(), cameraModel.getLink());
 		if (!camera.open()) {
@@ -45,14 +45,14 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 			CameraXml cameraXml = CameraXml.getInstance();
 			cameraXml.remove(cameraModel.getName());
 		} else {
-			this.jPanelCameraList.addCameraPreview(
-					new JPanelCameraPreview(camera, cameraModel.getName(), cameraModel.getDescription(),jPanelCameraList, this));
+			this.panelCameraList.addCameraPreview(
+					new JPanelCameraPreview(camera, cameraModel.getName(), cameraModel.getDescription(),panelCameraList, this));
 		}
 	}
 
 	private void appearance() {
 		this.setTitle("Fluffy : Main");
-		// this.setIconImage(MagasinImage.logo.getImage());
+		this.setIconImage(MagasinImage.logo.getImage());
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 	}
@@ -62,18 +62,18 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 	}
 
 	private void geometry() {
-		this.jPanelButtons = new JPanelButtons();
-		this.jPanelLabel = new JPanelLabel();
-		this.jPanelLabel.repaint();
-		this.jPanelCameraList = new JPanelCameraList();
+		this.panelButtons = new JPanelButtons();
+		this.panelLabel = new JPanelLabel();
+		this.panelLabel.repaint();
+		this.panelCameraList = new JPanelCameraList();
 
 		this.loadCameras();
 
 		this.setLayout(new BorderLayout());
 
-		this.add(this.jPanelLabel, BorderLayout.NORTH);
-		this.add(this.jPanelCameraList, BorderLayout.CENTER);
-		this.add(this.jPanelButtons, BorderLayout.SOUTH);
+		this.add(this.panelLabel, BorderLayout.NORTH);
+		this.add(this.panelCameraList, BorderLayout.CENTER);
+		this.add(this.panelButtons, BorderLayout.SOUTH);
 	}
 
 	private void loadCameras() {
@@ -88,14 +88,15 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 						"Could not find a camera with the provided link : " + pair.getValue().getLink(),
 						"ErrBox: fluffy", JOptionPane.ERROR_MESSAGE);
 			} else {
-				this.jPanelCameraList.addCameraPreview(
-						new JPanelCameraPreview(camera, pair.getValue().getName(), pair.getValue().getDescription(), jPanelCameraList, this));
+				this.panelCameraList.addCameraPreview(
+						new JPanelCameraPreview(camera, pair.getValue().getName(), pair.getValue().getDescription(), panelCameraList, this));
+
 			}
 		}
 	}
 
-	private JPanelButtons jPanelButtons;
-	private JPanelLabel jPanelLabel;
-	private JPanelCameraList jPanelCameraList;
+	private JPanelButtons panelButtons;
+	private JPanelLabel panelLabel;
+	private JPanelCameraList panelCameraList;
 
 }

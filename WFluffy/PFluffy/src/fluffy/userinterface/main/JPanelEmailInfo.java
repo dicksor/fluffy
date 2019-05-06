@@ -31,17 +31,9 @@ public class JPanelEmailInfo extends JPanel
 	public JPanelEmailInfo()
 		{
 		geometry();
-		control();
 		appearance();
 		}
 
-	/*------------------------------------------------------------------*\
-	|*							Methodes Public							*|
-	\*------------------------------------------------------------------*/
-
-	/*------------------------------*\
-	|*				Get				*|
-	\*------------------------------*/
 	public JTextField getFldEmail()
 		{
 		return this.fldEmail;
@@ -52,12 +44,6 @@ public class JPanelEmailInfo extends JPanel
 		{
 		return this.cbxHours;
 		}
-
-
-
-	/*------------------------------------------------------------------*\
-	|*							Methodes Private						*|
-	\*------------------------------------------------------------------*/
 
 	/**
 	 * fill the combobox with hours
@@ -87,25 +73,11 @@ public class JPanelEmailInfo extends JPanel
 
 		}
 
-
-
-	private void control()
-		{
-		// rien
-		}
-
 	private void appearance()
 		{
 		fldEmail.setPreferredSize(new Dimension(100, fldEmail.getPreferredSize().height));
 		}
 
-	/*------------------------------------------------------------------*\
-	|*							Attributs Private						*|
-	\*------------------------------------------------------------------*/
-
-	// Inputs
-
-	// Tools
 	private JLabel lbEmail;
 	private JLabel lbHours;
 	private JTextField fldEmail;

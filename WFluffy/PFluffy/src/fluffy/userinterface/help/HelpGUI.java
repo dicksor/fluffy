@@ -14,6 +14,8 @@ import java.awt.Frame;
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
+import fluffy.tools.image.MagasinImage;
+
 public class HelpGUI extends JFrame {
 
 	public HelpGUI() {
@@ -24,7 +26,7 @@ public class HelpGUI extends JFrame {
 
 	private void appearance() {
 		this.setTitle("Fluffy : Aide");
-		// this.setIconImage(MagasinImage.logo.getImage());
+		this.setIconImage(MagasinImage.logo.getImage());
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 

@@ -52,13 +52,13 @@ public class JPanelCameraList extends JPanel
 
 	private void geometry()
 		{
-		this.jPanelEmail = new JPanelEmail();
+		this.panelEmail = new JPanelEmail();
 		this.boxV = Box.createVerticalBox();
-		this.boxV.add(jPanelEmail);
+		this.boxV.add(panelEmail);
 
 		this.setLayout(new FlowLayout());
 		}
 
-	private JPanelEmail jPanelEmail;
+	private JPanelEmail panelEmail;
 	private Box boxV;
 	}
