@@ -30,6 +30,13 @@ public class ZipCreator
 	public ZipCreator(String snapshotPath)
 		{
 		this.snapshotPath = snapshotPath;
+		}
+
+	/**
+	 * create the zip archive
+	 */
+	public void create()
+		{
 		snapshotNames = getAllfilename();
 		System.out.println(Arrays.toString(snapshotNames));
 		try
@@ -54,7 +61,6 @@ public class ZipCreator
 			{
 			e.printStackTrace();
 			}
-
 		}
 
 	/**
@@ -112,7 +118,7 @@ public class ZipCreator
 	public static void deleteZip(String zipFile)
 		{
 		File file = new File(zipFile);
-		if(!file.delete())
+		if (!file.delete())
 			{
 			System.err.println("Error was occured!");
 			}

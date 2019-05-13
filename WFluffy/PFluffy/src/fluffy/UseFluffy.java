@@ -18,8 +18,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import org.opencv.core.Core;
 
-import fluffy.network.camera.model.CameraModel;
-import fluffy.network.camera.model.CameraXml;
+import fluffy.network.mail.EmailSender;
 import fluffy.userinterface.main.MainGUI;
 import mdlaf.MaterialLookAndFeel;
 
@@ -35,8 +34,9 @@ public class UseFluffy {
 				e.printStackTrace();
 			}
 
+			EmailSender emailSender = new EmailSender();
 			new MainGUI();
-		
+
 		} else {
 			System.err.println("Only one instance of Fluffy can run!");
 			System.exit(-1);

@@ -40,12 +40,14 @@ public class EmailSender
 				String email = userModel.getEmail();
 				int hour = Integer.valueOf(userModel.getHour());
 
-				//check if hour in xml file is current hour
-				if (LocalDateTime.now().getHour() == hour)
+				if (!email.equals(""))
 					{
-					EmailSender.sendSnapShot(email);
+					//check if hour in xml file is current hour
+					if (LocalDateTime.now().getHour() == hour)
+						{
+						EmailSender.sendSnapShot(email);
+						}
 					}
-
 				}
 			};
 		timer.schedule(hourTimerTask, 0l, 1000 * 60 * 60);//execute TimerTask function every hour
@@ -55,6 +57,7 @@ public class EmailSender
 		{
 		String snapShotFileName = Email.getSnapShotFileName();
 		ZipCreator zipCreator = new ZipCreator(snapShotFileName);//zip the content of the snapshot folder of the day
+		zipCreator.create();//create the zip archive
 		Email mail = new Email(email, snapShotFileName + ".zip");//create email object with zip file
 		mail.sendEmail();
 		ZipCreator.deleteZip(snapShotFileName + ".zip");//delete zip file

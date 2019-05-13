@@ -52,7 +52,7 @@ public class CameraXml
 			}
 		return INSTANCE;
 		}
-	
+
 	public void remove(String camerName) {
 		this.mapCamera.remove(camerName);
 		this.save();

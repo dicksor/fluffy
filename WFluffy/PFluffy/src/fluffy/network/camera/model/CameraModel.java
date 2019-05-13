@@ -25,9 +25,9 @@ public class CameraModel implements Serializable {
 		this.name = name;
 		this.link = link;
 		this.description = description;
-		this.angle = "";
-		this.zoom = "";
-	}
+		this.angle = "0.0";
+		this.zoom = "1";
+		}
 
 	public CameraModel(String name, String link, String description, String angle, String zoom) {
 		this.name = name;

@@ -10,7 +10,6 @@ package fluffy.userinterface.main;
 
 import java.awt.BorderLayout;
 import java.awt.Frame;
-import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Map;
@@ -106,15 +105,15 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 		ProgressMonitor pm = new ProgressMonitor(this, message, note, 0, this.CAMERA_OPENING_DELAY);
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
-			
+
 			@Override
 			public void run() {
 				pm.setProgress(this.elapsedTime++);
 			}
-			
+
 			private int elapsedTime = 0;
 		};
-		
+
 		Camera camera = new Camera(cameraLink, cameraName);
 
 		ExecutorService executor = Executors.newFixedThreadPool(1);
@@ -124,9 +123,10 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 		});
 
 		if (isFutureCameraOpen.get(CAMERA_OPENING_DELAY, TimeUnit.SECONDS)) {
-			this.panelCameraList.addCameraPreview(new JPanelCameraPreview(camera, cameraName, cameraDescription));
+			this.panelCameraList.addCameraPreview(
+					new JPanelCameraPreview(camera, cameraName, cameraDescription, this.panelCameraList, this));
 		}
-		
+
 		timer.cancel();
 		pm.close();
 		executor.shutdown();

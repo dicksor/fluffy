@@ -6,6 +6,7 @@
  * Printemps 2019
  * He-arc
  */
+
 package fluffy.network.camera;
 
 import java.beans.PropertyChangeListener;
@@ -38,6 +39,11 @@ public class Camera implements Runnable {
 
 	public void release() {
 		this.camera.release();
+
+	}
+
+	public void stopThread() {
+		this.isRunning = false;
 	}
 
 	@Override
@@ -53,8 +59,9 @@ public class Camera implements Runnable {
 
 	public void getImage() throws EmptyImageException {
 		Mat frame = new Mat();
-		if (!camera.grab())
+		if (!camera.grab()) {
 			throw new EmptyImageException("Grab errror");
+		}
 
 		if (camera.retrieve(frame)) {
 			if (!camera.read(frame)) {
@@ -65,7 +72,7 @@ public class Camera implements Runnable {
 			}
 		} else {
 			throw new EmptyImageException("Retrieve error");
-		}	
+		}
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
@@ -78,8 +85,9 @@ public class Camera implements Runnable {
 
 	@Override
 	protected void finalize() throws Throwable {
-		if (this.camera.isOpened())
+		if (this.camera.isOpened()) {
 			this.camera.release();
+		}
 	}
 
 	private VideoCapture camera;
