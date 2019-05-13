@@ -19,8 +19,13 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -49,9 +54,7 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 		try {
 			this.openCamera(cameraModel.getLink(), cameraModel.getName(), cameraModel.getDescription());
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
-			JOptionPane.showMessageDialog(this,
-					"Could not find a camera with the provided link : " + cameraModel.getLink(), "ErrBox: fluffy",
-					JOptionPane.ERROR_MESSAGE);
+			displayError(cameraModel.getLink());
 		}
 	}
 
@@ -91,11 +94,15 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 			try {
 				this.openCamera(cameraModel.getLink(), cameraModel.getName(), cameraModel.getDescription());
 			} catch (InterruptedException | ExecutionException | TimeoutException e) {
-				JOptionPane.showMessageDialog(this,
-						"Could not find a camera with the provided link : " + cameraModel.getLink(), "ErrBox: fluffy",
-						JOptionPane.ERROR_MESSAGE);
+				displayError(cameraModel.getLink());
 			}
 		}
+	}
+
+	private void displayError(String cameraLink) {
+		JOptionPane.showMessageDialog(this,
+				"Could not find a camera with the provided link : " + cameraLink, "ErrBox: fluffy",
+				JOptionPane.ERROR_MESSAGE);
 	}
 
 	private void openCamera(String cameraLink, String cameraName, String cameraDescription)
@@ -103,32 +110,32 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 		String message = "Trying to open camera : " + cameraName;
 		String note = "Trying for maximum : " + Integer.toString(this.CAMERA_OPENING_DELAY) + " seconds";
 		ProgressMonitor pm = new ProgressMonitor(this, message, note, 0, this.CAMERA_OPENING_DELAY);
-		Timer timer = new Timer();
-		TimerTask task = new TimerTask() {
-
-			@Override
-			public void run() {
-				pm.setProgress(this.elapsedTime++);
-			}
-
-			private int elapsedTime = 0;
-		};
 
 		Camera camera = new Camera(cameraLink, cameraName);
 
 		ExecutorService executor = Executors.newFixedThreadPool(1);
+		ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(1);
+		
 		Future<Boolean> isFutureCameraOpen = executor.submit(() -> {
-			timer.schedule(task, 0, 1000);
+			AtomicInteger prog = new AtomicInteger(0);
+			scheduledExecutorService.scheduleAtFixedRate(() -> {
+				pm.setProgress(prog.incrementAndGet());
+			}, 0, 1000, TimeUnit.SECONDS);
 			return camera.open();
 		});
 
-		if (isFutureCameraOpen.get(CAMERA_OPENING_DELAY, TimeUnit.SECONDS)) {
+		if (isFutureCameraOpen.get(this.CAMERA_OPENING_DELAY, TimeUnit.SECONDS)) {
+			System.out.println("ok");
 			this.panelCameraList.addCameraPreview(
 					new JPanelCameraPreview(camera, cameraName, cameraDescription, this.panelCameraList, this));
 		}
+		else {
+			System.out.println("Nok");
+			displayError(cameraLink);
+		}
 
-		timer.cancel();
 		pm.close();
+		scheduledExecutorService.shutdown();
 		executor.shutdown();
 	}
 

@@ -17,7 +17,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 
