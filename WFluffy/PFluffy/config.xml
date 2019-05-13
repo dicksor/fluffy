@@ -2,36 +2,10 @@
 <java version="10.0.2" class="java.beans.XMLDecoder">
  <object class="java.util.HashMap">
   <void method="put">
-   <string>sd</string>
+   <string></string>
    <object class="fluffy.network.camera.model.CameraModel">
     <void property="angle">
      <string>0.0</string>
-    </void>
-    <void property="description">
-     <string>ds</string>
-    </void>
-    <void property="link">
-     <string>ds</string>
-    </void>
-    <void property="name">
-     <string>sd</string>
-    </void>
-    <void property="zoom">
-     <string>1</string>
-    </void>
-   </object>
-  </void>
-  <void method="put">
-   <string>webcam</string>
-   <object class="fluffy.network.camera.model.CameraModel">
-    <void property="angle">
-     <string>0.0</string>
-    </void>
-    <void property="description">
-     <string>webcam</string>
-    </void>
-    <void property="name">
-     <string>webcam</string>
     </void>
     <void property="zoom">
      <string>1</string>
