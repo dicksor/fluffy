@@ -74,7 +74,7 @@ public class JPanelButtons extends JPanel {
 	
 	private void quit() {
 		JPanelButtons.this.parent.setVisible(false);
-		JPanelButtons.this.parent.dispose();
+		//JPanelButtons.this.parent.dispose();
 	}
 
 	private JFrame parent;

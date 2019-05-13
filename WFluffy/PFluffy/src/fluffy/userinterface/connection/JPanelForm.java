@@ -27,11 +27,11 @@ public class JPanelForm extends JPanel {
 	public void save() {
 		CameraXml cameraXml = CameraXml.getInstance();
 		String link = "";
-		if(!this.fldAdressIP.getText().isEmpty())
-			{
-				link = this.fldAdressIP.getText();
-				}
-		CameraModel cameraModel = new CameraModel(this.fldCameraName.getText(), link, this.fldCameraDescription.getText());
+		if (!this.fldAdressIP.getText().isEmpty()) {
+			link = this.fldAdressIP.getText();
+		}
+		CameraModel cameraModel = new CameraModel(this.fldCameraName.getText(), link,
+				this.fldCameraDescription.getText());
 		cameraXml.add(cameraModel);
 	}
 
