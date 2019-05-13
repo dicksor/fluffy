@@ -1,0 +1,59 @@
+#!/bin/bash
+#
+# Goal:
+#
+#		Utiliser le script 
+#		
+#			cd /opt/quadra
+#			./runQuadra.sh 3 2 4
+#		
+#		comme une commande system, depuis n'importe ou,ie comme le montre le paragraphe "usage" ci-dessous
+#		
+# Usage:
+#
+#    	quadra a=3 c=2 b=4
+#
+# Emplacement de ce script quadra (sans .sh): 
+#
+#		/usr/local/bin
+#
+# Warning:
+#
+#	   Lisez d'abord document tips et installJava forunit.
+#
+# See too:
+#
+#		/opt/quadra/runQuadra.sh
+#
+# Perimetre:
+#
+#		Tester sous ubuntu 14.04, 16.04
+#
+
+set -e
+set -u
+
+#---------
+# version1
+#---------
+
+#cd /opt/quadra/
+
+#opt/quadra/runQuadra.sh $1 $2 $3
+
+#cd -
+
+#---------
+# version1
+#---------
+
+pushd . >/dev/null
+cd /opt/quadra/
+
+/opt/quadra/runQuadra.sh $1 $2 $3
+
+popd >/dev/null
+
+#---------
+# end
+#---------

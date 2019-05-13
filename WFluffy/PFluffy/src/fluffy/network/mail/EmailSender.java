@@ -38,10 +38,11 @@ public class EmailSender
 				UserXml userXml = UserXml.getInstance();
 				UserModel userModel = userXml.getUserModel();
 				String email = userModel.getEmail();
-				int hour = Integer.valueOf(userModel.getHour());
 
 				if (!email.equals(""))
 					{
+					int hour = Integer.valueOf(userModel.getHour());
+
 					//check if hour in xml file is current hour
 					if (LocalDateTime.now().getHour() == hour)
 						{
