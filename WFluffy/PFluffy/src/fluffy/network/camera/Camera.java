@@ -33,7 +33,6 @@ public class Camera implements Runnable {
 		} else {
 			this.camera.open(0);
 		}
-
 		return this.camera.isOpened();
 	}
 

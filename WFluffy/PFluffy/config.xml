@@ -2,39 +2,83 @@
 <java version="10.0.2" class="java.beans.XMLDecoder">
  <object class="java.util.HashMap">
   <void method="put">
-   <string>webcam</string>
+   <string>as</string>
    <object class="fluffy.network.camera.model.CameraModel">
-    <void property="angle">
-     <string>90</string>
-    </void>
     <void property="description">
-     <string>Webcam du staff...</string>
+     <string>asf</string>
+    </void>
+    <void property="link">
+     <string>asdafa</string>
     </void>
     <void property="name">
-     <string>webcam</string>
+     <string>as</string>
     </void>
-    <void property="zoom">
-     <string>1</string>
+   </object>
+  </void>
+  <void method="put">
+   <string>dsfd</string>
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>dfsdf</string>
+    </void>
+    <void property="link">
+     <string>sdfsd</string>
+    </void>
+    <void property="name">
+     <string>dsfd</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>sas</string>
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>sfds</string>
+    </void>
+    <void property="link">
+     <string>afa</string>
+    </void>
+    <void property="name">
+     <string>sas</string>
     </void>
    </object>
   </void>
   <void method="put">
    <string>ip</string>
    <object class="fluffy.network.camera.model.CameraModel">
-    <void property="angle">
-     <string>0.0</string>
-    </void>
     <void property="description">
      <string>ip</string>
     </void>
     <void property="link">
-     <string>http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&amp;clock=1&amp;date=1</string>
+     <string>http://192.168.1.200/axis-cgi/mjpg/video.cgi?resolution=480x360&amp;amp;clock=1&amp;amp;date=1</string>
     </void>
     <void property="name">
      <string>ip</string>
     </void>
-    <void property="zoom">
-     <string>1</string>
+   </object>
+  </void>
+  <void method="put">
+   <string>iii</string>
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>df</string>
+    </void>
+    <void property="link">
+     <string>dfadf</string>
+    </void>
+    <void property="name">
+     <string>iii</string>
+    </void>
+   </object>
+  </void>
+  <void method="put">
+   <string>Webcam</string>
+   <object class="fluffy.network.camera.model.CameraModel">
+    <void property="description">
+     <string>webcam</string>
+    </void>
+    <void property="name">
+     <string>Webcam</string>
     </void>
    </object>
   </void>
