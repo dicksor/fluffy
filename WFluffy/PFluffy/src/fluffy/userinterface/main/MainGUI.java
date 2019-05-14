@@ -120,17 +120,15 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 			AtomicInteger prog = new AtomicInteger(0);
 			scheduledExecutorService.scheduleAtFixedRate(() -> {
 				pm.setProgress(prog.incrementAndGet());
-			}, 0, 1000, TimeUnit.SECONDS);
+			}, 0, 1, TimeUnit.SECONDS);
 			return camera.open();
 		});
 
 		if (isFutureCameraOpen.get(this.CAMERA_OPENING_DELAY, TimeUnit.SECONDS)) {
-			System.out.println("ok");
 			this.panelCameraList.addCameraPreview(
 					new JPanelCameraPreview(camera, cameraName, cameraDescription, this.panelCameraList, this));
 		}
 		else {
-			System.out.println("Nok");
 			displayError(cameraLink);
 		}
 
