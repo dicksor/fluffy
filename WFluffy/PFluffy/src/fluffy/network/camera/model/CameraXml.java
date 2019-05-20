@@ -6,7 +6,6 @@
  * Printemps 2019
  * He-arc
  */
-
 package fluffy.network.camera.model;
 
 import java.beans.PropertyChangeListener;
