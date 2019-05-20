@@ -8,30 +8,10 @@
      <string>0.0</string>
     </void>
     <void property="description">
-     <string>webcam</string>
+     <string>web</string>
     </void>
     <void property="name">
      <string>webcam</string>
-    </void>
-    <void property="zoom">
-     <string>1</string>
-    </void>
-   </object>
-  </void>
-  <void method="put">
-   <string>ip camera</string>
-   <object class="fluffy.network.camera.model.CameraModel">
-    <void property="angle">
-     <string>0.0</string>
-    </void>
-    <void property="description">
-     <string>sdfsdfd</string>
-    </void>
-    <void property="link">
-     <string>dfsdfk</string>
-    </void>
-    <void property="name">
-     <string>ip camera</string>
     </void>
     <void property="zoom">
      <string>1</string>

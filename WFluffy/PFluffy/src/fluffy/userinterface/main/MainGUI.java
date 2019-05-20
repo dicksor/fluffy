@@ -49,7 +49,7 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 		try {
 			this.openCamera(cameraModel.getLink(), cameraModel.getName(), cameraModel.getDescription());
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
-			displayError(cameraModel.getLink());
+			displayError("Could not find a camera with the provided link : ", cameraModel.getLink());
 		}
 	}
 
@@ -89,15 +89,13 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 			try {
 				this.openCamera(cameraModel.getLink(), cameraModel.getName(), cameraModel.getDescription());
 			} catch (InterruptedException | ExecutionException | TimeoutException e) {
-				displayError(cameraModel.getLink());
+				displayError("Could not find a camera with the provided link : ", cameraModel.getLink());
 			}
 		}
 	}
 
-	private void displayError(String cameraLink) {
-		JOptionPane.showMessageDialog(this,
-				"Could not find a camera with the provided link : " + cameraLink, "ErrBox: fluffy",
-				JOptionPane.ERROR_MESSAGE);
+	private void displayError(String message, String cameraLink) {
+		JOptionPane.showMessageDialog(this, message + cameraLink, "ErrBox: fluffy", JOptionPane.ERROR_MESSAGE);
 	}
 
 	private void openCamera(String cameraLink, String cameraName, String cameraDescription)
@@ -110,7 +108,7 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 
 		ExecutorService executor = Executors.newFixedThreadPool(1);
 		ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(1);
-		
+
 		Future<Boolean> isFutureCameraOpen = executor.submit(() -> {
 			AtomicInteger prog = new AtomicInteger(0);
 			scheduledExecutorService.scheduleAtFixedRate(() -> {
@@ -122,9 +120,8 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 		if (isFutureCameraOpen.get(this.CAMERA_OPENING_DELAY, TimeUnit.SECONDS)) {
 			this.panelCameraList.addCameraPreview(
 					new JPanelCameraPreview(camera, cameraName, cameraDescription, this.panelCameraList, this));
-		}
-		else {
-			displayError(cameraLink);
+		} else {
+			displayError("Could not find a camera with the provided link : ", cameraLink);
 		}
 
 		pm.close();
