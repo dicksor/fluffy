@@ -44,7 +44,6 @@ public class JPanelCameraPreview extends JPanel
 		this.geometry();
 		this.control();
 		this.appearance();
-		// Todo : fermer à un moment ou instancier ailleurs
 		cameraThread = new Thread(this.camera);
 
 		this.camera = camera;
@@ -107,10 +106,10 @@ public class JPanelCameraPreview extends JPanel
 					camera.release();
 					stopStream();
 
-
+					//remove the camera from the xml
 					CameraXml cameraXml = CameraXml.getInstance();
 					cameraXml.remove(cameraName);
-					panelListCamera.deleteCameraPreview(JPanelCameraPreview.this);
+					panelListCamera.deleteCameraPreview(JPanelCameraPreview.this);//remove the camera from the panel
 					root.revalidate();
 					root.repaint();
 					}

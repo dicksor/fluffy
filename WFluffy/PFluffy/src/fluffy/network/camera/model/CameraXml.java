@@ -45,6 +45,11 @@ public class CameraXml {
 		return INSTANCE;
 	}
 
+	/**
+	 * Check whether the camera link is already used on another camera
+	 * @param cameraLink link of the camera
+	 * @return 1 the link is already taken, 0 the link is available
+	 */
 	public int checkCameraIsAlreadySaved(String cameraLink) {
 		int count = 0;
 		for (CameraModel camera : this.mapCamera.values()) {
@@ -103,6 +108,9 @@ public class CameraXml {
 		this.xmlEncoder.close();
 	}
 
+	/**
+	 * Save the xml file from the model
+	 */
 	private void save() {
 		try {
 			this.xmlEncoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(FILENAME)));
@@ -114,6 +122,9 @@ public class CameraXml {
 		}
 	}
 
+	/**
+	 * Load the xml file and get the model
+	 */
 	@SuppressWarnings("unchecked")
 	private void load() {
 		try {

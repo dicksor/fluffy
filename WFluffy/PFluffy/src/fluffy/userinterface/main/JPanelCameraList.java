@@ -40,13 +40,11 @@ public class JPanelCameraList extends JPanel
 
 	private void appearance()
 		{
-		// TODO Auto-generated method stub
 
 		}
 
 	private void control()
 		{
-		// TODO Auto-generated method stub
 
 		}
 

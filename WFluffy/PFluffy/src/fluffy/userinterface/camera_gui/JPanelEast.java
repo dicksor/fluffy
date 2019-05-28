@@ -31,6 +31,7 @@ public class JPanelEast extends JPanel implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
+		//show the stats on the panel
 		 if (evt.getPropertyName().equals("detectionStatistic")) {
 			 	this.clearList();
 				this.stats = (ConcurrentHashMap<String, AtomicInteger>) evt.getNewValue();
@@ -39,7 +40,7 @@ public class JPanelEast extends JPanel implements PropertyChangeListener {
 				}
 		 }
 	}
-	
+
 	public void clearList() {
 		this.model.clear();
 	}

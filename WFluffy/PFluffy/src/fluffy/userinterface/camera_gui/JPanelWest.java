@@ -35,6 +35,7 @@ public class JPanelWest extends JPanel {
 		this.control();
 		this.appearance();
 
+		//restore the angle when windows is created
 		CameraXml cameraXml = CameraXml.getInstance();
 		if (!cameraXml.getCameras().get(cameraName).getAngle().equals("")) {
 			cameraRotationAngle = Double.valueOf(cameraXml.getCameras().get(cameraName).getAngle());
@@ -145,7 +146,7 @@ public class JPanelWest extends JPanel {
 				}
 			}
 		});
-		
+
 		this.ckbTinyYoloDetection.addActionListener(new ActionListener() {
 
 			@Override

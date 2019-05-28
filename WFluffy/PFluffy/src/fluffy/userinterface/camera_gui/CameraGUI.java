@@ -42,6 +42,7 @@ public class CameraGUI extends JFrame {
 
 	private void control() {
 		this.addWindowListener(new WindowAdapter() {
+		//When windows is closing, save the option in the xml file
 			@Override
 			public void windowClosing(WindowEvent e) {
 				CameraXml cameraXml = CameraXml.getInstance();

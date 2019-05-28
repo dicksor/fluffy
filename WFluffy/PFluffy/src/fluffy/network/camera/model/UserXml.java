@@ -65,6 +65,9 @@ public class UserXml
 		save();
 		}
 
+	/**
+	 * Save the xml file from the model
+	 */
 	private void save()
 		{
 		try
@@ -80,6 +83,9 @@ public class UserXml
 			}
 		}
 
+	/**
+	 * Load the xml file and get the model
+	 */
 	private void load()
 		{
 		try

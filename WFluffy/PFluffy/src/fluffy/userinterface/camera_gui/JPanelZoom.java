@@ -27,6 +27,7 @@ public class JPanelZoom extends JPanel
 		this.geometry();
 		this.control();
 
+		//restore the zoom when windows is created
 		CameraXml cameraXml = CameraXml.getInstance();
 		if(!cameraXml.getCameras().get(cameraName).getZoom().equals(""))
 			{

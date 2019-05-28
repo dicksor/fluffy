@@ -6,6 +6,7 @@
  * Printemps 2019
  * He-arc
  */
+
 package fluffy.imageprocessing.snapshot;
 
 import java.awt.image.BufferedImage;
@@ -20,27 +21,40 @@ import org.opencv.core.Mat;
 
 import fluffy.imageprocessing.OpenCvUtil;
 
-public class DialogSnapshotTaker extends SnapshotTaker {
-	
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		this.setImage((Mat) evt.getNewValue());
-	}
+public class DialogSnapshotTaker extends SnapshotTaker
+	{
 
-	public void getSnapShot() {
+	/**
+	 * Get the new image
+	 */
+	@Override
+	public void propertyChange(PropertyChangeEvent evt)
+		{
+		this.setImage((Mat)evt.getNewValue());
+		}
+
+	/**
+	 * Open a dialog to save the capture
+	 */
+	public void getSnapShot()
+		{
 		BufferedImage snapShot;
 		snapShot = OpenCvUtil.matToBufferedImage(this.getImage());
 		JFileChooser fileChooser = new JFileChooser();
 		int returnVal = fileChooser.showSaveDialog(null);
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
+		if (returnVal == JFileChooser.APPROVE_OPTION)
+			{
 			String filePath = fileChooser.getSelectedFile().toString() + ".jpg";
 			File file = new File(filePath);
-			try {
+			try
+				{
 				ImageIO.write(snapShot, "jpg", file);
-			} catch (IOException e) {
+				}
+			catch (IOException e)
+				{
 				e.printStackTrace();
+				}
 			}
 		}
+
 	}
-	
-}

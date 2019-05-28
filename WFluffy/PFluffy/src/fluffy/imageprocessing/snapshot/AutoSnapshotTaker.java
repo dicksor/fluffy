@@ -35,6 +35,9 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 		}
 	}
 
+	/**
+	 * Get the new image and procces detection
+	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 	if(!evt.getPropertyName().equals("faceDetected") && !evt.getPropertyName().equals("detectionStatistic"))
@@ -45,6 +48,9 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 		}
 	}
 
+	/**
+	 * Save the capture on the disk with the good filename
+	 */
 	private void getSnapShot() {
 		String filePath = createFolderFromDate() + "\\" + this.filename +"_" + this.cameraName +".jpg";
 		File file = new File(filePath);
@@ -55,6 +61,9 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 		}
 	}
 
+	/**
+	 * Process on image detection if a spot an element on the image
+	 */
 	private void detecte() {
 		MatOfRect faceDetections = this.faceDetection.detecte(this.getImage());
 
@@ -63,6 +72,9 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 		}
 	}
 
+	/**
+	 * Get the snapshot. It is also verified that a delay of 10 seconds has elapsed before the previous capture.
+	 */
 	private void takeSnapshot() {
 		try {
 			dateActuelle = format.parse(format.format(new Date()));
@@ -80,6 +92,10 @@ public class AutoSnapshotTaker extends SnapshotTaker{
 		}
 	}
 
+	/**
+	 * Created the folder where the snapshot will be placed from today's date
+	 * @return folder name
+	 */
 	private String createFolderFromDate() {
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-YYY");
 

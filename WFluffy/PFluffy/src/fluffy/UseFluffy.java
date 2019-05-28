@@ -26,10 +26,12 @@ public class UseFluffy {
 
 	public static void main(String[] args) {
 		if (lockInstance("fluffy.lock")) {
+			//Chargement des librairies
 			System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 			System.loadLibrary("opencv_ffmpeg401_64");
+
 			try {
-				UIManager.setLookAndFeel(new MaterialLookAndFeel());
+				UIManager.setLookAndFeel(new MaterialLookAndFeel());//chargement de la GUI
 			} catch (UnsupportedLookAndFeelException e) {
 				e.printStackTrace();
 			}
@@ -43,6 +45,11 @@ public class UseFluffy {
 		}
 	}
 
+	/**
+	 * Permet d'assurer qu'une seule instance du programme tourne en même temps
+	 * @param lockFile chemin du fichier de lock
+	 * @return booléen indiquant si le programme est en cours d'execution ou non
+	 */
 	private static boolean lockInstance(final String lockFile) {
 		try {
 			final File file = new File(lockFile);

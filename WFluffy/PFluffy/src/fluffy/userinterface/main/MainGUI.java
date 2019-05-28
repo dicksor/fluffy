@@ -22,6 +22,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ProgressMonitor;
@@ -47,6 +48,7 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent evt) {
 		CameraModel cameraModel = (CameraModel) evt.getNewValue();
 		try {
+			//try to open the camera
 			this.openCamera(cameraModel.getLink(), cameraModel.getName(), cameraModel.getDescription());
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
 			displayError("Could not find a camera with the provided link : ", cameraModel.getLink());
@@ -79,6 +81,9 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 		this.add(this.panelButtons, BorderLayout.SOUTH);
 	}
 
+	/**
+	 * Load the camera from the XML, test if the link is valid
+	 */
 	private void loadCameras() {
 		CameraXml cameraXml = CameraXml.getInstance();
 		cameraXml.addPropertyChangeListener(this);
@@ -98,6 +103,12 @@ public class MainGUI extends JFrame implements PropertyChangeListener {
 		JOptionPane.showMessageDialog(this, message + cameraLink, "ErrBox: fluffy", JOptionPane.ERROR_MESSAGE);
 	}
 
+	/**
+	 * try to open the link of the camera, if the program can not connect after a while, an error is displayed
+	 * @param cameraLink link of the camera
+	 * @param cameraName name of the camera
+	 * @param cameraDescription description of the camera
+	 */
 	private void openCamera(String cameraLink, String cameraName, String cameraDescription)
 			throws InterruptedException, ExecutionException, TimeoutException {
 		String message = "Trying to open camera : " + cameraName;
