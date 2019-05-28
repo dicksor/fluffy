@@ -17,7 +17,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import mdlaf.animation.MaterialUIMovement;
 import mdlaf.utils.MaterialColors;
 
@@ -74,7 +73,7 @@ public class JPanelButtons extends JPanel {
 	
 	private void quit() {
 		JPanelButtons.this.parent.setVisible(false);
-		JPanelButtons.this.parent.dispose();
+		//JPanelButtons.this.parent.dispose();
 	}
 
 	private JFrame parent;
