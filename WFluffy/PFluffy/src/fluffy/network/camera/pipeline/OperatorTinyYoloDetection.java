@@ -25,7 +25,7 @@ public class OperatorTinyYoloDetection extends AbstractOperator implements Prope
 		super(isActive);
 		this.support = new PropertyChangeSupport(this);
 		this.detectionStat = new ConcurrentHashMap<String, AtomicInteger>();
-		this.tinyYoloDetection = new OpenCvYoloDetection("yolov3\\yolov3tiny.weights", "yolov3\\yolov3tiny.cfg", 0.30f);
+		this.tinyYoloDetection = new OpenCvYoloDetection("..\\PDeploy\\Deploy\\ext\\yolov\\yolov3tiny.weights", "..\\PDeploy\\Deploy\\ext\\yolov\\yolov3tiny.cfg", 0.30f);
 		this.tinyYoloDetection.addPropertyChangeListener(this);
 	}
 
@@ -33,7 +33,7 @@ public class OperatorTinyYoloDetection extends AbstractOperator implements Prope
 	public Mat operate(Mat image) {
 		return this.tinyYoloDetection.feedForward(image);
 	}
-	
+
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
 		support.addPropertyChangeListener(pcl);
 	}
@@ -41,14 +41,14 @@ public class OperatorTinyYoloDetection extends AbstractOperator implements Prope
 	public void removePropertyChangeListener(PropertyChangeListener pcl) {
 		support.removePropertyChangeListener(pcl);
 	}
-	
+
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("detectionStatistic")) {
 			ConcurrentMap<String, AtomicInteger> detectionStats = (ConcurrentHashMap<String, AtomicInteger>) evt.getNewValue();
 			support.firePropertyChange("detectionStatistic", this.detectionStat, detectionStats);
 			this.detectionStat = detectionStats;
-		} 
+		}
 	}
 
 	private OpenCvYoloDetection tinyYoloDetection;

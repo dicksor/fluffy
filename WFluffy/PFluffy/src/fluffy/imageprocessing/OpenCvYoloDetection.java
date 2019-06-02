@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-import org.opencv.dnn.Net;
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfFloat;
 import org.opencv.core.MatOfInt;
@@ -31,10 +31,9 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.dnn.Dnn;
+import org.opencv.dnn.Net;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.utils.Converters;
-
-import org.opencv.core.Core;
 
 // Based on : https://github.com/suddh123/YOLO-object-detection-in-java/blob/code/yolo.java
 public class OpenCvYoloDetection {
@@ -50,7 +49,7 @@ public class OpenCvYoloDetection {
 
 	public Mat feedForward(Mat image) {
 		ConcurrentMap<String, AtomicInteger> stats = new ConcurrentHashMap<String, AtomicInteger>();
-		
+
 		Size sz = new Size(288, 288);
 
 		List<Mat> result = new ArrayList<>();
@@ -82,7 +81,7 @@ public class OpenCvYoloDetection {
 					int top = centerY - height / 2;
 
 					clsIds.add((int) classIdPoint.x);
-					confs.add((float) confidence);
+					confs.add(confidence);
 					rects.add(new Rect(left, top, width, height));
 				}
 			}
@@ -107,7 +106,7 @@ public class OpenCvYoloDetection {
 				stats.get(predictionLabel).incrementAndGet();
 				Imgproc.putText(image, predictionLabel, box.tl(), Imgproc.FONT_HERSHEY_SIMPLEX, 2, RED_COLOR);
 			}
-			
+
 			support.firePropertyChange("detectionStatistic", this.detectedClasses, stats);
 			this.detectedClasses = stats;
 			this.detectedClasses.clear();
@@ -116,10 +115,10 @@ public class OpenCvYoloDetection {
 			Imgproc.resize(image, resizedImage, image.size());
 			return resizedImage;
 		}
-		
+
 		return image;
 	}
-	
+
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
 		support.addPropertyChangeListener(pcl);
 	}
@@ -140,7 +139,7 @@ public class OpenCvYoloDetection {
 	}
 
 	private void readClasses() {
-		final String FILE_OF_PRED_CLASSES = "yolov3\\yolov3.txt";
+		final String FILE_OF_PRED_CLASSES = "..\\PDeploy\\Deploy\\ext\\yolov\\yolov3.txt";
 		try (Stream<String> stream = Files.lines(Paths.get(FILE_OF_PRED_CLASSES))) {
 			stream.forEach((predictionClass) -> this.classes.add(predictionClass));
 		} catch (IOException e) {

@@ -2,10 +2,10 @@
 <java version="10.0.2" class="java.beans.XMLDecoder">
  <object class="fluffy.network.camera.model.UserModel">
   <void property="email">
-   <string>romain.capocasale99@gmail.com</string>
+   <string>romain.capocasale@he-arc.ch</string>
   </void>
   <void property="hour">
-   <string>0</string>
+   <string>5</string>
   </void>
  </object>
 </java>
