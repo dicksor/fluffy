@@ -1,0 +1,16 @@
+fluffy
+fluffy.imageprocessing
+fluffy.imageprocessing.snapshot
+fluffy.network.camera
+fluffy.network.camera.exception
+fluffy.network.camera.model
+fluffy.network.camera.pipeline
+fluffy.network.mail
+fluffy.network.mail.zip
+fluffy.tools.image
+fluffy.tools.mail
+fluffy.userinterface.camera_gui
+fluffy.userinterface.cameradisplay
+fluffy.userinterface.connection
+fluffy.userinterface.help
+fluffy.userinterface.main
